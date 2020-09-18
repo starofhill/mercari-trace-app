@@ -1,21 +1,59 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  Home,
+  Notices,
+  Listing,
+  MerPay,
+  MyPage,
+  SignUp,
+} from "./components/pages";
+import Icon from "react-native-vector-icons/FontAwesome";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="ホーム"
+          component={Home}
+          options={{
+            tabBarIcon: () => <Icon name="home" size={24} color="black" />,
+          }}
+        />
+        <Tab.Screen
+          name="お知らせ"
+          component={Notices}
+          options={{
+            tabBarIcon: () => <Icon name="bell" size={24} color="black" />,
+          }}
+        />
+        <Tab.Screen
+          name="出品"
+          component={Listing}
+          options={{
+            tabBarIcon: () => <Icon name="camera" size={24} color="black" />,
+          }}
+        />
+        <Tab.Screen
+          name="メルペイ"
+          component={MerPay}
+          options={{
+            tabBarIcon: () => <Icon name="yen" size={24} color="black" />,
+          }}
+        />
+        <Tab.Screen
+          name="マイページ"
+          component={MyPage}
+          options={{
+            tabBarIcon: () => <Icon name="user" size={24} color="black" />,
+          }}
+        />
+        {/* <Tab.Screen name="SignUp" component={SignUp} options={{}} /> */}
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

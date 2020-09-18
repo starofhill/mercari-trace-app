@@ -1,0 +1,47 @@
+import React from "react";
+import { StyleSheet, TextInput } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { Product, Products } from "../atoms";
+
+const styles = StyleSheet.create({
+  input: {
+    width: 256,
+    height: 32,
+    paddingRight: 16,
+    paddingLeft: 16,
+    backgroundColor: "#eee",
+    borderRadius: 20,
+    marginRight: 20,
+    marginLeft: 20,
+  },
+});
+
+const Stack = createStackNavigator();
+
+export default function Home() {
+  const [value, setValue] = React.useState("");
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Products}
+        options={{
+          headerTitle: () => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(newValue) => {
+                setValue(newValue);
+              }}
+              placeholder="検索"
+            />
+          ),
+          headerLeft: () => <Icon name="qrcode" size={24} />,
+          headerRight: () => <Icon name="check" size={24} />,
+        }}
+      />
+      <Stack.Screen name="Product" component={Product} />
+    </Stack.Navigator>
+  );
+}
