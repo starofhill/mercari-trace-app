@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Products() {
+const Tab = createMaterialTopTabNavigator();
+
+function Products() {
   const data = [
     { id: 1, src: "../../assets/seigiman369_TP_V.jpg", price: 1000 },
     { id: 2, src: "../../assets/seigiman369_TP_V.jpg", price: 1000 },
@@ -80,5 +82,16 @@ export default function Products() {
       )}
       numColumns={3}
     />
+  );
+}
+
+export default function () {
+  return (
+    <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
+      <Tab.Screen name="おすすめ" component={Products} />
+      <Tab.Screen name="新着" component={Products} />
+      <Tab.Screen name="カテゴリー" component={Products} />
+      <Tab.Screen name="保存した検索条件" component={Products} />
+    </Tab.Navigator>
   );
 }
