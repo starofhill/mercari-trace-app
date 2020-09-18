@@ -5,6 +5,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Product, Products } from "../atoms";
 
 const styles = StyleSheet.create({
+  headerLeft: {
+    marginLeft: 20,
+  },
+  headerRight: {
+    marginRight: 20,
+  },
   input: {
     width: 256,
     height: 32,
@@ -39,6 +45,8 @@ export default function Home() {
           ),
           headerLeft: () => <Icon name="qrcode" size={24} />,
           headerRight: () => <Icon name="check" size={24} />,
+          headerLeftContainerStyle: styles.headerLeft,
+          headerRightContainerStyle: styles.headerRight,
         }}
       />
       <Stack.Screen name="Product" component={Product} />
