@@ -6,6 +6,9 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { createStackNavigator } from "@react-navigation/stack";
+import NoticeDetail from "../atoms/NoticeDetail";
+import NewsDetail from "../atoms/NewsDetail";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +18,7 @@ const styles = StyleSheet.create({
 
 const Tab = createMaterialTopTabNavigator();
 
-function Notices() {
+function NoticesBody() {
   const insets = useSafeAreaInsets();
 
   return (
@@ -30,10 +33,26 @@ function Notices() {
   );
 }
 
+const Stack = createStackNavigator();
+
+function NoticesPageTransition() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Notice"
+        component={NoticesBody}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="NoticeDetail" component={NoticeDetail} />
+      <Stack.Screen name="NewsDetail" component={NewsDetail} />
+    </Stack.Navigator>
+  );
+}
+
 export default function NoticesWrapper() {
   return (
     <SafeAreaProvider>
-      <Notices />
+      <NoticesPageTransition />
     </SafeAreaProvider>
   );
 }

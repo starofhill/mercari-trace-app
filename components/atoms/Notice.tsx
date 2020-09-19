@@ -1,6 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
@@ -92,12 +99,20 @@ const data = [
 ];
 
 export default function Notice() {
+  const { navigate } = useNavigation();
+
   return (
     <FlatList
       data={data}
       contentContainerStyle={styles.container}
       renderItem={({ item }) => (
-        <View style={styles.box} key={item.id}>
+        <TouchableOpacity
+          style={styles.box}
+          key={item.id}
+          onPress={() => {
+            navigate("NoticeDetail");
+          }}
+        >
           <View style={styles.texts}>
             <Text style={styles.text}>{item.text}</Text>
             <Text style={styles.date}>{item.date}</Text>
@@ -105,7 +120,7 @@ export default function Notice() {
           <View style={styles.angle}>
             <Icon name="angle-right" size={24} />
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
   );
