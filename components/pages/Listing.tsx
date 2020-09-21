@@ -10,7 +10,7 @@ import EnterProductInformation from "../atoms/Listing/EnterProductInformation";
 
 export function Listing() {
   const { navigate } = useNavigation();
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.listing}>

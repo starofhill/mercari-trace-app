@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   },
   priceContents: {
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   priceContent: {
     flexDirection: "row",
