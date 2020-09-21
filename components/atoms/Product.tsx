@@ -151,16 +151,22 @@ const styles = StyleSheet.create({
   },
   sellerInformation: {
     marginLeft: 10,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   sellerName: {
     color: "red",
     fontSize: 16,
     fontWeight: "bold",
   },
-  sellerStar: {
+  sellerStarContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+  },
+  sellerStarNumber: {
     fontSize: 12,
     color: "blue",
+    marginLeft: 5,
   },
   doComment: {
     flexDirection: "row",
@@ -195,10 +201,15 @@ const productData = {
 
 const sellerData = {
   name: "りゅう",
-  star: 3,
+  starNumber: 3,
 };
 
 export default function Product() {
+  let starIcon = [];
+  for (var i = 0; i < sellerData.starNumber; i++) {
+    starIcon.push(<Icon name="star" size="18" color="#FFCC00"></Icon>);
+  }
+
   return (
     <View>
       <View style={styles.footer}>
@@ -297,7 +308,7 @@ export default function Product() {
 
         <View style={styles.box}>
           <Text style={styles.boxTitle}>出品者</Text>
-          <View style={[styles.boxContent, styles.sellerBox]}>
+          <TouchableOpacity style={[styles.boxContent, styles.sellerBox]}>
             <View style={styles.sellerContent}>
               <Image
                 source={require("../../assets/user_icon.png")}
@@ -305,11 +316,16 @@ export default function Product() {
               />
               <View style={styles.sellerInformation}>
                 <Text style={styles.sellerName}>{sellerData.name}</Text>
-                <Text style={styles.sellerStar}>{sellerData.star}</Text>
+                <View style={styles.sellerStarContent}>
+                  {starIcon}
+                  <Text style={styles.sellerStarNumber}>
+                    {sellerData.starNumber}
+                  </Text>
+                </View>
               </View>
             </View>
             <Icon name="angle-right" size={24} color="red" />
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View>
