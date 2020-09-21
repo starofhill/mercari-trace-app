@@ -9,38 +9,6 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-  },
-  box: {
-    width: "100%",
-    borderBottomColor: "#eee",
-    borderBottomWidth: 1,
-    padding: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    maxWidth: 500,
-    marginRight: "auto",
-    marginLeft: "auto",
-  },
-  texts: {
-    width: 320,
-  },
-  text: {
-    lineHeight: 20,
-  },
-  date: {
-    color: "#666",
-    fontSize: 11,
-    lineHeight: 20,
-  },
-  angle: {
-    paddingLeft: 10,
-  },
-});
-
 const data = [
   {
     id: 1,
@@ -125,3 +93,35 @@ export default function Notice() {
     />
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+  },
+  box: {
+    width: "100%",
+    borderBottomColor: "#eee",
+    borderBottomWidth: 1,
+    padding: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    maxWidth: 500,
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+  texts: {
+    width: 320,
+  },
+  text: {
+    lineHeight: 20,
+  },
+  date: {
+    color: "#666",
+    fontSize: 11,
+    lineHeight: 20,
+  },
+  angle: {
+    paddingLeft: 10,
+  },
+});

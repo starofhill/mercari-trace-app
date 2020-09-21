@@ -10,12 +10,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import NoticeDetail from "../atoms/NoticeDetail";
 import NewsDetail from "../atoms/NewsDetail";
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-  },
-});
-
 const Tab = createMaterialTopTabNavigator();
 
 function NoticesBody() {
@@ -56,3 +50,9 @@ export default function NoticesWrapper() {
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+  },
+});
