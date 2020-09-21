@@ -5,31 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Category from "./Home/Category";
 
-const styles = StyleSheet.create({
-  scrollView: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-  },
-  imageBox: {
-    position: "relative",
-  },
-  image: {
-    height: 110,
-    width: 110,
-    margin: 5,
-    borderRadius: 5,
-  },
-  price: {
-    position: "absolute",
-    left: 5,
-    bottom: 5,
-    backgroundColor: "rgba(30,30,30,0.8)",
-    color: "white",
-    padding: 3,
-  },
-});
-
 const Tab = createMaterialTopTabNavigator();
 
 const data = [
@@ -97,3 +72,28 @@ export default function () {
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollView: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+  imageBox: {
+    position: "relative",
+  },
+  image: {
+    height: 110,
+    width: 110,
+    margin: 5,
+    borderRadius: 5,
+  },
+  price: {
+    position: "absolute",
+    left: 5,
+    bottom: 5,
+    backgroundColor: "rgba(30,30,30,0.8)",
+    color: "white",
+    padding: 3,
+  },
+});
