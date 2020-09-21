@@ -4,6 +4,44 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/FontAwesome";
 
+export default function SignIn() {
+  return (
+    <SafeAreaView style={styles.component}>
+      <View style={styles.title}>
+        <Image
+          source={require("../../assets/IMG_6606.jpg")}
+          style={{ width: 100, height: 100 }}
+        />
+        <Text style={styles.titleText}>mercari</Text>
+      </View>
+      <View style={styles.boxes}>
+        <View>
+          <TouchableOpacity style={[styles.box, styles.blackBackgroundColor]}>
+            <Icon name="apple" size="24" color="white" />
+            <Text style={styles.whiteColor}>Appleでログイン</Text>
+            <Text></Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.box, styles.blueBackgroundColor]}>
+            <Icon name="facebook-official" size="24" color="white" />
+            <Text style={styles.whiteColor}>Facebookでログイン</Text>
+            <Text></Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.box, styles.whiteBackgroundColor]}>
+            <Icon name="google" size="24" />
+            <Text style={styles.blackColor}>Googleでログイン</Text>
+            <Text></Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.box, styles.redBackgroundColor]}>
+            <Icon name="envelope-o" size="24" color="white" />
+            <Text style={styles.whiteColor}>メールアドレスでログイン</Text>
+            <Text></Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
 const styles = StyleSheet.create({
   component: {
     backgroundColor: "white",
@@ -56,41 +94,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default function SignIn() {
-  return (
-    <SafeAreaView style={styles.component}>
-      <View style={styles.title}>
-        <Image
-          source={require("../../assets/IMG_6606.jpg")}
-          style={{ width: 100, height: 100 }}
-        />
-        <Text style={styles.titleText}>mercari</Text>
-      </View>
-      <View style={styles.boxes}>
-        <View>
-          <TouchableOpacity style={[styles.box, styles.blackBackgroundColor]}>
-            <Icon name="apple" size="24" color="white" />
-            <Text style={styles.whiteColor}>Appleでログイン</Text>
-            <Text></Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.box, styles.blueBackgroundColor]}>
-            <Icon name="facebook-official" size="24" color="white" />
-            <Text style={styles.whiteColor}>Facebookでログイン</Text>
-            <Text></Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.box, styles.whiteBackgroundColor]}>
-            <Icon name="google" size="24" />
-            <Text style={styles.blackColor}>Googleでログイン</Text>
-            <Text></Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.box, styles.redBackgroundColor]}>
-            <Icon name="envelope-o" size="24" color="white" />
-            <Text style={styles.whiteColor}>メールアドレスでログイン</Text>
-            <Text></Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-}

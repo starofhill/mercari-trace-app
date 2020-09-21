@@ -7,75 +7,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SignIn from "./SignIn";
 import { useNavigation } from "@react-navigation/native";
 
-const styles = StyleSheet.create({
-  component: {
-    backgroundColor: "white",
-    flex: 1,
-    alignItems: "center",
-  },
-  title: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30,
-  },
-  titleText: {
-    fontWeight: "bold",
-    fontSize: 48,
-  },
-  boxes: {
-    alignItems: "center",
-    borderColor: "black",
-    borderTopWidth: 1,
-    marginTop: 30,
-    paddingTop: 15,
-  },
-  boxTitle: {
-    backgroundColor: "white",
-    position: "absolute",
-    top: -16,
-    padding: 10,
-  },
-  box: {
-    width: 300,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 8,
-    margin: 8,
-  },
-  blackBackgroundColor: {
-    backgroundColor: "black",
-  },
-  blueBackgroundColor: {
-    backgroundColor: "#3B5998",
-  },
-  whiteBackgroundColor: {
-    backgroundColor: "white",
-    borderColor: "black",
-    borderWidth: 1,
-  },
-  redBackgroundColor: {
-    backgroundColor: "#FF4F02",
-  },
-  whiteColor: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  blackColor: {
-    color: "black",
-    fontWeight: "bold",
-  },
-  login: {
-    marginTop: 20,
-    borderBottomColor: "#136FFF",
-    borderBottomWidth: 1,
-  },
-  loginText: {
-    color: "#136FFF",
-  },
-});
-
 const Stack = createStackNavigator();
 
 function SignUp() {
@@ -146,3 +77,72 @@ export default function () {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  component: {
+    backgroundColor: "white",
+    flex: 1,
+    alignItems: "center",
+  },
+  title: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+  },
+  titleText: {
+    fontWeight: "bold",
+    fontSize: 48,
+  },
+  boxes: {
+    alignItems: "center",
+    borderColor: "black",
+    borderTopWidth: 1,
+    marginTop: 30,
+    paddingTop: 15,
+  },
+  boxTitle: {
+    backgroundColor: "white",
+    position: "absolute",
+    top: -16,
+    padding: 10,
+  },
+  box: {
+    width: 300,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 8,
+    margin: 8,
+  },
+  blackBackgroundColor: {
+    backgroundColor: "black",
+  },
+  blueBackgroundColor: {
+    backgroundColor: "#3B5998",
+  },
+  whiteBackgroundColor: {
+    backgroundColor: "white",
+    borderColor: "black",
+    borderWidth: 1,
+  },
+  redBackgroundColor: {
+    backgroundColor: "#FF4F02",
+  },
+  whiteColor: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  blackColor: {
+    color: "black",
+    fontWeight: "bold",
+  },
+  login: {
+    marginTop: 20,
+    borderBottomColor: "#136FFF",
+    borderBottomWidth: 1,
+  },
+  loginText: {
+    color: "#136FFF",
+  },
+});

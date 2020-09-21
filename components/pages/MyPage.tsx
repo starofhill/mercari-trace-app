@@ -7,61 +7,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SignUp from "./SignUp";
 import { useNavigation } from "@react-navigation/native";
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "white",
-    width: "100%",
-    maxWidth: 500,
-    height: 100,
-    marginRight: "auto",
-    marginLeft: "auto",
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  icon: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    borderColor: "#eee",
-    borderWidth: 3,
-    marginLeft: 10,
-  },
-  headerTitle: {
-    fontWeight: "700",
-    marginLeft: 10,
-  },
-  boxes: {
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  box: {
-    backgroundColor: "white",
-    width: "100%",
-    maxWidth: 500,
-    marginRight: "auto",
-    marginLeft: "auto",
-    borderBottomColor: "#eee",
-    borderBottomWidth: 1,
-    padding: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  boxTitle: {
-    color: "#777",
-    paddingLeft: 10,
-    paddingBottom: 10,
-    marginRight: "auto",
-    marginLeft: "auto",
-    width: "100%",
-    maxWidth: 500,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
 const Stack = createStackNavigator();
 
 function MyPage() {
@@ -162,3 +107,58 @@ export default function () {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    width: "100%",
+    maxWidth: 500,
+    height: 100,
+    marginRight: "auto",
+    marginLeft: "auto",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  icon: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    borderColor: "#eee",
+    borderWidth: 3,
+    marginLeft: 10,
+  },
+  headerTitle: {
+    fontWeight: "700",
+    marginLeft: 10,
+  },
+  boxes: {
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  box: {
+    backgroundColor: "white",
+    width: "100%",
+    maxWidth: 500,
+    marginRight: "auto",
+    marginLeft: "auto",
+    borderBottomColor: "#eee",
+    borderBottomWidth: 1,
+    padding: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  boxTitle: {
+    color: "#777",
+    paddingLeft: 10,
+    paddingBottom: 10,
+    marginRight: "auto",
+    marginLeft: "auto",
+    width: "100%",
+    maxWidth: 500,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
