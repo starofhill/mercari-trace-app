@@ -3,10 +3,9 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Examples } from "../atoms";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import EnterProductInformation from "../atoms/Listing/EnterProductInformation";
+import { EnterProductInformation, Examples } from "../atoms/Listing";
 
 export function Listing() {
   const { navigate } = useNavigation();
@@ -71,6 +70,7 @@ export function Listing() {
             </View>
             <Icon name="angle-right" size={24} color="#ccc" />
           </View>
+
           <Examples />
         </View>
       </ScrollView>

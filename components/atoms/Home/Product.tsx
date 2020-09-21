@@ -132,7 +132,7 @@ export default function Product() {
           <TouchableOpacity style={[styles.boxContent, styles.sellerBox]}>
             <View style={styles.sellerContent}>
               <Image
-                source={require("../../assets/user_icon.png")}
+                source={require("../../../assets/user_icon.png")}
                 style={styles.icon}
               />
               <View style={styles.sellerInformation}>

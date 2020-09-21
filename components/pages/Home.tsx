@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Product, Products } from "../atoms";
+import { Product, Products } from "../atoms/Home";
 
 const Stack = createStackNavigator();
 

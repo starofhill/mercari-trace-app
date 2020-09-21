@@ -4,8 +4,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { createStackNavigator } from "@react-navigation/stack";
-import SignIn from "./SignIn";
 import { useNavigation } from "@react-navigation/native";
+import { SignIn } from ".";
 
 const Stack = createStackNavigator();
 

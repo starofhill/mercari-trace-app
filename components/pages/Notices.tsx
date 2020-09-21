@@ -1,14 +1,12 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { News, Notice } from "../atoms";
+import { News, NewsDetail, Notice, NoticeDetail } from "../atoms/Notices";
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
-import NoticeDetail from "../atoms/NoticeDetail";
-import NewsDetail from "../atoms/NewsDetail";
 
 const Tab = createMaterialTopTabNavigator();
 

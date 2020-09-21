@@ -2,28 +2,28 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import CategoryIcon from "./CategoryIcon";
+import { CategoryItem } from ".";
 
-export default function CategoryIcons() {
+export default function CategoryItems() {
   const [showFlag, setShowFlag] = React.useState(false);
 
   return (
     <View>
       <View style={styles.category}>
-        <CategoryIcon
+        <CategoryItem
           color="#FF1A6F"
           name="female"
           size="32"
           category="レディース"
         />
-        <CategoryIcon color="#005FFF" name="male" size="32" category="メンズ" />
-        <CategoryIcon
+        <CategoryItem color="#005FFF" name="male" size="32" category="メンズ" />
+        <CategoryItem
           color="#FFCC00"
           name="baby"
           size="32"
           category="ベビー・キッズ"
         />
-        <CategoryIcon
+        <CategoryItem
           color="#CC66CC"
           name="mobile-alt"
           size="32"
@@ -32,26 +32,26 @@ export default function CategoryIcons() {
         />
       </View>
       <View style={styles.category}>
-        <CategoryIcon
+        <CategoryItem
           color="#FF4F02"
           name="book-open"
           size="28"
           category="本・メディア"
         />
-        <CategoryIcon
+        <CategoryItem
           color="#FF8C00"
           name="gamepad"
           size="28"
           category="ゲーム"
         />
-        <CategoryIcon
+        <CategoryItem
           color="#32CD32"
           name="cubes"
           size="32"
           category="おもちゃ"
           category2="ホビー・グッズ"
         />
-        <CategoryIcon
+        <CategoryItem
           color="#A9A9A9"
           name="box"
           size="28"
@@ -75,27 +75,27 @@ export default function CategoryIcons() {
       {showFlag && (
         <View>
           <View style={styles.category}>
-            <CategoryIcon
+            <CategoryItem
               color="#7FFF00"
               name="microphone-alt"
               size="28"
               category="タレントグッズ"
             />
-            <CategoryIcon
+            <CategoryItem
               color="#DC143C"
               name="eye"
               size="28"
               category="コスメ"
               category2="香水・美容"
             />
-            <CategoryIcon
+            <CategoryItem
               color="#00FFFF"
               name="basketball-ball"
               size="32"
               category="スポーツ"
               category2="レンジャー"
             />
-            <CategoryIcon
+            <CategoryItem
               color="#9400D3"
               name="camera"
               size="28"
@@ -103,27 +103,27 @@ export default function CategoryIcons() {
             />
           </View>
           <View style={styles.category}>
-            <CategoryIcon
+            <CategoryItem
               color="#00CED1"
               name="home"
               size="28"
               category="インテリア"
               category2="住まい・小物"
             />
-            <CategoryIcon
+            <CategoryItem
               color="#1E90FF"
               name="car-side"
               size="28"
               category="自動車"
               category2="オートバイ"
             />
-            <CategoryIcon
+            <CategoryItem
               color="#555"
               name="ticket-alt"
               size="28"
               category="チケット"
             />
-            <CategoryIcon
+            <CategoryItem
               color="#FF4F50"
               name="donate"
               size="28"

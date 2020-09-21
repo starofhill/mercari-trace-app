@@ -7,7 +7,7 @@ import {
 } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import CategoryIcons from "./CategoryIcons";
+import { CategoryItems } from ".";
 
 const data = [
   { id: 1, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
@@ -42,7 +42,7 @@ export default function Category() {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
-      <CategoryIcons />
+      <CategoryItems />
 
       <View style={styles.boxes}>
         <View style={styles.box}>

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default function CategoryIcon(props) {
+export default function CategoryItem(props) {
   return (
     <View style={styles.categoryBox}>
       <TouchableOpacity

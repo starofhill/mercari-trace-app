@@ -4,8 +4,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
-import SignUp from "./SignUp";
 import { useNavigation } from "@react-navigation/native";
+import { SignUp } from ".";
 
 const Stack = createStackNavigator();
 
