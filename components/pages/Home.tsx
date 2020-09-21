@@ -4,19 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Product, Products } from "../atoms";
 
-const styles = StyleSheet.create({
-  input: {
-    width: 256,
-    height: 32,
-    paddingRight: 16,
-    paddingLeft: 16,
-    backgroundColor: "#eee",
-    borderRadius: 20,
-    marginRight: 20,
-    marginLeft: 20,
-  },
-});
-
 const Stack = createStackNavigator();
 
 export default function Home() {
@@ -39,9 +26,30 @@ export default function Home() {
           ),
           headerLeft: () => <Icon name="qrcode" size={24} />,
           headerRight: () => <Icon name="check" size={24} />,
+          headerLeftContainerStyle: styles.headerLeft,
+          headerRightContainerStyle: styles.headerRight,
         }}
       />
       <Stack.Screen name="Product" component={Product} />
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  headerLeft: {
+    marginLeft: 20,
+  },
+  headerRight: {
+    marginRight: 20,
+  },
+  input: {
+    width: 256,
+    height: 32,
+    paddingRight: 16,
+    paddingLeft: 16,
+    backgroundColor: "#eee",
+    borderRadius: 20,
+    marginRight: 20,
+    marginLeft: 20,
+  },
+});
