@@ -1,9 +1,106 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Examples } from "../atoms";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import EnterProductInformation from "../atoms/Listing/EnterProductInformation";
+
+export function Listing() {
+  const { navigate } = useNavigation();
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.listing}>
+        <TouchableOpacity
+          style={styles.listingButton}
+          onPress={() => navigate("EnterProductInformation")}
+        >
+          <Icon name="camera" size={18} color="white" />
+          <Text style={styles.listingText}>出品</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View>
+          <View style={styles.topImage}>
+            <Image
+              source={require("../../assets/IMG_6604.jpeg")}
+              style={{
+                width: 300,
+                height: 150,
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+              resizeMode="contain"
+            />
+          </View>
+          <View style={styles.shortcuts}>
+            <Text style={styles.shortcutTitle}>出品へのショートカット</Text>
+            <View style={styles.shortcut}>
+              <TouchableOpacity style={styles.shortcutBox}>
+                <Icon name="camera" size="24" />
+                <Text style={styles.shortcutText}>写真を撮る</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.shortcutBox}>
+                <Icon name="photo" size="24" />
+                <Text style={styles.shortcutText}>アルバム</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.shortcutBox}>
+                <Icon name="barcode" size="24" />
+                <Text style={styles.shortcutText}>
+                  バーコード{"\n"}(本・コスメ)
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.shortcutBox}>
+                <Icon name="edit" size="24" />
+                <Text style={styles.shortcutText}>下書き一覧</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.check}>
+            <View style={styles.checkTexts}>
+              <Icon name="photo" size={32} />
+              <View style={styles.checkText}>
+                <Text style={styles.checkTextBold}>売れるかチェックする</Text>
+                <Text style={styles.checkTextLight}>
+                  写真を撮って商品価格の相場をチェック
+                </Text>
+              </View>
+            </View>
+            <Icon name="angle-right" size={24} color="#ccc" />
+          </View>
+          <Examples />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function () {
+  return (
+    <Stack.Navigator mode="modal">
+      <Stack.Screen
+        name="Listing"
+        component={Listing}
+        options={{
+          title: "出品",
+        }}
+      />
+      <Stack.Screen
+        name="EnterProductInformation"
+        component={EnterProductInformation}
+        options={{
+          title: "商品の状態を入力",
+          headerBackTitle: "",
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -13,12 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   listing: {
-    backgroundColor: "#f33",
-    width: 60,
-    height: 60,
     borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
     position: "absolute",
     bottom: 20,
     right: 20,
@@ -30,6 +122,14 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 5,
     shadowOpacity: 0.5,
+  },
+  listingButton: {
+    backgroundColor: "#f33",
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   listingText: {
     color: "white",
@@ -99,66 +199,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
-export default function Listing() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.listing}>
-        <Icon name="camera" size={18} color="white" />
-        <Text style={styles.listingText}>出品</Text>
-      </View>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <View>
-          <View style={styles.topImage}>
-            <Image
-              source={require("../../assets/IMG_6604.jpeg")}
-              style={{
-                width: 300,
-                height: 150,
-                marginTop: 20,
-                marginBottom: 20,
-              }}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={styles.shortcuts}>
-            <Text style={styles.shortcutTitle}>出品へのショートカット</Text>
-            <View style={styles.shortcut}>
-              <View style={styles.shortcutBox}>
-                <Icon name="camera" size="24" />
-                <Text style={styles.shortcutText}>写真を撮る</Text>
-              </View>
-              <View style={styles.shortcutBox}>
-                <Icon name="photo" size="24" />
-                <Text style={styles.shortcutText}>アルバム</Text>
-              </View>
-              <View style={styles.shortcutBox}>
-                <Icon name="barcode" size="24" />
-                <Text style={styles.shortcutText}>
-                  バーコード{"\n"}(本・コスメ)
-                </Text>
-              </View>
-              <View style={styles.shortcutBox}>
-                <Icon name="edit" size="24" />
-                <Text style={styles.shortcutText}>下書き一覧</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.check}>
-            <View style={styles.checkTexts}>
-              <Icon name="photo" size={32} />
-              <View style={styles.checkText}>
-                <Text style={styles.checkTextBold}>売れるかチェックする</Text>
-                <Text style={styles.checkTextLight}>
-                  写真を撮って商品価格の相場をチェック
-                </Text>
-              </View>
-            </View>
-            <Icon name="angle-right" size={24} color="#ccc" />
-          </View>
-          <Examples />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
