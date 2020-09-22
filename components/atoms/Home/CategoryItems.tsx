@@ -13,20 +13,20 @@ export default function CategoryItems() {
         <CategoryItem
           color="#FF1A6F"
           name="female"
-          size="32"
+          size={32}
           category="レディース"
         />
-        <CategoryItem color="#005FFF" name="male" size="32" category="メンズ" />
+        <CategoryItem color="#005FFF" name="male" size={32} category="メンズ" />
         <CategoryItem
           color="#FFCC00"
           name="baby"
-          size="32"
+          size={32}
           category="ベビー・キッズ"
         />
         <CategoryItem
           color="#CC66CC"
           name="mobile-alt"
-          size="32"
+          size={32}
           category="スマホ"
           category2="タブレット"
         />
@@ -35,26 +35,26 @@ export default function CategoryItems() {
         <CategoryItem
           color="#FF4F02"
           name="book-open"
-          size="28"
+          size={28}
           category="本・メディア"
         />
         <CategoryItem
           color="#FF8C00"
           name="gamepad"
-          size="28"
+          size={28}
           category="ゲーム"
         />
         <CategoryItem
           color="#32CD32"
           name="cubes"
-          size="32"
+          size={32}
           category="おもちゃ"
           category2="ホビー・グッズ"
         />
         <CategoryItem
           color="#A9A9A9"
           name="box"
-          size="28"
+          size={28}
           category="メルカリ公式"
           category2="梱包グッズ"
         />
@@ -78,27 +78,27 @@ export default function CategoryItems() {
             <CategoryItem
               color="#7FFF00"
               name="microphone-alt"
-              size="28"
+              size={28}
               category="タレントグッズ"
             />
             <CategoryItem
               color="#DC143C"
               name="eye"
-              size="28"
+              size={28}
               category="コスメ"
               category2="香水・美容"
             />
             <CategoryItem
               color="#00FFFF"
               name="basketball-ball"
-              size="32"
+              size={32}
               category="スポーツ"
               category2="レンジャー"
             />
             <CategoryItem
               color="#9400D3"
               name="camera"
-              size="28"
+              size={28}
               category="家電・カメラ"
             />
           </View>
@@ -106,27 +106,27 @@ export default function CategoryItems() {
             <CategoryItem
               color="#00CED1"
               name="home"
-              size="28"
+              size={28}
               category="インテリア"
               category2="住まい・小物"
             />
             <CategoryItem
               color="#1E90FF"
               name="car-side"
-              size="28"
+              size={28}
               category="自動車"
               category2="オートバイ"
             />
             <CategoryItem
               color="#555"
               name="ticket-alt"
-              size="28"
+              size={28}
               category="チケット"
             />
             <CategoryItem
               color="#FF4F50"
               name="donate"
-              size="28"
+              size={28}
               category="メルカリ寄付"
             />
           </View>
