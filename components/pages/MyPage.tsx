@@ -3,13 +3,9 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import { SignUp } from ".";
 
-const Stack = createStackNavigator();
-
-function MyPage() {
+export default function MyPage() {
   const { navigate } = useNavigation();
 
   return (
@@ -84,27 +80,6 @@ function MyPage() {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
-}
-
-export default function () {
-  return (
-    <Stack.Navigator mode="modal">
-      <Stack.Screen
-        name="MyPage"
-        component={MyPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
   );
 }
 
