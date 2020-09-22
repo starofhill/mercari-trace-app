@@ -4,43 +4,19 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Category } from ".";
+import { useSelector } from "react-redux";
 
 const Tab = createMaterialTopTabNavigator();
 
-const data = [
-  { id: 1, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 2, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 3, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 4, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 5, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 6, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 7, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 8, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 9, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 10, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 11, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 12, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 13, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 14, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 15, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 16, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 17, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 18, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 19, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 20, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 21, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 22, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 23, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 24, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 25, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-];
-
 function Products() {
   const { navigate } = useNavigation();
+  const selector = useSelector((state) => state);
+  const products = selector.products;
+  const list = products.list;
 
   return (
     <FlatList
-      data={data}
+      data={list}
       contentContainerStyle={styles.scrollView}
       renderItem={({ item }) => (
         <View style={styles.imageBox} key={item.id}>

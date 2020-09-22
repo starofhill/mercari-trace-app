@@ -8,37 +8,13 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CategoryItems } from ".";
-
-const data = [
-  { id: 1, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 2, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 3, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 4, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 5, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 6, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 7, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 8, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 9, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 10, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 11, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 12, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 13, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 14, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 15, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 16, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 17, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 18, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 19, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 20, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 21, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 22, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 23, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 24, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-  { id: 25, src: "../../../assets/seigiman369_TP_V.jpg", price: 1000 },
-];
+import { useSelector } from "react-redux";
 
 export default function Category() {
   const { navigate } = useNavigation();
+  const selector = useSelector((state) => state);
+  const products = selector.products;
+  const list = products.list;
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
@@ -54,7 +30,7 @@ export default function Category() {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={data}
+            data={list}
             contentContainerStyle={styles.list}
             horizontal
             renderItem={({ item }) => (
@@ -83,7 +59,7 @@ export default function Category() {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={data}
+            data={list}
             contentContainerStyle={styles.list}
             horizontal
             renderItem={({ item }) => (
@@ -112,7 +88,7 @@ export default function Category() {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={data}
+            data={list}
             contentContainerStyle={styles.list}
             horizontal
             renderItem={({ item }) => (
@@ -141,7 +117,7 @@ export default function Category() {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={data}
+            data={list}
             contentContainerStyle={styles.list}
             horizontal
             renderItem={({ item }) => (
@@ -170,7 +146,7 @@ export default function Category() {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={data}
+            data={list}
             contentContainerStyle={styles.list}
             horizontal
             renderItem={({ item }) => (
