@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Product, Products } from "../atoms/Home";
+import { Product, Products, Purchase } from "../atoms/Home";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +31,11 @@ export default function Home() {
         }}
       />
       <Stack.Screen name="Product" component={Product} />
+      <Stack.Screen
+        name="Purchase"
+        component={Purchase}
+        options={{ title: "購入手続き", headerBackTitle: "" }}
+      />
     </Stack.Navigator>
   );
 }

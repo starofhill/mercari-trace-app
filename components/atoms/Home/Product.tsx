@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const productData = {
   id: 1,
@@ -26,6 +27,8 @@ const sellerData = {
 };
 
 export default function Product() {
+  const { navigate } = useNavigation();
+
   let starIcon = [];
   for (var i = 0; i < sellerData.starNumber; i++) {
     starIcon.push(<Icon name="star" size="18" color="#FFCC00"></Icon>);
@@ -39,7 +42,12 @@ export default function Product() {
             メルペイスマート払い{"\n"}で購入手続き
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerRightButton}>
+        <TouchableOpacity
+          style={styles.footerRightButton}
+          onPress={() => {
+            navigate("Purchase");
+          }}
+        >
           <Text style={styles.footerRightButtonText}>購入手続きへ</Text>
         </TouchableOpacity>
       </View>
