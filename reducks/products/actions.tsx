@@ -1,7 +1,7 @@
-export const ADD_PRODUCTS = "ADD_PRODUCTS";
-export const addProductAction = (products) => {
+export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
+export const fetchProductsAction = (products) => {
   return {
-    type: "ADD_PRODUCTS",
+    type: "FETCH_PRODUCTS",
     payload: products,
   };
 };
