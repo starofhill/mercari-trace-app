@@ -13,6 +13,8 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Provider } from "react-redux";
 import createStore from "./reducks/store/store";
+import { Product } from "./components/atoms/Home";
+import Purchase from "./components/atoms/Home/Purchase";
 
 export const store = createStore();
 
@@ -65,7 +67,7 @@ export default function () {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator mode="modal">
+        <Stack.Navigator mode="card">
           <Stack.Screen
             name="App"
             component={App}
@@ -79,6 +81,12 @@ export default function () {
             options={{
               headerShown: false,
             }}
+          />
+          <Stack.Screen name="Product" component={Product} />
+          <Stack.Screen
+            name="Purchase"
+            component={Purchase}
+            options={{ title: "購入手続き", headerBackTitle: "" }}
           />
         </Stack.Navigator>
       </NavigationContainer>

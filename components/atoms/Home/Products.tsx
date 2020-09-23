@@ -16,7 +16,7 @@ function Products() {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  },[]);
+  }, []);
 
   const products = selector.products;
   const list = products.list;
