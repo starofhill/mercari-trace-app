@@ -6,15 +6,54 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ExpoImagePicker } from ".";
+import { ExpoImagePicker, ModalItems } from ".";
+import * as ImagePicker from "expo-image-picker";
 
 export default function EnterProductInformation() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState([]);
+
+  // カメラを起動
+  const _takePhoto = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: false,
+    });
+
+    const img = image.slice();
+    if (!result.cancelled) {
+      img.push(result.uri);
+      setImage(img);
+    }
+  };
+
+  // カメラロールから選択
+  const _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [16, 9],
+    });
+
+    const img = image.slice();
+    if (!result.cancelled) {
+      img.push(result.uri);
+      setImage(img);
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
-      <ExpoImagePicker />
+      <ModalItems
+        _takePhoto={_takePhoto}
+        _pickImage={_pickImage}
+        image={image}
+      />
+
+      <ExpoImagePicker
+        _takePhoto={_takePhoto}
+        _pickImage={_pickImage}
+        image={image}
+      />
 
       <View style={styles.box}>
         <Text style={styles.boxTitle}>商品の詳細</Text>

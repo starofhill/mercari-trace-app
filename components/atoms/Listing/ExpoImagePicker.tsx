@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import * as ImagePicker from "expo-image-picker";
 
-export default function ExpoImagePicker() {
+export default function ExpoImagePicker(props) {
   const data = [
     { id: 0, name: "camera", text: "(必須)" },
     { id: 1, name: "camera" },
@@ -18,34 +17,6 @@ export default function ExpoImagePicker() {
     { id: 9, name: "camera" },
   ];
 
-  const [image, setImage] = useState([]);
-
-  // カメラを起動
-  const _takePhoto = async (id) => {
-    let result = await ImagePicker.launchCameraAsync({
-      allowsEditing: false,
-    });
-
-    const img = image.slice();
-    if (!result.cancelled) {
-      img.push(result.uri);
-      setImage(img);
-    }
-  };
-
-  // カメラロールから選択
-  const _pickImage = async (id) => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [16, 9],
-    });
-
-    const img = image.slice();
-    if (!result.cancelled) {
-      img.push(result.uri);
-      setImage(img);
-    }
-  };
   return (
     <FlatList
       data={data}
@@ -54,24 +25,24 @@ export default function ExpoImagePicker() {
       keyExtractor={(item) => `enterProductInformation-${item.id}`}
       renderItem={({ item }) => (
         <View>
-          {!image[item.id] && (
+          {!props.image[item.id] && (
             // 画像なし
             <>
               {item.id === 0 ? (
                 // 1個目
                 <TouchableOpacity
                   style={styles.imageBox}
-                  onPress={() => _takePhoto(item.id)}
+                  onPress={() => props._takePhoto()}
                 >
                   <Text style={styles.imageNumber}>{item.id + 1}</Text>
                   <Icon name={item.name} size={20} />
                   <Text style={styles.imageText}>{item.text}</Text>
                 </TouchableOpacity>
-              ) : image[item.id - 1] ? (
+              ) : props.image[item.id - 1] ? (
                 // 1個目以外 & 1つ前に画像あり
                 <TouchableOpacity
                   style={styles.imageBox}
-                  onPress={() => _takePhoto(item.id)}
+                  onPress={() => props._takePhoto()}
                 >
                   <Text style={styles.imageNumber}>{item.id + 1}</Text>
                   <Icon name={item.name} size={20} color="#ccc" />
@@ -84,12 +55,12 @@ export default function ExpoImagePicker() {
               )}
             </>
           )}
-          {image[item.id] && (
+          {props.image[item.id] && (
             // 画像あり
             <TouchableOpacity style={styles.imageBox}>
               <Text style={styles.imageNumber}>{item.id + 1}</Text>
               <Image
-                source={{ uri: image[item.id] }}
+                source={{ uri: props.image[item.id] }}
                 style={{ width: 60, height: 60 }}
               />
             </TouchableOpacity>
