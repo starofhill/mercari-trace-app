@@ -39,21 +39,21 @@ export function Listing() {
             <Text style={styles.shortcutTitle}>出品へのショートカット</Text>
             <View style={styles.shortcut}>
               <TouchableOpacity style={styles.shortcutBox}>
-                <Icon name="camera" size="24" />
+                <Icon name="camera" size={24} />
                 <Text style={styles.shortcutText}>写真を撮る</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.shortcutBox}>
-                <Icon name="photo" size="24" />
+                <Icon name="photo" size={24} />
                 <Text style={styles.shortcutText}>アルバム</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.shortcutBox}>
-                <Icon name="barcode" size="24" />
+                <Icon name="barcode" size={24} />
                 <Text style={styles.shortcutText}>
                   バーコード{"\n"}(本・コスメ)
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.shortcutBox}>
-                <Icon name="edit" size="24" />
+                <Icon name="edit" size={24} />
                 <Text style={styles.shortcutText}>下書き一覧</Text>
               </TouchableOpacity>
             </View>

@@ -30,10 +30,11 @@ export default function EnterProductInformation() {
         data={data}
         contentContainerStyle={styles.image}
         horizontal
+        keyExtractor={(item) => `enterProductInformation-${item.id}`}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.imageBox} key={item.id}>
+          <TouchableOpacity style={styles.imageBox}>
             <Text style={styles.imageNumber}>{item.id}</Text>
-            <Icon name={item.name} size="20" />
+            <Icon name={item.name} size={20} />
             <Text style={styles.imageText}>{item.text}</Text>
           </TouchableOpacity>
         )}
@@ -45,14 +46,14 @@ export default function EnterProductInformation() {
             <Text style={styles.boxTitleText}>カテゴリー</Text>
             <View style={styles.boxContent}>
               <Text style={styles.boxText}>(必須)</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content}>
             <Text style={styles.boxTitleText}>商品の状態</Text>
             <View style={styles.boxContent}>
               <Text style={styles.boxText}>(必須)</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
         </View>
@@ -93,28 +94,28 @@ export default function EnterProductInformation() {
             <Text style={styles.boxTitleText}>配送料の負担</Text>
             <View style={styles.boxContent}>
               <Text style={styles.boxText}>(必須)</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.content, styles.borderBottom]}>
             <Text style={styles.boxTitleText}>配送の方法</Text>
             <View style={styles.boxContent}>
               <Text style={styles.boxText}>(必須)</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.content, styles.borderBottom]}>
             <Text style={styles.boxTitleText}>配送元の地域</Text>
             <View style={styles.boxContent}>
               <Text style={styles.boxText}>(必須)</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.content, styles.borderBottom]}>
             <Text style={styles.boxTitleText}>配送までの日数</Text>
             <View style={styles.boxContent}>
               <Text style={styles.boxText}>(必須)</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
         </View>

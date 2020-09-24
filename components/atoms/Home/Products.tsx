@@ -25,8 +25,9 @@ function Products() {
     <FlatList
       data={list}
       contentContainerStyle={styles.scrollView}
+      keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (
-        <View style={styles.imageBox} key={item.id}>
+        <View style={styles.imageBox}>
           <TouchableOpacity
             onPress={() => {
               navigate("Product");

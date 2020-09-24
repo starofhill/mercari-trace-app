@@ -31,7 +31,7 @@ export default function Product() {
 
   let starIcon = [];
   for (var i = 0; i < sellerData.starNumber; i++) {
-    starIcon.push(<Icon name="star" size="18" color="#FFCC00"></Icon>);
+    starIcon.push(<Icon name="star" size={18} color="#FFCC00"></Icon>);
   }
 
   return (

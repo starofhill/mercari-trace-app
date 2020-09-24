@@ -59,7 +59,7 @@ export default function Purchase() {
             </View>
             <View style={styles.rightBox}>
               <Text style={styles.usePoints}>P100を使用する</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
         </View>
@@ -68,7 +68,7 @@ export default function Purchase() {
             <Text>支払い方法</Text>
             <View style={styles.rightBox}>
               <Text style={styles.paymentNumber}>************1234</Text>
-              <Icon name="angle-right" size="22" color="#888" />
+              <Icon name="angle-right" size={22} color="#888" />
             </View>
           </View>
           <View style={styles.box}>
@@ -89,7 +89,7 @@ export default function Purchase() {
               <Text style={styles.deliveryText}>※郵便局/コンビニ受取可能</Text>
               <Text style={styles.deliveryText}>※匿名配送</Text>
             </View>
-            <Icon name="angle-right" size="22" color="#888" />
+            <Icon name="angle-right" size={22} color="#888" />
           </View>
         </View>
       </ScrollView>

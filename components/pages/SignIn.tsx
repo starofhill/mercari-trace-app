@@ -17,22 +17,22 @@ export default function SignIn() {
       <View style={styles.boxes}>
         <View>
           <TouchableOpacity style={[styles.box, styles.blackBackgroundColor]}>
-            <Icon name="apple" size="24" color="white" />
+            <Icon name="apple" size={24} color="white" />
             <Text style={styles.whiteColor}>Appleでログイン</Text>
             <Text></Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.blueBackgroundColor]}>
-            <Icon name="facebook-official" size="24" color="white" />
+            <Icon name="facebook-official" size={24} color="white" />
             <Text style={styles.whiteColor}>Facebookでログイン</Text>
             <Text></Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.whiteBackgroundColor]}>
-            <Icon name="google" size="24" />
+            <Icon name="google" size={24} />
             <Text style={styles.blackColor}>Googleでログイン</Text>
             <Text></Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.redBackgroundColor]}>
-            <Icon name="envelope-o" size="24" color="white" />
+            <Icon name="envelope-o" size={24} color="white" />
             <Text style={styles.whiteColor}>メールアドレスでログイン</Text>
             <Text></Text>
           </TouchableOpacity>

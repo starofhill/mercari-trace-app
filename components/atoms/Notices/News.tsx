@@ -79,10 +79,10 @@ export default function News() {
     <FlatList
       data={data}
       contentContainerStyle={styles.container}
+      keyExtractor={(item) => `news-${item.id}`}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.box}
-          key={item.id}
           onPress={() => {
             navigate("NewsDetail");
           }}

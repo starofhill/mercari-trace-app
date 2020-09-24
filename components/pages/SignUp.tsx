@@ -25,22 +25,22 @@ function SignUp() {
         <Text style={styles.boxTitle}>初めてご利用の方は</Text>
         <View>
           <TouchableOpacity style={[styles.box, styles.blackBackgroundColor]}>
-            <Icon name="apple" size="24" color="white" />
+            <Icon name="apple" size={24} color="white" />
             <Text style={styles.whiteColor}>Appleでサインアップ</Text>
             <Text></Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.blueBackgroundColor]}>
-            <Icon name="facebook-official" size="24" color="white" />
+            <Icon name="facebook-official" size={24} color="white" />
             <Text style={styles.whiteColor}>Facebookで登録</Text>
             <Text></Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.whiteBackgroundColor]}>
-            <Icon name="google" size="24" />
+            <Icon name="google" size={24} />
             <Text style={styles.blackColor}>Googleで登録</Text>
             <Text></Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.redBackgroundColor]}>
-            <Icon name="envelope-o" size="24" color="white" />
+            <Icon name="envelope-o" size={24} color="white" />
             <Text style={styles.whiteColor}>メールアドレスで登録</Text>
             <Text></Text>
           </TouchableOpacity>

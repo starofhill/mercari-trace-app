@@ -8,13 +8,13 @@ export default function History() {
     <View style={styles.boxes}>
       <Text style={styles.boxTitle}>使った履歴</Text>
       <View style={styles.histories}>
-        <HistoryItem name="yen" text="売上金" size="24" />
-        <HistoryItem name="product-hunt" text="ポイント" size="24" />
+        <HistoryItem name="yen" text="売上金" size={24} />
+        <HistoryItem name="product-hunt" text="ポイント" size={24} />
         <HistoryItem
           name="mobile"
           text="メルペイ"
           text2="スマート払い"
-          size="32"
+          size={32}
         />
       </View>
     </View>

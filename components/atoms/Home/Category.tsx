@@ -33,8 +33,9 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
+            keyExtractor={(item) => `women-${item.id}`}
             renderItem={({ item }) => (
-              <View style={styles.imageBox} key={item.id}>
+              <View style={styles.imageBox}>
                 <TouchableOpacity
                   onPress={() => {
                     navigate("Product");
@@ -62,8 +63,9 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
+            keyExtractor={(item) => `men-${item.id}`}
             renderItem={({ item }) => (
-              <View style={styles.imageBox} key={item.id}>
+              <View style={styles.imageBox}>
                 <TouchableOpacity
                   onPress={() => {
                     navigate("Product");
@@ -91,8 +93,9 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
+            keyExtractor={(item) => `baby-${item.id}`}
             renderItem={({ item }) => (
-              <View style={styles.imageBox} key={item.id}>
+              <View style={styles.imageBox}>
                 <TouchableOpacity
                   onPress={() => {
                     navigate("Product");
@@ -120,8 +123,9 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
+            keyExtractor={(item) => `interior-${item.id}`}
             renderItem={({ item }) => (
-              <View style={styles.imageBox} key={item.id}>
+              <View style={styles.imageBox}>
                 <TouchableOpacity
                   onPress={() => {
                     navigate("Product");
@@ -149,8 +153,9 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
+            keyExtractor={(item) => `book-${item.id}`}
             renderItem={({ item }) => (
-              <View style={styles.imageBox} key={item.id}>
+              <View style={styles.imageBox}>
                 <TouchableOpacity
                   onPress={() => {
                     navigate("Product");

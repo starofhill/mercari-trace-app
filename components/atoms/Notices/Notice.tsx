@@ -73,10 +73,10 @@ export default function Notice() {
     <FlatList
       data={data}
       contentContainerStyle={styles.container}
+      keyExtractor={(item) => `notice-${item.id}`}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.box}
-          key={item.id}
           onPress={() => {
             navigate("NoticeDetail");
           }}
