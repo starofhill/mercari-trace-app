@@ -8,9 +8,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function Search(props) {
-    // console.log(props);
-
+export default function Search() {
   return (
     <ScrollView>
       <View style={styles.boxes}>
@@ -52,30 +50,6 @@ export default function Search(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "white",
-    width: "100%",
-    maxWidth: 500,
-    height: 100,
-    marginRight: "auto",
-    marginLeft: "auto",
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  icon: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    borderColor: "#eee",
-    borderWidth: 3,
-    marginLeft: 10,
-  },
-  headerTitle: {
-    fontWeight: "700",
-    marginLeft: 10,
-  },
   boxes: {
     marginTop: 10,
     marginBottom: 20,
