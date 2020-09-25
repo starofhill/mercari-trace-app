@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 
-export default function Products() {
+export default function ScreenScreen(props) {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state) => state);
@@ -14,13 +14,27 @@ export default function Products() {
   const products = selector.products;
   const list = products.list;
 
+  const value = props.value;
+
+  const [items, setItems] = useState();
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
+  useEffect(() => {
+    const updateList = list.filter((item) => {
+      if (value) {
+        return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+      } else return item;
+    });
+
+    setItems(updateList);
+  }, [value]);
+
   return (
     <FlatList
-      data={list}
+      data={items}
       contentContainerStyle={styles.scrollView}
       keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (

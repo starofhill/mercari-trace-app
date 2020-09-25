@@ -4,3 +4,6 @@ export { default as CategoryItems } from "./CategoryItems";
 export { default as Product } from "./Product";
 export { default as Products } from "./Products";
 export { default as Purchase } from "./Purchase";
+export { default as Search } from "./Search";
+export { default as SearchHome } from "./SearchHome";
+export { default as SearchScreen } from "./SearchScreen";
