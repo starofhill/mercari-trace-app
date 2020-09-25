@@ -14,29 +14,29 @@ export default function Products(props) {
   const products = selector.products;
   const list = products.list;
 
-  const value = props.value;
-
-  const [items, setItems] = useState();
+  // const value = props.value;
+  // const [items, setItems] = useState();
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  useEffect(() => {
-    setItems(list);
-  }, [list]);
+  // useEffect(() => {
+  //   setItems(list);
+  // }, [list]);
 
-  useEffect(() => {
-    const updateList = list.filter((item) => {
-      return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-    });
+  // useEffect(() => {
+  //   const updateList = list.filter((item) => {
+  //     return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+  //   });
 
-    setItems(updateList);
-  }, [value]);
+  //   setItems(updateList);
+  // }, [value]);
 
   return (
     <FlatList
-      data={items}
+      // data={items}
+      data={list}
       contentContainerStyle={styles.scrollView}
       keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (
