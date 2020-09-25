@@ -3,11 +3,10 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import { EnterProductInformation, Examples } from "../atoms/Listing";
+import { Examples } from "../atoms/Listing";
 
-export function Listing() {
+export default function Listing() {
   const { navigate } = useNavigation();
 
   return (
@@ -75,30 +74,6 @@ export function Listing() {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function () {
-  return (
-    <Stack.Navigator mode="modal">
-      <Stack.Screen
-        name="Listing"
-        component={Listing}
-        options={{
-          title: "出品",
-        }}
-      />
-      <Stack.Screen
-        name="EnterProductInformation"
-        component={EnterProductInformation}
-        options={{
-          title: "商品の状態を入力",
-          headerBackTitle: "",
-        }}
-      />
-    </Stack.Navigator>
   );
 }
 
