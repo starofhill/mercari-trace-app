@@ -1,29 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { Category } from ".";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 
-const Tab = createMaterialTopTabNavigator();
-
-function Products() {
+export default function Products(props) {
   const { navigate } = useNavigation();
+
   const selector = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  const products = selector.products;
+  const list = products.list;
+
+  const value = props.value;
+
+  const [items, setItems] = useState();
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  const products = selector.products;
-  const list = products.list;
+  useEffect(() => {
+    setItems(list);
+  }, [list]);
+
+  useEffect(() => {
+    const updateList = list.filter((item) => {
+      return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+    });
+
+    setItems(updateList);
+  }, [value]);
 
   return (
     <FlatList
-      data={list}
+      data={items}
       contentContainerStyle={styles.scrollView}
       keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (
@@ -43,17 +56,6 @@ function Products() {
       )}
       numColumns={3}
     />
-  );
-}
-
-export default function () {
-  return (
-    <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
-      <Tab.Screen name="おすすめ" component={Products} />
-      <Tab.Screen name="新着" component={Products} />
-      <Tab.Screen name="カテゴリー" component={Category} />
-      <Tab.Screen name="保存した検索条件" component={Products} />
-    </Tab.Navigator>
   );
 }
 
