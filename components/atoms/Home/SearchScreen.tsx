@@ -35,6 +35,12 @@ export default function ScreenScreen(props) {
   return (
     <FlatList
       data={items}
+      // data={items ? items.sort((a, b) => a.price - b.price) : list}
+      // data={items.sort((a, b) => a.price - b.price)}
+      // data={list.sort((a, b) => a.price - b.price)}
+      // data={list.sort((a, b) => a.name.localeCompare(b.name))}
+      // data={list.sort((a, b) => a.created_at.localeCompare(b.created_at))}
+
       contentContainerStyle={styles.scrollView}
       keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (

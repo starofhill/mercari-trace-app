@@ -5,8 +5,6 @@ import { SearchScreen } from ".";
 const Tab = createMaterialTopTabNavigator();
 
 export default function SearchHome({ value }) {
-  console.log(value);
-
   return (
     <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
       <Tab.Screen name="おすすめ">
