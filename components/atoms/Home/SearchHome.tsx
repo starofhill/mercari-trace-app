@@ -1,6 +1,6 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { SearchScreen } from ".";
+import { NewArrival, SearchScreen } from ".";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -20,7 +20,7 @@ export default function SearchHome({ value }) {
         {(props) => <SearchScreen {...props} value={value} />}
       </Tab.Screen>
       <Tab.Screen name="新しい順">
-        {(props) => <SearchScreen {...props} value={value} />}
+        {(props) => <NewArrival {...props} value={value} />}
       </Tab.Screen>
     </Tab.Navigator>
   );

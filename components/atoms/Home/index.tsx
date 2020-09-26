@@ -1,6 +1,7 @@
 export { default as Category } from "./Category";
 export { default as CategoryItem } from "./CategoryItem";
 export { default as CategoryItems } from "./CategoryItems";
+export { default as NewArrival } from "./NewArrival";
 export { default as Product } from "./Product";
 export { default as Products } from "./Products";
 export { default as Purchase } from "./Purchase";
