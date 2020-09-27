@@ -9,7 +9,12 @@ import {
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function SearchHome({ value }) {
+// export default function SearchHome({ value }) {
+  // export default function SearchHome(props) {
+  export default function SearchHome({value, ...props}) {
+  // console.log(props.route.params);
+  // const value = props.route.params.value;
+  // console.log(value);
   return (
     <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
       <Tab.Screen name="おすすめ">
