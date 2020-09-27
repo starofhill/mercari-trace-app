@@ -5,7 +5,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 
-export default function ScreenScreen(props) {
+export default function PriceInDescending(props) {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state) => state);
@@ -34,7 +34,7 @@ export default function ScreenScreen(props) {
 
   return (
     <FlatList
-      data={items}
+      data={items ? items.sort((a, b) => b.price - a.price) : list}
       contentContainerStyle={styles.scrollView}
       keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (
