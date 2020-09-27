@@ -4,13 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import {
-  Category,
-  NewArrival,
-  Products,
-  Search,
-  SearchHome,
-} from "../atoms/Home";
+import { Category, Products, Search, SearchHome } from "../atoms/Home";
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -19,7 +13,7 @@ function SearchTab() {
   return (
     <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
       <Tab.Screen name="おすすめ" component={Products} />
-      <Tab.Screen name="新着" component={NewArrival} />
+      <Tab.Screen name="新着" component={Products} />
       <Tab.Screen name="カテゴリー" component={Category} />
       <Tab.Screen name="保存した検索条件" component={Products} />
     </Tab.Navigator>
@@ -55,17 +49,28 @@ export default function Home() {
         name="Search"
         component={Search}
         options={{
-          headerTitle: () => (
-            <TextInput
-              style={styles.input}
-              onChangeText={(newValue) => {
-                setValue(newValue);
-              }}
-              placeholder="検索"
-              autoCapitalize="none"
-              onSubmitEditing={() => navigate("SearchHome")}
-            />
-          ),
+          // TextInputが入力されていなければページ遷移なし
+          headerTitle: () =>
+            value ? (
+              <TextInput
+                style={styles.input}
+                onChangeText={(newValue) => {
+                  setValue(newValue);
+                }}
+                placeholder="検索"
+                autoCapitalize="none"
+                onSubmitEditing={() => navigate("SearchHome")}
+              />
+            ) : (
+              <TextInput
+                style={styles.input}
+                onChangeText={(newValue) => {
+                  setValue(newValue);
+                }}
+                placeholder="検索"
+                autoCapitalize="none"
+              />
+            ),
           headerBackTitleVisible: false,
         }}
       />
