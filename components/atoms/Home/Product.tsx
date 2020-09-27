@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const productData = {
   id: 1,
-  title: "React Native",
+  name: "React Native",
   price: 2500,
   likes: 5,
   comments: 3,
@@ -26,8 +26,11 @@ const sellerData = {
   starNumber: 3,
 };
 
-export default function Product() {
+export default function Product(props) {
   const { navigate } = useNavigation();
+
+  // 商品情報を取得
+  const productData = props.route.params;
 
   let starIcon = [];
   for (var i = 0; i < sellerData.starNumber; i++) {
@@ -53,10 +56,12 @@ export default function Product() {
       </View>
       <ScrollView>
         <View style={styles.main}>
-          <Text style={styles.title}>{productData.title}</Text>
+          <Text style={styles.title}>{productData.name}</Text>
           <Text style={styles.brand}>{productData.brand}</Text>
           <View style={styles.prices}>
-            <Text style={styles.price}>¥{productData.price}</Text>
+            <Text style={styles.price}>
+              ¥{productData.price.toLocaleString()}
+            </Text>
             <Text style={styles.shippingCharges}>
               {productData.shippingCharges}
             </Text>

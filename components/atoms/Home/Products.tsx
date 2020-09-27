@@ -27,14 +27,14 @@ export default function Products() {
         <View style={styles.imageBox}>
           <TouchableOpacity
             onPress={() => {
-              navigate("Product");
+              navigate("Product", { ...item });
             }}
           >
             <Image
               source={require("../../../assets/seigiman369_TP_V.jpg")}
               style={styles.image}
             />
-            <Text style={styles.price}>¥{item.price}</Text>
+            <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
           </TouchableOpacity>
         </View>
       )}
