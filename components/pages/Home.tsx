@@ -1,39 +1,148 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Category, Products, Search, SearchHome } from "../atoms/Home";
+import {
+  Category,
+  NewArrival,
+  Products,
+  Search,
+  SearchHome,
+} from "../atoms/Home";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StackActions } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 
-function SearchTab() {
+function SearchTab({
+  modalVisible,
+  setModalVisible,
+  value,
+  setValue,
+  valueArray,
+  setValueArray,
+  index,
+  setIndex,
+  ...props
+}) {
+  const navigation = props.navigation;
+  const pushAction = StackActions.push("SearchHome");
+
+  React.useEffect(() => {
+    setValue(valueArray[index]);
+  }, [modalVisible]);
+
   return (
-    <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
-      <Tab.Screen name="おすすめ" component={Products} />
-      <Tab.Screen name="新着" component={Products} />
-      <Tab.Screen name="カテゴリー" component={Category} />
-      <Tab.Screen name="保存した検索条件" component={Products} />
-    </Tab.Navigator>
+    <View style={{ flex: 1 }}>
+      <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
+        <Tab.Screen name="おすすめ" component={Products} />
+        {/* <Tab.Screen name="新着" component={NewArrival} />
+        <Tab.Screen name="カテゴリー" component={Category} />
+        <Tab.Screen name="保存した検索条件" component={Products} /> */}
+      </Tab.Navigator>
+      <View>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "white",
+            }}
+          >
+            <SafeAreaView>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Icon
+                    name="close"
+                    size={32}
+                    color="#ccc"
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  />
+                </TouchableOpacity>
+                {value ? (
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    onSubmitEditing={() => {
+                      navigation.dispatch(pushAction);
+                      setModalVisible(!modalVisible);
+                      setValueArray([...valueArray, value]);
+                      setIndex(index + 1);
+                    }}
+                    placeholder="検索"
+                    autoCapitalize="none"
+                    value={value}
+                  />
+                ) : (
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    placeholder="検索"
+                    autoCapitalize="none"
+                    value={value}
+                  />
+                )}
+              </View>
+              <Search />
+            </SafeAreaView>
+          </View>
+        </Modal>
+      </View>
+    </View>
   );
 }
 
-export default function Home() {
+export default function Home(props) {
   const { navigate } = useNavigation();
   const [value, setValue] = React.useState("");
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [toggle, setToggle] = React.useState(false);
+  const [valueArray, setValueArray] = React.useState([]);
+  const [index, setIndex] = React.useState(-1);
+
+  const navigation = props.navigation;
+  const popAction = StackActions.pop(1);
 
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
-        component={SearchTab}
         options={{
           headerTitle: () => (
             <TouchableOpacity
               style={styles.input}
-              onPress={() => navigate("Search")}
+              onPress={() => setModalVisible(!modalVisible)}
             >
               <Text style={styles.searchText}>なにをお探しですか?</Text>
             </TouchableOpacity>
@@ -43,7 +152,23 @@ export default function Home() {
           headerLeftContainerStyle: styles.headerLeft,
           headerRightContainerStyle: styles.headerRight,
         }}
-      />
+      >
+        {(props) => (
+          <SearchTab
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            value={value}
+            setValue={setValue}
+            valueArray={valueArray}
+            setValueArray={setValueArray}
+            index={index}
+            setIndex={setIndex}
+            toggle={toggle}
+            setToggle={setToggle}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
 
       <Stack.Screen
         name="Search"
@@ -79,20 +204,36 @@ export default function Home() {
         name="SearchHome"
         options={{
           headerTitle: () => (
-            <TextInput
+            <TouchableOpacity
               style={styles.input}
-              onChangeText={(newValue) => {
-                setValue(newValue);
-              }}
-              placeholder="検索"
-              autoCapitalize="none"
-              value={value}
-            />
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.searchText}>{valueArray[index]}</Text>
+            </TouchableOpacity>
           ),
           headerBackTitleVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                setValueArray([...valueArray].splice(0, valueArray.length - 1));
+                setIndex(index - 1);
+                navigation.dispatch(popAction);
+              }}
+            >
+              <Icon
+                name="angle-left"
+                size={40}
+                color="#ccc"
+                style={{ justifyContent: "center", alignItems: "center" }}
+              />
+            </TouchableOpacity>
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 30,
+          },
         }}
       >
-        {() => <SearchHome value={value} />}
+        {(props) => <SearchHome {...props} value={valueArray[index]} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
