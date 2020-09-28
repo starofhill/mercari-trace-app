@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useNavigation } from "@react-navigation/native";
+import { ProductFooterButton } from ".";
 
 const productData = {
   id: 1,
@@ -27,8 +27,6 @@ const sellerData = {
 };
 
 export default function Product(props) {
-  const { navigate } = useNavigation();
-
   // 商品情報を取得
   const productData = props.route.params;
 
@@ -39,21 +37,7 @@ export default function Product(props) {
 
   return (
     <View>
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerLeftButton}>
-          <Text style={styles.footerLeftButtonText}>
-            メルペイスマート払い{"\n"}で購入手続き
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.footerRightButton}
-          onPress={() => {
-            navigate("Purchase");
-          }}
-        >
-          <Text style={styles.footerRightButtonText}>購入手続きへ</Text>
-        </TouchableOpacity>
-      </View>
+      <ProductFooterButton />
       <ScrollView>
         <View style={styles.main}>
           <Text style={styles.title}>{productData.name}</Text>
@@ -174,50 +158,6 @@ export default function Product(props) {
 }
 
 const styles = StyleSheet.create({
-  footer: {
-    backgroundColor: "white",
-    padding: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    bottom: 0,
-    zIndex: 10,
-    right: 0,
-    left: 0,
-  },
-  footerLeftButton: {
-    borderColor: "#EA352E",
-    borderWidth: 1,
-    width: "40%",
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 5,
-    padding: 10,
-    borderRadius: 5,
-  },
-  footerLeftButtonText: {
-    color: "#EA352E",
-    fontSize: 12,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  footerRightButton: {
-    backgroundColor: "#EA352E",
-    height: 50,
-    width: "50%",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 5,
-    padding: 10,
-    borderRadius: 5,
-  },
-  footerRightButtonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
   main: {
     backgroundColor: "white",
     padding: 16,
