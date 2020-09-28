@@ -5,6 +5,7 @@ export { default as NewArrival } from "./NewArrival";
 export { default as PriceInAscending } from "./PriceInAscending";
 export { default as PriceInDescending } from "./PriceInDescending";
 export { default as Product } from "./Product";
+export { default as ProductFooterButton } from "./ProductFooterButton";
 export { default as Products } from "./Products";
 export { default as Purchase } from "./Purchase";
 export { default as Search } from "./Search";
