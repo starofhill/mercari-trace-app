@@ -19,7 +19,7 @@ export default function ScreenScreen(props) {
   const [items, setItems] = useState();
 
   useEffect(() => {
-    // dispatch(fetchProducts());
+    dispatch(fetchProducts());
   }, []);
 
   useEffect(() => {

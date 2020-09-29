@@ -15,7 +15,7 @@ export default function Products() {
   const list = products.list;
 
   useEffect(() => {
-    // dispatch(fetchProducts());
+    dispatch(fetchProducts());
   }, []);
 
   return (
@@ -30,10 +30,21 @@ export default function Products() {
               navigate("Product", { ...item });
             }}
           >
-            <Image
-              source={require("../../../assets/seigiman369_TP_V.jpg")}
-              style={styles.image}
-            />
+            {item.image_url ? (
+              <Image
+                source={{
+                  uri: item.image_url.replace("&", "%26").replace("&", "%26"),
+                }}
+                style={styles.image}
+                resizeMode="cover"
+              />
+            ) : (
+              <Image
+                source={require("../../../assets/seigiman369_TP_V.jpg")}
+                style={styles.image}
+                resizeMode="cover"
+              />
+            )}
             <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
           </TouchableOpacity>
         </View>

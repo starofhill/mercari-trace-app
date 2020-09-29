@@ -47,9 +47,9 @@ function SearchTab({
     <View style={{ flex: 1 }}>
       <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
         <Tab.Screen name="おすすめ" component={Products} />
-        {/* <Tab.Screen name="新着" component={NewArrival} />
+        <Tab.Screen name="新着" component={NewArrival} />
         <Tab.Screen name="カテゴリー" component={Category} />
-        <Tab.Screen name="保存した検索条件" component={Products} /> */}
+        <Tab.Screen name="保存した検索条件" component={Products} />
       </Tab.Navigator>
       <View>
         <Modal
