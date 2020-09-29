@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ProductFooterButton() {
+export default function ProductFooterButton({ productData }) {
   const { navigate } = useNavigation();
 
   return (
@@ -27,7 +27,7 @@ export default function ProductFooterButton() {
         <TouchableOpacity
           style={[styles.footerRightButton, styles.footerButton]}
           onPress={() => {
-            navigate("Purchase");
+            navigate("Purchase", productData);
           }}
         >
           <Text style={styles.footerRightButtonText}>購入手続きへ</Text>

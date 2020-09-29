@@ -37,7 +37,7 @@ export default function Product(props) {
 
   return (
     <View>
-      <ProductFooterButton />
+      <ProductFooterButton productData={productData} />
       <ScrollView>
         <View style={styles.main}>
           <Text style={styles.title}>{productData.name}</Text>

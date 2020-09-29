@@ -4,8 +4,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function Purchase() {
+export default function Purchase(props) {
   const { navigate } = useNavigation();
+  const productData = props.route.params;
 
   return (
     <View>
@@ -29,10 +30,12 @@ export default function Purchase() {
             style={styles.image}
           />
           <View style={styles.title}>
-            <Text>ReactReactReactReactReact</Text>
+            <Text>{productData.name}</Text>
             <View style={styles.priceBox}>
               <Text style={styles.shipping}>送料込み</Text>
-              <Text style={styles.price}>¥2,000</Text>
+              <Text style={styles.price}>
+                ¥{productData.price.toLocaleString()}
+              </Text>
             </View>
           </View>
         </View>
@@ -64,17 +67,19 @@ export default function Purchase() {
           </TouchableOpacity>
         </View>
         <View style={styles.boxes}>
-          <View style={[styles.box, styles.borderBottom]}>
+          <TouchableOpacity style={[styles.box, styles.borderBottom]}>
             <Text>支払い方法</Text>
             <View style={styles.rightBox}>
               <Text style={styles.paymentNumber}>************1234</Text>
               <Icon name="angle-right" size={22} color="#888" />
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.box}>
             <Text>支払い金額</Text>
             <View>
-              <Text style={styles.paymentMoney}>¥2,000</Text>
+              <Text style={styles.paymentMoney}>
+                ¥{productData.price.toLocaleString()}
+              </Text>
             </View>
           </View>
         </View>
