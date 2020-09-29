@@ -32,9 +32,7 @@ export default function Products() {
           >
             {item.image_url ? (
               <Image
-                source={{
-                  uri: item.image_url.replace("&", "%26").replace("&", "%26"),
-                }}
+                source={{ uri: encodeURI(item.image_url.replace(/&/g, "%26")) }}
                 style={styles.image}
                 resizeMode="cover"
               />
