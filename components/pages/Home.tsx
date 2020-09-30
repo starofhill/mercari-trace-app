@@ -127,7 +127,6 @@ export default function Home(props) {
   const { navigate } = useNavigation();
   const [value, setValue] = React.useState("");
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [toggle, setToggle] = React.useState(false);
   const [valueArray, setValueArray] = React.useState([]);
   const [index, setIndex] = React.useState(-1);
 
@@ -163,8 +162,6 @@ export default function Home(props) {
             setValueArray={setValueArray}
             index={index}
             setIndex={setIndex}
-            toggle={toggle}
-            setToggle={setToggle}
             {...props}
           />
         )}
