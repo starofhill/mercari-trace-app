@@ -4,19 +4,18 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
+import { Item, Store } from "../../../Interface";
 
-export default function PriceInAscending(props) {
+export default function PriceInAscending({ value }: { value: string }) {
   const { navigate } = useNavigation();
 
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: Store) => state);
   const dispatch = useDispatch();
 
   const products = selector.products;
   const list = products.list;
 
-  const value = props.value;
-
-  const [items, setItems] = useState();
+  const [items, setItems] = useState<Item[]>();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -36,7 +35,7 @@ export default function PriceInAscending(props) {
     <FlatList
       data={items ? items.sort((a, b) => a.price - b.price) : list}
       contentContainerStyle={styles.scrollView}
-      keyExtractor={(item) => `products-${item.id}`}
+      keyExtractor={(item: Item) => `products-${item.id}`}
       renderItem={({ item }) => (
         <View style={styles.imageBox}>
           <TouchableOpacity

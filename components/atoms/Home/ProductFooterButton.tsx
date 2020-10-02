@@ -7,8 +7,13 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Item } from "../../../Interface";
 
-export default function ProductFooterButton({ productData }) {
+export default function ProductFooterButton({
+  productData,
+}: {
+  productData: Item;
+}) {
   const { navigate } = useNavigation();
 
   return (

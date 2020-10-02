@@ -25,6 +25,20 @@ import { StackActions } from "@react-navigation/native";
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 
+interface SearchTab {
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  valueArray: string[];
+  setValueArray: React.Dispatch<React.SetStateAction<string[]>>;
+  index: number;
+  setIndex: React.Dispatch<React.SetStateAction<number>>;
+  navigation: {
+    dispatch: (pushAction: any) => void;
+  };
+}
+
 function SearchTab({
   modalVisible,
   setModalVisible,
@@ -35,7 +49,7 @@ function SearchTab({
   index,
   setIndex,
   ...props
-}) {
+}: SearchTab) {
   const navigation = props.navigation;
   const pushAction = StackActions.push("SearchHome");
 
@@ -123,11 +137,11 @@ function SearchTab({
   );
 }
 
-export default function Home(props) {
+export default function Home(props: any) {
   const { navigate } = useNavigation();
   const [value, setValue] = React.useState("");
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [valueArray, setValueArray] = React.useState([]);
+  const [valueArray, setValueArray] = React.useState<string[]>([]);
   const [index, setIndex] = React.useState(-1);
 
   const navigation = props.navigation;

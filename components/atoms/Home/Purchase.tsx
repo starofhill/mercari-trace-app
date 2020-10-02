@@ -3,8 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Navigation } from "../../../Interface";
 
-export default function Purchase(props) {
+export default function Purchase(props: Navigation) {
   const { navigate } = useNavigation();
   const productData = props.route.params;
 
