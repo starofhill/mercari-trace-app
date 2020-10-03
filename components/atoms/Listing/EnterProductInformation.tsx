@@ -6,18 +6,25 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ExpoImagePicker, ModalItems } from ".";
+import { ExpoImagePicker, ModalItems, Validation } from ".";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../../../reducks/products/operations";
 
 export default function EnterProductInformation() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState([]);
-  const [sendImage, setSendImage] = useState([]);
-  const [price, setPrice] = useState();
+  const [image, setImage] = useState<string[]>([]);
+  const [sendImage, setSendImage] = useState<string[]>([]);
+  const [price, setPrice] = useState<number>();
   const [status, setStatus] = useState("sale");
+  const [condition, setCondition] = useState("新品、未使用");
   const [category, setCategory] = useState("book");
+
+  const { navigate } = useNavigation();
+  const dispatch = useDispatch();
 
   // カメラを起動
   const _takePhoto = async () => {
@@ -31,7 +38,7 @@ export default function EnterProductInformation() {
 
     if (!result.cancelled) {
       img.push(result.uri);
-      sendImg.push(result.base64);
+      sendImg.push(result.base64!);
 
       setImage(img);
       setSendImage(sendImg);
@@ -39,6 +46,11 @@ export default function EnterProductInformation() {
   };
 
   const addProduct = async () => {
+    // バリデーション
+    if (!Validation(image, name, category, condition, price as number)) {
+      return;
+    }
+
     const product = {
       product: {
         name: name,
@@ -47,6 +59,7 @@ export default function EnterProductInformation() {
         image: `data:image/jpg;base64,${sendImage[0]}`,
         status: status,
         category: category,
+        condition: condition,
       },
     };
 
@@ -54,6 +67,9 @@ export default function EnterProductInformation() {
       "https://mercari-trace-server.herokuapp.com/api/v1/products/",
       product
     );
+
+    dispatch(fetchProducts());
+    navigate("App");
   };
 
   // カメラロールから選択
@@ -69,7 +85,7 @@ export default function EnterProductInformation() {
 
     if (!result.cancelled) {
       img.push(result.uri);
-      sendImg.push(result.base64);
+      sendImg.push(result.base64!);
 
       setImage(img);
       setSendImage(sendImg);
@@ -174,20 +190,21 @@ export default function EnterProductInformation() {
       <View style={styles.box}>
         <Text style={styles.boxTitle}>販売価格(300~9,999,999)</Text>
         <View style={styles.boxContents}>
-          <TouchableOpacity style={[styles.content, styles.borderBottom]}>
+          <View style={[styles.content, styles.borderBottom]}>
             <Text style={styles.boxTitleText}>販売価格</Text>
             <View style={styles.boxContent}>
               <TextInput
-                style={styles.boxText}
+                style={[styles.boxText, styles.inputPrice]}
                 keyboardType="numeric"
                 value={price}
+                maxLength={8}
                 placeholder="¥0"
                 onChangeText={(newPrice) => {
-                  setPrice(newPrice);
+                  setPrice(+newPrice);
                 }}
               />
             </View>
-          </TouchableOpacity>
+          </View>
           <View style={styles.priceContents}>
             <View style={styles.priceContent}>
               <Text style={styles.priceTitleText}>販売手数料</Text>
@@ -320,5 +337,10 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
     height: 30,
+  },
+  inputPrice: {
+    fontWeight: "bold",
+    fontSize: 22,
+    textAlign: "right",
   },
 });
