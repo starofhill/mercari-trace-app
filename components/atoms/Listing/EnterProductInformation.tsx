@@ -8,23 +8,52 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ExpoImagePicker, ModalItems } from ".";
 import * as ImagePicker from "expo-image-picker";
+import axios from "axios";
 
 export default function EnterProductInformation() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState([]);
+  const [sendImage, setSendImage] = useState([]);
+  const [price, setPrice] = useState();
+  const [status, setStatus] = useState("sale");
+  const [category, setCategory] = useState("book");
 
   // カメラを起動
   const _takePhoto = async () => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
+      base64: true,
     });
 
     const img = image.slice();
+    const sendImg = sendImage.slice();
+
     if (!result.cancelled) {
       img.push(result.uri);
+      sendImg.push(result.base64);
+
       setImage(img);
+      setSendImage(sendImg);
     }
+  };
+
+  const addProduct = async () => {
+    const product = {
+      product: {
+        name: name,
+        description: description,
+        price: price,
+        image: `data:image/jpg;base64,${sendImage[0]}`,
+        status: status,
+        category: category,
+      },
+    };
+
+    await axios.post(
+      "https://mercari-trace-server.herokuapp.com/api/v1/products/",
+      product
+    );
   };
 
   // カメラロールから選択
@@ -32,12 +61,18 @@ export default function EnterProductInformation() {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [16, 9],
+      base64: true,
     });
 
     const img = image.slice();
+    const sendImg = sendImage.slice();
+
     if (!result.cancelled) {
       img.push(result.uri);
+      sendImg.push(result.base64);
+
       setImage(img);
+      setSendImage(sendImg);
     }
   };
 
@@ -142,7 +177,15 @@ export default function EnterProductInformation() {
           <TouchableOpacity style={[styles.content, styles.borderBottom]}>
             <Text style={styles.boxTitleText}>販売価格</Text>
             <View style={styles.boxContent}>
-              <Text style={styles.boxText}>¥0</Text>
+              <TextInput
+                style={styles.boxText}
+                keyboardType="numeric"
+                value={price}
+                placeholder="¥0"
+                onChangeText={(newPrice) => {
+                  setPrice(newPrice);
+                }}
+              />
             </View>
           </TouchableOpacity>
           <View style={styles.priceContents}>
@@ -162,7 +205,7 @@ export default function EnterProductInformation() {
         </View>
       </View>
       <View style={[styles.box, styles.buttonBox]}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={addProduct}>
           <Text style={styles.buttonText}>出品する</Text>
         </TouchableOpacity>
         <Text>or</Text>
