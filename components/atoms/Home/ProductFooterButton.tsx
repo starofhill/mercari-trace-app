@@ -9,11 +9,9 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Item } from "../../../Interface";
 
-export default function ProductFooterButton({
-  productData,
-}: {
+const ProductFooterButton: React.FC<{
   productData: Item;
-}) {
+}> = ({ productData }) => {
   const { navigate } = useNavigation();
 
   return (
@@ -41,7 +39,9 @@ export default function ProductFooterButton({
       </View>
     </View>
   );
-}
+};
+
+export default ProductFooterButton;
 
 const styles = StyleSheet.create({
   footer: {

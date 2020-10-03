@@ -11,7 +11,7 @@ interface CategoryItem {
   category2?: string;
 }
 
-export default function CategoryItem(props: CategoryItem) {
+const CategoryItem: React.FC<CategoryItem> = (props) => {
   return (
     <View style={styles.categoryBox}>
       <TouchableOpacity
@@ -32,7 +32,9 @@ export default function CategoryItem(props: CategoryItem) {
       </View>
     </View>
   );
-}
+};
+
+export default CategoryItem;
 
 const styles = StyleSheet.create({
   categoryBox: {

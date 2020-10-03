@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
-export default function PriceInAscending({ value }: { value: string }) {
+const PriceInAscending: React.FC<{ value?: string }> = ({ value }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -54,7 +54,9 @@ export default function PriceInAscending({ value }: { value: string }) {
       numColumns={3}
     />
   );
-}
+};
+
+export default PriceInAscending;
 
 const styles = StyleSheet.create({
   scrollView: {

@@ -27,7 +27,7 @@ const sellerData = {
   starNumber: 3,
 };
 
-export default function Product(props: Navigation) {
+const Product: React.FC<Navigation> = (props) => {
   // 商品情報を取得
   const productData = props.route.params;
 
@@ -156,7 +156,9 @@ export default function Product(props: Navigation) {
       </ScrollView>
     </View>
   );
-}
+};
+
+export default Product;
 
 const styles = StyleSheet.create({
   main: {

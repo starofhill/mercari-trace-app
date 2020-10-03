@@ -9,7 +9,7 @@ import {
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function SearchHome({ value }: { value: string }) {
+const SearchHome: React.FC<{ value: string }> = ({ value }) => {
   return (
     <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
       <Tab.Screen name="おすすめ">
@@ -29,4 +29,6 @@ export default function SearchHome({ value }: { value: string }) {
       </Tab.Screen>
     </Tab.Navigator>
   );
-}
+};
+
+export default SearchHome;

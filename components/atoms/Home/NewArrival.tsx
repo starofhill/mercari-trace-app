@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
-export default function NewArrival({ value }: { value?: string }) {
+const NewArrival: React.FC<{ value?: string }> = ({ value }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -60,7 +60,9 @@ export default function NewArrival({ value }: { value?: string }) {
       numColumns={3}
     />
   );
-}
+};
+
+export default NewArrival;
 
 const styles = StyleSheet.create({
   scrollView: {

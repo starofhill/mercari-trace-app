@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
-export default function ScreenScreen({ value }: { value: string }) {
+const SearchScreen: React.FC<{ value: string }> = ({ value }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -54,7 +54,9 @@ export default function ScreenScreen({ value }: { value: string }) {
       numColumns={3}
     />
   );
-}
+};
+
+export default SearchScreen;
 
 const styles = StyleSheet.create({
   scrollView: {

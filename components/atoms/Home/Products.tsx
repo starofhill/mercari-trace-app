@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Store } from "../../../Interface";
 
-export default function Products() {
+const Products: React.FC = () => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -51,7 +51,9 @@ export default function Products() {
       numColumns={3}
     />
   );
-}
+};
+
+export default Products;
 
 const styles = StyleSheet.create({
   scrollView: {

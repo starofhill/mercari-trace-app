@@ -39,7 +39,7 @@ interface SearchTab {
   };
 }
 
-function SearchTab({
+const SearchTab: React.FC<SearchTab> = ({
   modalVisible,
   setModalVisible,
   value,
@@ -49,7 +49,7 @@ function SearchTab({
   index,
   setIndex,
   ...props
-}: SearchTab) {
+}) => {
   const navigation = props.navigation;
   const pushAction = StackActions.push("SearchHome");
 
@@ -135,9 +135,9 @@ function SearchTab({
       </View>
     </View>
   );
-}
+};
 
-export default function Home(props: any) {
+const Home: React.FC<any> = (props) => {
   const { navigate } = useNavigation();
   const [value, setValue] = React.useState("");
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -248,7 +248,9 @@ export default function Home(props: any) {
       </Stack.Screen>
     </Stack.Navigator>
   );
-}
+};
+
+export default Home;
 
 const styles = StyleSheet.create({
   headerLeft: {

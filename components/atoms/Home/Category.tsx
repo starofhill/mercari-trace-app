@@ -11,7 +11,7 @@ import { CategoryItems } from ".";
 import { useSelector } from "react-redux";
 import { Item, Store } from "../../../Interface";
 
-export default function Category() {
+const Category: React.FC = () => {
   const { navigate } = useNavigation();
   const selector = useSelector((state: Store) => state);
   const products = selector.products;
@@ -185,7 +185,9 @@ export default function Category() {
       </View>
     </ScrollView>
   );
-}
+};
+
+export default Category;
 
 const styles = StyleSheet.create({
   scrollView: {

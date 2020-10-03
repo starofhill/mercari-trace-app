@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CategoryItem } from ".";
 
-export default function CategoryItems() {
+const CategoryItems: React.FC = () => {
   const [showFlag, setShowFlag] = React.useState(false);
 
   return (
@@ -134,7 +134,9 @@ export default function CategoryItems() {
       )}
     </View>
   );
-}
+};
+
+export default CategoryItems;
 
 const styles = StyleSheet.create({
   category: {

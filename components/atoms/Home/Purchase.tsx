@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Navigation } from "../../../Interface";
 
-export default function Purchase(props: Navigation) {
+const Purchase: React.FC<Navigation> = (props) => {
   const { navigate } = useNavigation();
   const productData = props.route.params;
 
@@ -101,7 +101,9 @@ export default function Purchase(props: Navigation) {
       </ScrollView>
     </View>
   );
-}
+};
+
+export default Purchase;
 
 const styles = StyleSheet.create({
   footer: {
