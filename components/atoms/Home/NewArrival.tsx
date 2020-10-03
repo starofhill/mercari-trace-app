@@ -4,19 +4,18 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
+import { Item, Store } from "../../../Interface";
 
-export default function NewArrival(props) {
+const NewArrival: React.FC<{ value?: string }> = ({ value }) => {
   const { navigate } = useNavigation();
 
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: Store) => state);
   const dispatch = useDispatch();
 
   const products = selector.products;
   const list = products.list;
 
-  const value = props.value;
-
-  const [items, setItems] = useState();
+  const [items, setItems] = useState<Item[]>();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -61,7 +60,9 @@ export default function NewArrival(props) {
       numColumns={3}
     />
   );
-}
+};
+
+export default NewArrival;
 
 const styles = StyleSheet.create({
   scrollView: {

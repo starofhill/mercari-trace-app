@@ -4,11 +4,12 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
+import { Store } from "../../../Interface";
 
-export default function Products() {
+const Products: React.FC = () => {
   const { navigate } = useNavigation();
 
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: Store) => state);
   const dispatch = useDispatch();
 
   const products = selector.products;
@@ -50,7 +51,9 @@ export default function Products() {
       numColumns={3}
     />
   );
-}
+};
+
+export default Products;
 
 const styles = StyleSheet.create({
   scrollView: {

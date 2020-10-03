@@ -7,8 +7,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Item } from "../../../Interface";
 
-export default function ProductFooterButton({ productData }) {
+const ProductFooterButton: React.FC<{
+  productData: Item;
+}> = ({ productData }) => {
   const { navigate } = useNavigation();
 
   return (
@@ -36,7 +39,9 @@ export default function ProductFooterButton({ productData }) {
       </View>
     </View>
   );
-}
+};
+
+export default ProductFooterButton;
 
 const styles = StyleSheet.create({
   footer: {

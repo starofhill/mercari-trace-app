@@ -3,30 +3,31 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ProductFooterButton } from ".";
+import { Navigation } from "../../../Interface";
 
-const productData = {
-  id: 1,
-  name: "React Native",
-  price: 2500,
-  likes: 5,
-  comments: 3,
-  description:
-    "カバーを外して読んでいたため、カバーはキレイですが、本体の表紙に少し汚れがあります。中身は書き込み等なく問題ありません。",
-  category: "本",
-  condition: "やや傷や汚れあり",
-  shippingCharges: "送料込み(出品者負担)",
-  deliveryArea: "宮城県",
-  deliveryDate: "1~2日で発送",
-  method: "ゆうゆうメルカリ便",
-  brand: "本",
-};
+// const productData = {
+//   id: 1,
+//   name: "React Native",
+//   price: 2500,
+//   likes: 5,
+//   comments: 3,
+//   description:
+//     "カバーを外して読んでいたため、カバーはキレイですが、本体の表紙に少し汚れがあります。中身は書き込み等なく問題ありません。",
+//   category: "本",
+//   condition: "やや傷や汚れあり",
+//   shippingCharges: "送料込み(出品者負担)",
+//   deliveryArea: "宮城県",
+//   deliveryDate: "1~2日で発送",
+//   method: "ゆうゆうメルカリ便",
+//   brand: "本",
+// };
 
 const sellerData = {
   name: "りゅう",
   starNumber: 3,
 };
 
-export default function Product(props) {
+const Product: React.FC<Navigation> = (props) => {
   // 商品情報を取得
   const productData = props.route.params;
 
@@ -155,7 +156,9 @@ export default function Product(props) {
       </ScrollView>
     </View>
   );
-}
+};
+
+export default Product;
 
 const styles = StyleSheet.create({
   main: {

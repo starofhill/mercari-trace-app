@@ -9,10 +9,11 @@ import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CategoryItems } from ".";
 import { useSelector } from "react-redux";
+import { Item, Store } from "../../../Interface";
 
-export default function Category() {
+const Category: React.FC = () => {
   const { navigate } = useNavigation();
-  const selector = useSelector((state) => state);
+  const selector = useSelector((state: Store) => state);
   const products = selector.products;
   const list = products.list;
 
@@ -33,7 +34,7 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
-            keyExtractor={(item) => `women-${item.id}`}
+            keyExtractor={(item: Item) => `women-${item.id}`}
             renderItem={({ item }) => (
               <View style={styles.imageBox}>
                 <TouchableOpacity
@@ -65,7 +66,7 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
-            keyExtractor={(item) => `men-${item.id}`}
+            keyExtractor={(item: Item) => `men-${item.id}`}
             renderItem={({ item }) => (
               <View style={styles.imageBox}>
                 <TouchableOpacity
@@ -97,7 +98,7 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
-            keyExtractor={(item) => `baby-${item.id}`}
+            keyExtractor={(item: Item) => `baby-${item.id}`}
             renderItem={({ item }) => (
               <View style={styles.imageBox}>
                 <TouchableOpacity
@@ -129,7 +130,7 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
-            keyExtractor={(item) => `interior-${item.id}`}
+            keyExtractor={(item: Item) => `interior-${item.id}`}
             renderItem={({ item }) => (
               <View style={styles.imageBox}>
                 <TouchableOpacity
@@ -161,7 +162,7 @@ export default function Category() {
             data={list}
             contentContainerStyle={styles.list}
             horizontal
-            keyExtractor={(item) => `book-${item.id}`}
+            keyExtractor={(item: Item) => `book-${item.id}`}
             renderItem={({ item }) => (
               <View style={styles.imageBox}>
                 <TouchableOpacity
@@ -184,7 +185,9 @@ export default function Category() {
       </View>
     </ScrollView>
   );
-}
+};
+
+export default Category;
 
 const styles = StyleSheet.create({
   scrollView: {

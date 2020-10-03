@@ -3,7 +3,15 @@ import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default function CategoryItem(props) {
+interface CategoryItem {
+  color: string;
+  name: string;
+  size: number;
+  category: string;
+  category2?: string;
+}
+
+const CategoryItem: React.FC<CategoryItem> = (props) => {
   return (
     <View style={styles.categoryBox}>
       <TouchableOpacity
@@ -24,7 +32,9 @@ export default function CategoryItem(props) {
       </View>
     </View>
   );
-}
+};
+
+export default CategoryItem;
 
 const styles = StyleSheet.create({
   categoryBox: {
