@@ -3,8 +3,11 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SignIn() {
+  const { navigate } = useNavigation();
+
   return (
     <SafeAreaView style={styles.component}>
       <View style={styles.title}>
@@ -31,7 +34,10 @@ export default function SignIn() {
             <Text style={styles.blackColor}>Googleでログイン</Text>
             <Text></Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.box, styles.redBackgroundColor]}>
+          <TouchableOpacity
+            style={[styles.box, styles.redBackgroundColor]}
+            onPress={() => navigate("SignInEmailInput")}
+          >
             <Icon name="envelope-o" size={24} color="white" />
             <Text style={styles.whiteColor}>メールアドレスでログイン</Text>
             <Text></Text>
