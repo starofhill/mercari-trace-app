@@ -13,15 +13,15 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 
-export default function EnterProductInformation() {
+const EnterProductInformation: React.FC = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<string[]>([]);
   const [sendImage, setSendImage] = useState<string[]>([]);
   const [price, setPrice] = useState<number>();
   const [status, setStatus] = useState("sale");
-  const [condition, setCondition] = useState("新品、未使用");
-  const [category, setCategory] = useState("book");
+  const [condition, setCondition] = useState("");
+  const [category, setCategory] = useState("");
 
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
@@ -47,7 +47,16 @@ export default function EnterProductInformation() {
 
   const addProduct = async () => {
     // バリデーション
-    if (!Validation(image, name, category, condition, price as number)) {
+    if (
+      !Validation(
+        image,
+        name,
+        description,
+        category,
+        condition,
+        price as number
+      )
+    ) {
       return;
     }
 
@@ -94,32 +103,38 @@ export default function EnterProductInformation() {
 
   return (
     <ScrollView style={styles.container}>
-      <ModalItems
-        _takePhoto={_takePhoto}
-        _pickImage={_pickImage}
-        image={image}
-      />
+      <ModalItems _takePhoto={_takePhoto} _pickImage={_pickImage} />
 
-      <ExpoImagePicker
-        _takePhoto={_takePhoto}
-        _pickImage={_pickImage}
-        image={image}
-      />
+      <ExpoImagePicker _takePhoto={_takePhoto} image={image} />
 
       <View style={styles.box}>
         <Text style={styles.boxTitle}>商品の詳細</Text>
         <View style={styles.boxContents}>
-          <TouchableOpacity style={[styles.content, styles.borderBottom]}>
+          <TouchableOpacity
+            style={[styles.content, styles.borderBottom]}
+            onPress={() => navigate("CategorySelect", { setCategory })}
+          >
             <Text style={styles.boxTitleText}>カテゴリー</Text>
             <View style={styles.boxContent}>
-              <Text style={styles.boxText}>(必須)</Text>
+              {category ? (
+                <Text style={styles.boxText}>{category}</Text>
+              ) : (
+                <Text style={styles.boxText}>(必須)</Text>
+              )}
               <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.content}>
+          <TouchableOpacity
+            style={styles.content}
+            onPress={() => navigate("ProductConditionSelect", { setCondition })}
+          >
             <Text style={styles.boxTitleText}>商品の状態</Text>
             <View style={styles.boxContent}>
-              <Text style={styles.boxText}>(必須)</Text>
+              {condition ? (
+                <Text style={styles.boxText}>{condition}</Text>
+              ) : (
+                <Text style={styles.boxText}>(必須)</Text>
+              )}
               <Icon name="angle-right" size={22} color="#888" />
             </View>
           </TouchableOpacity>
@@ -196,7 +211,7 @@ export default function EnterProductInformation() {
               <TextInput
                 style={[styles.boxText, styles.inputPrice]}
                 keyboardType="numeric"
-                value={price}
+                value={price?.toString()}
                 maxLength={8}
                 placeholder="¥0"
                 onChangeText={(newPrice) => {
@@ -232,7 +247,9 @@ export default function EnterProductInformation() {
       </View>
     </ScrollView>
   );
-}
+};
+
+export default EnterProductInformation;
 
 const styles = StyleSheet.create({
   container: {

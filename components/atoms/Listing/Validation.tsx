@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 const Validation = (
   image: string[],
   name: string,
+  description: string,
   category: string,
   condition: string,
   price: number
@@ -14,7 +15,6 @@ const Validation = (
       [
         {
           text: "OK",
-          onPress: () => console.log("Ask me later pressed"),
         },
       ],
       { cancelable: false }
@@ -29,7 +29,20 @@ const Validation = (
       [
         {
           text: "OK",
-          onPress: () => console.log("Ask me later pressed"),
+        },
+      ],
+      { cancelable: false }
+    );
+    return false;
+  }
+
+  if (!description) {
+    Alert.alert(
+      "エラー",
+      "商品の説明を入力してください",
+      [
+        {
+          text: "OK",
         },
       ],
       { cancelable: false }
@@ -44,7 +57,6 @@ const Validation = (
       [
         {
           text: "OK",
-          onPress: () => console.log("Ask me later pressed"),
         },
       ],
       { cancelable: false }
@@ -59,7 +71,6 @@ const Validation = (
       [
         {
           text: "OK",
-          onPress: () => console.log("Ask me later pressed"),
         },
       ],
       { cancelable: false }
@@ -67,14 +78,13 @@ const Validation = (
     return false;
   }
 
-  if (price < 300 || price > 9999999) {
+  if (price < 300 || price > 9999999 || !price) {
     Alert.alert(
       "エラー",
       "販売価格は300~9,999,999円の範囲で入力してください",
       [
         {
           text: "OK",
-          onPress: () => console.log("Ask me later pressed"),
         },
       ],
       { cancelable: false }

@@ -15,7 +15,11 @@ import { Provider } from "react-redux";
 import createStore from "./reducks/store/store";
 import { Product } from "./components/atoms/Home";
 import Purchase from "./components/atoms/Home/Purchase";
-import { EnterProductInformation } from "./components/atoms/Listing";
+import {
+  CategorySelect,
+  EnterProductInformation,
+  ProductConditionSelect,
+} from "./components/atoms/Listing";
 
 export const store = createStore();
 
@@ -68,7 +72,7 @@ export default function () {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator mode="card">
+        <Stack.Navigator mode="card" headerMode="screen">
           <Stack.Screen
             name="App"
             component={App}
@@ -94,7 +98,23 @@ export default function () {
             component={EnterProductInformation}
             options={{
               title: "商品の状態を入力",
-              headerBackTitle: "",
+              headerBackTitleVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="CategorySelect"
+            component={CategorySelect}
+            options={{
+              title: "カテゴリー",
+              headerBackTitleVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="ProductConditionSelect"
+            component={ProductConditionSelect}
+            options={{
+              title: "商品の状態",
+              headerBackTitleVisible: false,
             }}
           />
         </Stack.Navigator>

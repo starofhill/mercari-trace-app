@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import { Examples } from "../atoms/Listing";
 
-export default function Listing() {
+const Listing: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -75,7 +75,9 @@ export default function Listing() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default Listing;
 
 const styles = StyleSheet.create({
   container: {

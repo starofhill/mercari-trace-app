@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
-export default function Examples() {
+const Examples: React.FC = () => {
   return (
     <View style={styles.examples}>
       <View style={styles.examplesTitle}>
@@ -259,7 +259,9 @@ export default function Examples() {
       </View>
     </View>
   );
-}
+};
+
+export default Examples;
 
 const styles = StyleSheet.create({
   examples: {
@@ -310,7 +312,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     paddingTop: 25,
-    paddingRight: 15,
     paddingBottom: 15,
     paddingLeft: 15,
   },
@@ -332,6 +333,6 @@ const styles = StyleSheet.create({
     textDecorationColor: "#AFEEEE",
   },
   examplePrice: {
-    fontSize: 20,
+    fontSize: 18,
   },
 });

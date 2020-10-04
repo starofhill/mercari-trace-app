@@ -3,7 +3,10 @@ import { View, Text, StyleSheet, Modal, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function ModalItems(props) {
+const ModalItems: React.FC<{
+  _takePhoto: () => void;
+  _pickImage: () => void;
+}> = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -57,7 +60,9 @@ export default function ModalItems(props) {
       </Modal>
     </View>
   );
-}
+};
+
+export default ModalItems;
 
 const styles = StyleSheet.create({
   centeredView: {

@@ -3,7 +3,9 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function ExpoImagePicker(props) {
+const ExpoImagePicker: React.FC<{ image: string[]; _takePhoto: () => void }> = (
+  props
+) => {
   const data = [
     { id: 0, name: "camera", text: "(必須)" },
     { id: 1, name: "camera" },
@@ -69,7 +71,9 @@ export default function ExpoImagePicker(props) {
       )}
     />
   );
-}
+};
+
+export default ExpoImagePicker;
 
 const styles = StyleSheet.create({
   image: {
