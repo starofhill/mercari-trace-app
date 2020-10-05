@@ -17,7 +17,7 @@ const Purchase: React.FC<Navigation> = (props) => {
   const productData = props.route.params;
 
   return (
-    <View>
+    <View style={{ height: "100%" }}>
       <View style={styles.footer}>
         <View style={{ width: "45%" }}>
           <TouchableOpacity style={styles.footerLeftButton}>
@@ -37,7 +37,7 @@ const Purchase: React.FC<Navigation> = (props) => {
           <SafeAreaView />
         </View>
       </View>
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <View style={styles.imageBox}>
           <Image
             source={require("../../../assets/seigiman369_TP_V.jpg")}
@@ -119,9 +119,6 @@ const Purchase: React.FC<Navigation> = (props) => {
 export default Purchase;
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 80,
-  },
   footer: {
     backgroundColor: "white",
     padding: 10,
