@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -12,19 +19,25 @@ const Purchase: React.FC<Navigation> = (props) => {
   return (
     <View>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerLeftButton}>
-          <Text style={styles.footerLeftButtonText}>アップルPay</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.footerRightButton}
-          onPress={() => {
-            navigate("Purchase");
-          }}
-        >
-          <Text style={styles.footerRightButtonText}>購入する</Text>
-        </TouchableOpacity>
+        <View style={{ width: "45%" }}>
+          <TouchableOpacity style={styles.footerLeftButton}>
+            <Text style={styles.footerLeftButtonText}>アップルPay</Text>
+          </TouchableOpacity>
+          <SafeAreaView />
+        </View>
+        <View style={{ width: "45%" }}>
+          <TouchableOpacity
+            style={styles.footerRightButton}
+            onPress={() => {
+              navigate("Purchase");
+            }}
+          >
+            <Text style={styles.footerRightButtonText}>購入する</Text>
+          </TouchableOpacity>
+          <SafeAreaView />
+        </View>
       </View>
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <View style={styles.imageBox}>
           <Image
             source={require("../../../assets/seigiman369_TP_V.jpg")}
@@ -106,6 +119,9 @@ const Purchase: React.FC<Navigation> = (props) => {
 export default Purchase;
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 80,
+  },
   footer: {
     backgroundColor: "white",
     padding: 10,
@@ -120,28 +136,23 @@ const styles = StyleSheet.create({
   },
   footerLeftButton: {
     backgroundColor: "black",
-    width: "45%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
-    padding: 10,
     borderRadius: 5,
   },
   footerLeftButtonText: {
     color: "white",
     fontSize: 16,
-    textAlign: "center",
     fontWeight: "bold",
   },
   footerRightButton: {
     backgroundColor: "#EA352E",
     height: 50,
-    width: "45%",
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
-    padding: 10,
     borderRadius: 5,
   },
   footerRightButtonText: {

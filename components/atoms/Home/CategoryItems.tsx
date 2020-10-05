@@ -146,32 +146,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
   },
-  categoryBox: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 30,
-    marginLeft: 30,
-    width: 100,
-  },
-  iconBox: {
-    width: 50,
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 50,
-    marginTop: 20,
-    marginBottom: 5,
-  },
-  iconBoxTexts: {
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    height: 30,
-  },
-  iconBoxText: {
-    textAlign: "center",
-    fontSize: 12,
-  },
   seeMore: {
     flexDirection: "row",
     alignItems: "center",
