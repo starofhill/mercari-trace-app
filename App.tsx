@@ -13,8 +13,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Provider } from "react-redux";
 import createStore from "./reducks/store/store";
-import { Product } from "./components/atoms/Home";
-import Purchase from "./components/atoms/Home/Purchase";
+import { Product, Purchase } from "./components/atoms/Home";
 import {
   CategorySelect,
   EnterProductInformation,
