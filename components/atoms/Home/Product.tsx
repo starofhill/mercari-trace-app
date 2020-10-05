@@ -1,9 +1,20 @@
 import React from "react";
-import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Alert,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ProductFooterButton } from ".";
 import { Navigation } from "../../../Interface";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../../../reducks/products/operations";
 
 // const productData = {
 //   id: 1,
@@ -35,6 +46,35 @@ const Product: React.FC<Navigation> = (props) => {
   for (var i = 0; i < sellerData.starNumber; i++) {
     starIcon.push(<Icon name="star" size={18} color="#FFCC00" key={i}></Icon>);
   }
+
+  const { navigate } = useNavigation();
+  const dispatch = useDispatch();
+  const onDelete = () => {
+    Alert.alert(
+      "確認",
+      `削除すると二度と復活できません。削除する代わりに停止することもできます。\n\n本当に削除しますか?`,
+      [
+        {
+          text: "いいえ",
+          style: "cancel",
+        },
+        {
+          text: "はい",
+          onPress: () => {
+            axios
+              .delete(
+                `https://mercari-trace-server.herokuapp.com/api/v1/products/${productData.id}`
+              )
+              .then((res) => {
+                dispatch(fetchProducts());
+                navigate("App");
+              });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
 
   return (
     <View>
@@ -144,6 +184,12 @@ const Product: React.FC<Navigation> = (props) => {
               </View>
             </View>
             <Icon name="angle-right" size={24} color="red" />
+          </TouchableOpacity>
+        </View>
+
+        <View>
+          <TouchableOpacity style={styles.doDelete} onPress={onDelete}>
+            <Text>この商品を削除する</Text>
           </TouchableOpacity>
         </View>
 
@@ -280,6 +326,17 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "blue",
     marginLeft: 5,
+  },
+  doDelete: {
+    flexDirection: "row",
+    backgroundColor: "#ccc",
+    padding: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 200,
+    marginTop: 20,
+    marginRight: "auto",
+    marginLeft: "auto",
   },
   doComment: {
     flexDirection: "row",
