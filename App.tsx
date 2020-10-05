@@ -87,7 +87,14 @@ export default function () {
               headerShown: false,
             }}
           />
-          <Stack.Screen name="Product" component={Product} />
+          <Stack.Screen
+            name="Product"
+            component={Product}
+            options={{
+              headerBackTitleVisible: false,
+              title: "",
+            }}
+          />
           <Stack.Screen
             name="Purchase"
             component={Purchase}
