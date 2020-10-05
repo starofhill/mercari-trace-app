@@ -7,6 +7,7 @@ export interface Item {
   name: string;
   updated_at: string;
 
+  status?: string;
   likes?: number;
   comments?: number;
   category?: string;
