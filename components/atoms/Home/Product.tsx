@@ -5,17 +5,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  Alert,
   SafeAreaView,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ProductFooterButton } from ".";
+import { onDelete, ProductFooterButton, ProductHeaderButton } from ".";
 import { Navigation } from "../../../Interface";
-import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { fetchProducts } from "../../../reducks/products/operations";
 import Swiper from "react-native-swiper";
 
 const sellerData = {
@@ -34,38 +31,16 @@ const Product: React.FC<Navigation> = (props) => {
 
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
-  const onDelete = () => {
-    Alert.alert(
-      "確認",
-      `削除すると二度と復活できません。削除する代わりに停止することもできます。\n\n本当に削除しますか?`,
-      [
-        {
-          text: "いいえ",
-          style: "cancel",
-        },
-        {
-          text: "はい",
-          onPress: () => {
-            axios
-              .delete(
-                `https://mercari-trace-server.herokuapp.com/api/v1/products/${productData.id}`
-              )
-              .then((res) => {
-                dispatch(fetchProducts());
-                navigate("App");
-              });
-          },
-        },
-      ],
-      { cancelable: false }
-    );
-  };
 
   return (
-    <View>
-      <ProductFooterButton productData={productData} />
+    <View style={{ backgroundColor: "white" }}>
       <SafeAreaView>
-        <ScrollView>
+        <ProductHeaderButton
+          name={productData.name}
+          navigation={props.navigation}
+        />
+        <ProductFooterButton productData={productData} />
+        <ScrollView style={{ backgroundColor: "#eee" }}>
           <Swiper style={styles.wrapper} showsButtons={true}>
             <Image
               source={{
@@ -183,7 +158,10 @@ const Product: React.FC<Navigation> = (props) => {
           </View>
 
           <View>
-            <TouchableOpacity style={styles.doDelete} onPress={onDelete}>
+            <TouchableOpacity
+              style={styles.doDelete}
+              onPress={() => onDelete(productData.id, navigate, dispatch)}
+            >
               <Text>この商品を削除する</Text>
             </TouchableOpacity>
           </View>

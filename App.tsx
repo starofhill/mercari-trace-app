@@ -92,6 +92,7 @@ export default function () {
             options={{
               headerBackTitleVisible: false,
               title: "",
+              headerShown: false,
             }}
           />
           <Stack.Screen

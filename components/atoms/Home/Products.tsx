@@ -29,7 +29,7 @@ const Products: React.FC = () => {
     <View style={styles.container}>
       {!loading ? (
         <FlatList
-          data={list}
+          data={list.sort((a, b) => a.id - b.id)}
           contentContainerStyle={styles.scrollView}
           keyExtractor={(item) => `products-${item.id}`}
           renderItem={({ item }) => (
