@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Image, ActivityIndicator } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,47 +15,65 @@ const Products: React.FC = () => {
   const products = selector.products;
   const list = products.list;
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     dispatch(fetchProducts());
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   }, []);
 
   return (
-    <FlatList
-      data={list}
-      contentContainerStyle={styles.scrollView}
-      keyExtractor={(item) => `products-${item.id}`}
-      renderItem={({ item }) => (
-        <View style={styles.imageBox}>
-          <TouchableOpacity
-            onPress={() => {
-              navigate("Product", { ...item });
-            }}
-          >
-            {item.image_url ? (
-              <Image
-                source={{ uri: encodeURI(item.image_url.replace(/&/g, "%26")) }}
-                style={styles.image}
-                resizeMode="cover"
-              />
-            ) : (
-              <Image
-                source={require("../../../assets/seigiman369_TP_V.jpg")}
-                style={styles.image}
-                resizeMode="cover"
-              />
-            )}
-            <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
-          </TouchableOpacity>
-        </View>
+    <View style={styles.container}>
+      {!loading ? (
+        <FlatList
+          data={list}
+          contentContainerStyle={styles.scrollView}
+          keyExtractor={(item) => `products-${item.id}`}
+          renderItem={({ item }) => (
+            <View style={styles.imageBox}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigate("Product", { ...item });
+                }}
+              >
+                {item.image_url ? (
+                  <Image
+                    source={{
+                      uri: encodeURI(item.image_url.replace(/&/g, "%26")),
+                    }}
+                    style={styles.image}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <Image
+                    source={require("../../../assets/seigiman369_TP_V.jpg")}
+                    style={styles.image}
+                    resizeMode="cover"
+                  />
+                )}
+                <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          numColumns={3}
+        />
+      ) : (
+        <ActivityIndicator size="large" />
       )}
-      numColumns={3}
-    />
+    </View>
   );
 };
 
 export default Products;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
   scrollView: {
     justifyContent: "center",
     alignItems: "center",

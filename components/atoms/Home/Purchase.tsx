@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -10,19 +17,25 @@ const Purchase: React.FC<Navigation> = (props) => {
   const productData = props.route.params;
 
   return (
-    <View>
+    <View style={{ height: "100%" }}>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerLeftButton}>
-          <Text style={styles.footerLeftButtonText}>アップルPay</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.footerRightButton}
-          onPress={() => {
-            navigate("Purchase");
-          }}
-        >
-          <Text style={styles.footerRightButtonText}>購入する</Text>
-        </TouchableOpacity>
+        <View style={{ width: "45%" }}>
+          <TouchableOpacity style={styles.footerLeftButton}>
+            <Text style={styles.footerLeftButtonText}>アップルPay</Text>
+          </TouchableOpacity>
+          <SafeAreaView />
+        </View>
+        <View style={{ width: "45%" }}>
+          <TouchableOpacity
+            style={styles.footerRightButton}
+            onPress={() => {
+              navigate("Purchase");
+            }}
+          >
+            <Text style={styles.footerRightButtonText}>購入する</Text>
+          </TouchableOpacity>
+          <SafeAreaView />
+        </View>
       </View>
       <ScrollView>
         <View style={styles.imageBox}>
@@ -120,28 +133,23 @@ const styles = StyleSheet.create({
   },
   footerLeftButton: {
     backgroundColor: "black",
-    width: "45%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
-    padding: 10,
     borderRadius: 5,
   },
   footerLeftButtonText: {
     color: "white",
     fontSize: 16,
-    textAlign: "center",
     fontWeight: "bold",
   },
   footerRightButton: {
     backgroundColor: "#EA352E",
     height: 50,
-    width: "45%",
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
-    padding: 10,
     borderRadius: 5,
   },
   footerRightButtonText: {
