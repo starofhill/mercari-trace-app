@@ -39,21 +39,13 @@ const Products: React.FC = () => {
                   navigate("Product", { ...item });
                 }}
               >
-                {item.image_url ? (
-                  <Image
-                    source={{
-                      uri: encodeURI(item.image_url.replace(/&/g, "%26")),
-                    }}
-                    style={styles.image}
-                    resizeMode="cover"
-                  />
-                ) : (
-                  <Image
-                    source={require("../../../assets/seigiman369_TP_V.jpg")}
-                    style={styles.image}
-                    resizeMode="cover"
-                  />
-                )}
+                <Image
+                  source={{
+                    uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+                  }}
+                  style={styles.image}
+                  resizeMode="cover"
+                />
                 <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
               </TouchableOpacity>
             </View>

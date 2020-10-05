@@ -15,23 +15,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
-
-// const productData = {
-//   id: 1,
-//   name: "React Native",
-//   price: 2500,
-//   likes: 5,
-//   comments: 3,
-//   description:
-//     "カバーを外して読んでいたため、カバーはキレイですが、本体の表紙に少し汚れがあります。中身は書き込み等なく問題ありません。",
-//   category: "本",
-//   condition: "やや傷や汚れあり",
-//   shippingCharges: "送料込み(出品者負担)",
-//   deliveryArea: "宮城県",
-//   deliveryDate: "1~2日で発送",
-//   method: "ゆうゆうメルカリ便",
-//   brand: "本",
-// };
+import Swiper from "react-native-swiper";
 
 const sellerData = {
   name: "りゅう",
@@ -80,6 +64,15 @@ const Product: React.FC<Navigation> = (props) => {
     <View>
       <ProductFooterButton productData={productData} />
       <ScrollView>
+        <Swiper style={styles.wrapper} showsButtons={true}>
+          <Image
+            source={{
+              uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
+            }}
+            style={styles.slide}
+            resizeMode="contain"
+          />
+        </Swiper>
         <View style={styles.main}>
           <Text style={styles.title}>{productData.name}</Text>
           <Text style={styles.brand}>{productData.brand}</Text>
@@ -349,5 +342,14 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     marginBottom: 100,
     marginLeft: "auto",
+  },
+  wrapper: {
+    width: "100%",
+    height: 380,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

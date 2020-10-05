@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
-const PriceInDescending: React.FC<{ value?: string }> = ({ value }) => {
+const ByPrice: React.FC<{ value?: string; order: string }> = ({
+  value,
+  order,
+}) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -23,6 +26,7 @@ const PriceInDescending: React.FC<{ value?: string }> = ({ value }) => {
 
   useEffect(() => {
     const updateList = list.filter((item) => {
+      // 検索
       if (value) {
         return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
       } else return item;
@@ -33,9 +37,15 @@ const PriceInDescending: React.FC<{ value?: string }> = ({ value }) => {
 
   return (
     <FlatList
-      data={items ? items.sort((a, b) => b.price - a.price) : list}
+      data={
+        items
+          ? items.sort((a, b) =>
+              order === "ascending" ? a.price - b.price : b.price - a.price
+            )
+          : list
+      }
       contentContainerStyle={styles.scrollView}
-      keyExtractor={(item) => `products-${item.id}`}
+      keyExtractor={(item: Item) => `products-${item.id}`}
       renderItem={({ item }) => (
         <View style={styles.imageBox}>
           <TouchableOpacity
@@ -44,8 +54,11 @@ const PriceInDescending: React.FC<{ value?: string }> = ({ value }) => {
             }}
           >
             <Image
-              source={require("../../../assets/seigiman369_TP_V.jpg")}
+              source={{
+                uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+              }}
               style={styles.image}
+              resizeMode="cover"
             />
             <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
           </TouchableOpacity>
@@ -56,7 +69,7 @@ const PriceInDescending: React.FC<{ value?: string }> = ({ value }) => {
   );
 };
 
-export default PriceInDescending;
+export default ByPrice;
 
 const styles = StyleSheet.create({
   scrollView: {

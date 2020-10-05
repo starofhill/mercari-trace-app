@@ -44,8 +44,11 @@ const SearchScreen: React.FC<{ value: string }> = ({ value }) => {
             }}
           >
             <Image
-              source={require("../../../assets/seigiman369_TP_V.jpg")}
+              source={{
+                uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+              }}
               style={styles.image}
+              resizeMode="cover"
             />
             <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
           </TouchableOpacity>

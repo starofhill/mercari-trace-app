@@ -36,9 +36,9 @@ const NewArrival: React.FC<{ value?: string }> = ({ value }) => {
       data={
         value
           ? items
-            ? items.sort((a, b) => a.created_at.localeCompare(b.created_at))
+            ? items.sort((a, b) => b.created_at.localeCompare(a.created_at))
             : list
-          : list.sort((a, b) => a.created_at.localeCompare(b.created_at))
+          : list.sort((a, b) => b.created_at.localeCompare(a.created_at))
       }
       contentContainerStyle={styles.scrollView}
       keyExtractor={(item) => `products-${item.id}`}
@@ -50,8 +50,11 @@ const NewArrival: React.FC<{ value?: string }> = ({ value }) => {
             }}
           >
             <Image
-              source={require("../../../assets/seigiman369_TP_V.jpg")}
+              source={{
+                uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+              }}
               style={styles.image}
+              resizeMode="cover"
             />
             <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
           </TouchableOpacity>
