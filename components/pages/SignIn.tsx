@@ -5,7 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 
-export default function SignIn() {
+const SignIn: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -46,7 +46,9 @@ export default function SignIn() {
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default SignIn;
 
 const styles = StyleSheet.create({
   component: {

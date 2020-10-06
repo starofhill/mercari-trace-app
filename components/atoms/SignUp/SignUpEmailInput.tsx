@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
-export default function SignInEmailInput() {
+const SignUpEmailInput: React.FC = () => {
   const { navigate } = useNavigation();
 
   const [email, setEmail] = useState("");
@@ -103,7 +103,9 @@ export default function SignInEmailInput() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default SignUpEmailInput;
 
 const styles = StyleSheet.create({
   boxes: {

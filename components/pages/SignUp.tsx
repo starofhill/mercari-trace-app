@@ -11,7 +11,7 @@ import { SignUpEmailInput } from "../atoms/SignUp";
 
 const Stack = createStackNavigator();
 
-function SignUp() {
+const SignUp: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -58,9 +58,9 @@ function SignUp() {
       </View>
     </SafeAreaView>
   );
-}
+};
 
-export default function () {
+const SignUpContainer: React.FC = () => {
   return (
     <Stack.Navigator mode="card">
       <Stack.Screen
@@ -97,7 +97,9 @@ export default function () {
       />
     </Stack.Navigator>
   );
-}
+};
+
+export default SignUpContainer;
 
 const styles = StyleSheet.create({
   component: {

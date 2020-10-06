@@ -4,7 +4,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-export default function SignInEmailInput() {
+const SignInEmailInput: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -33,7 +33,9 @@ export default function SignInEmailInput() {
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default SignInEmailInput;
 
 const styles = StyleSheet.create({
   boxes: {
