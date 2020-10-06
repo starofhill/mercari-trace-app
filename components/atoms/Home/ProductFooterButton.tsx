@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     zIndex: 10,
-    right: 0,
-    left: 0,
+    width: "100%",
   },
   footerButton: {
     height: 50,

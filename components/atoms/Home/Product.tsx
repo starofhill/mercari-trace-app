@@ -33,147 +33,145 @@ const Product: React.FC<Navigation> = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <View style={{ backgroundColor: "white" }}>
-      <SafeAreaView>
-        <ProductHeaderButton
-          name={productData.name}
-          navigation={props.navigation}
-        />
-        <ProductFooterButton productData={productData} />
-        <ScrollView style={{ backgroundColor: "#eee" }}>
-          <Swiper style={styles.wrapper} showsButtons={true}>
-            <Image
-              source={{
-                uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
-              }}
-              style={styles.slide}
-              resizeMode="contain"
-            />
-          </Swiper>
-          <View style={styles.main}>
-            <Text style={styles.title}>{productData.name}</Text>
-            <Text style={styles.brand}>{productData.brand}</Text>
-            <View style={styles.prices}>
-              <Text style={styles.price}>
-                ¥{productData.price.toLocaleString()}
+    <View style={{ backgroundColor: "white", height: "100%" }}>
+      <ProductHeaderButton
+        name={productData.name}
+        navigation={props.navigation}
+      />
+      <ProductFooterButton productData={productData} />
+      <ScrollView style={{ backgroundColor: "#eee" }}>
+        <Swiper style={styles.wrapper} showsButtons={true}>
+          <Image
+            source={{
+              uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
+            }}
+            style={styles.slide}
+            resizeMode="contain"
+          />
+        </Swiper>
+        <View style={styles.main}>
+          <Text style={styles.title}>{productData.name}</Text>
+          <Text style={styles.brand}>{productData.brand}</Text>
+          <View style={styles.prices}>
+            <Text style={styles.price}>
+              ¥{productData.price.toLocaleString()}
+            </Text>
+            <Text style={styles.shippingCharges}>
+              {productData.shippingCharges}
+            </Text>
+          </View>
+          <View style={styles.buttonBoxes}>
+            <View style={styles.buttonBox}>
+              <View style={styles.buttonItem}>
+                <TouchableOpacity style={styles.button}>
+                  <Text>いいね!</Text>
+                </TouchableOpacity>
+                <Text style={styles.buttonText}>{productData.likes}</Text>
+              </View>
+              <View style={styles.buttonItem}>
+                <TouchableOpacity style={styles.button}>
+                  <Text>コメント</Text>
+                </TouchableOpacity>
+                <Text style={styles.buttonText}>{productData.comments}</Text>
+              </View>
+            </View>
+            <View style={styles.buttonBox}>
+              <TouchableOpacity style={styles.button}>
+                <Text>…</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.box}>
+          <Text style={styles.boxTitle}>商品の説明</Text>
+          <View style={styles.boxContent}>
+            <Text style={styles.descriptionText}>
+              {productData.description}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.box}>
+          <Text style={styles.boxTitle}>商品の情報</Text>
+          <View style={styles.boxContent}>
+            <View style={styles.informationBox}>
+              <Text style={styles.informationTitle}>カテゴリー</Text>
+              <Text style={styles.informationContent}>
+                {productData.category}
               </Text>
-              <Text style={styles.shippingCharges}>
+            </View>
+            <View style={styles.informationBox}>
+              <Text style={styles.informationTitle}>商品の状態</Text>
+              <Text style={styles.informationContent}>
+                {productData.condition}
+              </Text>
+            </View>
+            <View style={styles.informationBox}>
+              <Text style={styles.informationTitle}>配送料の負担</Text>
+              <Text style={styles.informationContent}>
                 {productData.shippingCharges}
               </Text>
             </View>
-            <View style={styles.buttonBoxes}>
-              <View style={styles.buttonBox}>
-                <View style={styles.buttonItem}>
-                  <TouchableOpacity style={styles.button}>
-                    <Text>いいね!</Text>
-                  </TouchableOpacity>
-                  <Text style={styles.buttonText}>{productData.likes}</Text>
-                </View>
-                <View style={styles.buttonItem}>
-                  <TouchableOpacity style={styles.button}>
-                    <Text>コメント</Text>
-                  </TouchableOpacity>
-                  <Text style={styles.buttonText}>{productData.comments}</Text>
-                </View>
-              </View>
-              <View style={styles.buttonBox}>
-                <TouchableOpacity style={styles.button}>
-                  <Text>…</Text>
-                </TouchableOpacity>
-              </View>
+            <View style={styles.informationBox}>
+              <Text style={styles.informationTitle}>配送の方法</Text>
+              <Text style={styles.informationContent}>
+                {productData.method}
+              </Text>
             </View>
-          </View>
-
-          <View style={styles.box}>
-            <Text style={styles.boxTitle}>商品の説明</Text>
-            <View style={styles.boxContent}>
-              <Text style={styles.descriptionText}>
-                {productData.description}
+            <View style={styles.informationBox}>
+              <Text style={styles.informationTitle}>発送元の地域</Text>
+              <Text style={styles.informationContent}>
+                {productData.deliveryArea}
+              </Text>
+            </View>
+            <View style={styles.informationBox}>
+              <Text style={styles.informationTitle}>発送までの日数</Text>
+              <Text style={styles.informationContent}>
+                {productData.deliveryDate}
               </Text>
             </View>
           </View>
+        </View>
 
-          <View style={styles.box}>
-            <Text style={styles.boxTitle}>商品の情報</Text>
-            <View style={styles.boxContent}>
-              <View style={styles.informationBox}>
-                <Text style={styles.informationTitle}>カテゴリー</Text>
-                <Text style={styles.informationContent}>
-                  {productData.category}
-                </Text>
-              </View>
-              <View style={styles.informationBox}>
-                <Text style={styles.informationTitle}>商品の状態</Text>
-                <Text style={styles.informationContent}>
-                  {productData.condition}
-                </Text>
-              </View>
-              <View style={styles.informationBox}>
-                <Text style={styles.informationTitle}>配送料の負担</Text>
-                <Text style={styles.informationContent}>
-                  {productData.shippingCharges}
-                </Text>
-              </View>
-              <View style={styles.informationBox}>
-                <Text style={styles.informationTitle}>配送の方法</Text>
-                <Text style={styles.informationContent}>
-                  {productData.method}
-                </Text>
-              </View>
-              <View style={styles.informationBox}>
-                <Text style={styles.informationTitle}>発送元の地域</Text>
-                <Text style={styles.informationContent}>
-                  {productData.deliveryArea}
-                </Text>
-              </View>
-              <View style={styles.informationBox}>
-                <Text style={styles.informationTitle}>発送までの日数</Text>
-                <Text style={styles.informationContent}>
-                  {productData.deliveryDate}
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.box}>
-            <Text style={styles.boxTitle}>出品者</Text>
-            <TouchableOpacity style={[styles.boxContent, styles.sellerBox]}>
-              <View style={styles.sellerContent}>
-                <Image
-                  source={require("../../../assets/user_icon.png")}
-                  style={styles.icon}
-                />
-                <View style={styles.sellerInformation}>
-                  <Text style={styles.sellerName}>{sellerData.name}</Text>
-                  <View style={styles.sellerStarContent}>
-                    {starIcon}
-                    <Text style={styles.sellerStarNumber}>
-                      {sellerData.starNumber}
-                    </Text>
-                  </View>
+        <View style={styles.box}>
+          <Text style={styles.boxTitle}>出品者</Text>
+          <TouchableOpacity style={[styles.boxContent, styles.sellerBox]}>
+            <View style={styles.sellerContent}>
+              <Image
+                source={require("../../../assets/user_icon.png")}
+                style={styles.icon}
+              />
+              <View style={styles.sellerInformation}>
+                <Text style={styles.sellerName}>{sellerData.name}</Text>
+                <View style={styles.sellerStarContent}>
+                  {starIcon}
+                  <Text style={styles.sellerStarNumber}>
+                    {sellerData.starNumber}
+                  </Text>
                 </View>
               </View>
-              <Icon name="angle-right" size={24} color="red" />
-            </TouchableOpacity>
-          </View>
+            </View>
+            <Icon name="angle-right" size={24} color="red" />
+          </TouchableOpacity>
+        </View>
 
-          <View>
-            <TouchableOpacity
-              style={styles.doDelete}
-              onPress={() => onDelete(productData.id, navigate, dispatch)}
-            >
-              <Text>この商品を削除する</Text>
-            </TouchableOpacity>
-          </View>
+        <View>
+          <TouchableOpacity
+            style={styles.doDelete}
+            onPress={() => onDelete(productData.id, navigate, dispatch)}
+          >
+            <Text>この商品を削除する</Text>
+          </TouchableOpacity>
+        </View>
 
-          <View>
-            <TouchableOpacity style={styles.doComment}>
-              <Icon name="comment-o" size={24} />
-              <Text>コメントする</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+        <View>
+          <TouchableOpacity style={styles.doComment}>
+            <Icon name="comment-o" size={24} />
+            <Text>コメントする</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 };

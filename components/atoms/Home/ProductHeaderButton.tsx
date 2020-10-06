@@ -1,5 +1,11 @@
 import React from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StackActions } from "@react-navigation/native";
 
@@ -10,19 +16,22 @@ const ProductHeaderButton: React.FC<{
   const popAction = StackActions.pop(1);
 
   return (
-    <View style={styles.header}>
-      <TouchableOpacity onPress={() => navigation.dispatch(popAction)}>
-        <Icon
-          name="angle-left"
-          size={40}
-          color="blue"
-          style={styles.headerSide}
-        />
-      </TouchableOpacity>
-      <Text style={styles.headerTitle} numberOfLines={1}>
-        {name}
-      </Text>
-      <View style={styles.headerSide}></View>
+    <View>
+      <SafeAreaView />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.dispatch(popAction)}>
+          <Icon
+            name="angle-left"
+            size={40}
+            color="blue"
+            style={styles.headerSide}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle} numberOfLines={1}>
+          {name}
+        </Text>
+        <View style={styles.headerSide}></View>
+      </View>
     </View>
   );
 };
