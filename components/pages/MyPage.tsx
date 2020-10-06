@@ -5,7 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-export default function MyPage() {
+const MyPage: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -81,7 +81,9 @@ export default function MyPage() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default MyPage;
 
 const styles = StyleSheet.create({
   container: {

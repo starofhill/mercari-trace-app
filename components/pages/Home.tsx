@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   Modal,
@@ -53,7 +53,7 @@ const SearchTab: React.FC<SearchTab> = ({
   const navigation = props.navigation;
   const pushAction = StackActions.push("SearchHome");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setValue(valueArray[index]);
   }, [modalVisible]);
 
@@ -139,10 +139,10 @@ const SearchTab: React.FC<SearchTab> = ({
 
 const Home: React.FC<any> = (props) => {
   const { navigate } = useNavigation();
-  const [value, setValue] = React.useState("");
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const [valueArray, setValueArray] = React.useState<string[]>([]);
-  const [index, setIndex] = React.useState(-1);
+  const [value, setValue] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [valueArray, setValueArray] = useState<string[]>([]);
+  const [index, setIndex] = useState(-1);
 
   const navigation = props.navigation;
   const popAction = StackActions.pop(1);

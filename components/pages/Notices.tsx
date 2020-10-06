@@ -10,7 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Tab = createMaterialTopTabNavigator();
 
-function NoticesBody() {
+const NoticesBody: React.FC = () => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -23,11 +23,11 @@ function NoticesBody() {
       <Tab.Screen name="ニュース" component={News} />
     </Tab.Navigator>
   );
-}
+};
 
 const Stack = createStackNavigator();
 
-function NoticesPageTransition() {
+const NoticesPageTransition: React.FC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -39,15 +39,17 @@ function NoticesPageTransition() {
       <Stack.Screen name="NewsDetail" component={NewsDetail} />
     </Stack.Navigator>
   );
-}
+};
 
-export default function NoticesWrapper() {
+const NoticesWrapper: React.FC = () => {
   return (
     <SafeAreaProvider>
       <NoticesPageTransition />
     </SafeAreaProvider>
   );
-}
+};
+
+export default NoticesWrapper;
 
 const styles = StyleSheet.create({
   container: {

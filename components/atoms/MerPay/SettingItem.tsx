@@ -3,14 +3,16 @@ import { Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function SettingItem(props) {
+const SettingItem: React.FC<{ text: string }> = (props) => {
   return (
     <TouchableOpacity style={styles.setting}>
       <Text>{props.text}</Text>
       <Icon name="angle-right" size={24} color="#ccc" />
     </TouchableOpacity>
   );
-}
+};
+
+export default SettingItem;
 
 const styles = StyleSheet.create({
   setting: {

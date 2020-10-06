@@ -2,7 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function MethodItem(props) {
+const MethodItem: React.FC<{
+  title: string;
+  name: string;
+  content: string;
+  content2: string;
+  color: string;
+}> = (props) => {
   return (
     <View style={styles.method}>
       <View style={styles.methodContent}>
@@ -26,7 +32,9 @@ export default function MethodItem(props) {
       </View>
     </View>
   );
-}
+};
+
+export default MethodItem;
 
 const styles = StyleSheet.create({
   boxTitle: {

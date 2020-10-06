@@ -2,7 +2,12 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function HistoryItem(props) {
+const HistoryItem: React.FC<{
+  name: string;
+  text: string;
+  text2?: string;
+  size: number;
+}> = (props) => {
   return (
     <View style={styles.history}>
       <Icon name={props.name} size={props.size} />
@@ -17,7 +22,9 @@ export default function HistoryItem(props) {
       </Text>
     </View>
   );
-}
+};
+
+export default HistoryItem;
 
 const styles = StyleSheet.create({
   history: {

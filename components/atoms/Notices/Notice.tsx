@@ -66,7 +66,7 @@ const data = [
   },
 ];
 
-export default function Notice() {
+const Notice: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -92,7 +92,9 @@ export default function Notice() {
       )}
     />
   );
-}
+};
+
+export default Notice;
 
 const styles = StyleSheet.create({
   container: {

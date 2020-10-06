@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { MethodItem } from ".";
 
-export default function Method() {
+const Method: React.FC = () => {
   return (
     <View style={styles.boxes}>
       <Text style={styles.boxTitle}>使い方</Text>
@@ -66,7 +66,9 @@ export default function Method() {
       </View>
     </View>
   );
-}
+};
+
+export default Method;
 
 const styles = StyleSheet.create({
   boxTitle: {

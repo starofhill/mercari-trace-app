@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function NoticeDetail() {
+const NoticeDetail: React.FC = () => {
   return (
     <View>
       <Text style={styles.text}>以下のクーポンがご利用できます</Text>
@@ -27,7 +27,9 @@ export default function NoticeDetail() {
       </View>
     </View>
   );
-}
+};
+
+export default NoticeDetail;
 
 const styles = StyleSheet.create({
   text: {

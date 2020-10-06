@@ -72,7 +72,7 @@ const data = [
   },
 ];
 
-export default function News() {
+const News: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -98,7 +98,9 @@ export default function News() {
       )}
     />
   );
-}
+};
+
+export default News;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CategoryItem } from ".";
 
 const CategoryItems: React.FC = () => {
-  const [showFlag, setShowFlag] = React.useState(false);
+  const [showFlag, setShowFlag] = useState(false);
 
   return (
     <View>

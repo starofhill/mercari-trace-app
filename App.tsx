@@ -25,7 +25,7 @@ export const store = createStore();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function App() {
+const App: React.FC = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -65,9 +65,9 @@ function App() {
       />
     </Tab.Navigator>
   );
-}
+};
 
-export default function () {
+const Container: React.FC = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -128,4 +128,6 @@ export default function () {
       </NavigationContainer>
     </Provider>
   );
-}
+};
+
+export default Container;

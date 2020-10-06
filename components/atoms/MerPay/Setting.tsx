@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { SettingItem } from ".";
 
-export default function Setting() {
+const Setting: React.FC = () => {
   return (
     <View style={styles.boxes}>
       <Text style={styles.boxTitle}>設定</Text>
@@ -16,7 +16,9 @@ export default function Setting() {
       <SettingItem text="店舗へのメルペイの導入の申込み" />
     </View>
   );
-}
+};
+
+export default Setting;
 
 const styles = StyleSheet.create({
   boxTitle: {

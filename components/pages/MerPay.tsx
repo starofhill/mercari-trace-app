@@ -4,7 +4,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { ScrollView } from "react-native-gesture-handler";
 import { History, Method, Setting } from "../atoms/MerPay";
 
-export default function MerPay() {
+const MerPay: React.FC = () => {
   return (
     <SafeAreaView>
       <ScrollView>
@@ -16,4 +16,5 @@ export default function MerPay() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+export default MerPay;

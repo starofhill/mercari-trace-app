@@ -1,9 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { HistoryItem } from ".";
 
-export default function History() {
+const History: React.FC = () => {
   return (
     <View style={styles.boxes}>
       <Text style={styles.boxTitle}>使った履歴</Text>
@@ -19,7 +18,9 @@ export default function History() {
       </View>
     </View>
   );
-}
+};
+
+export default History;
 
 const styles = StyleSheet.create({
   boxes: {
