@@ -86,6 +86,7 @@ const SearchTab: React.FC<SearchTab> = ({
                   flexDirection: "row",
                   justifyContent: "center",
                   alignItems: "center",
+                  marginTop: 8,
                 }}
               >
                 <TouchableOpacity
