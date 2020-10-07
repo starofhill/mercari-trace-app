@@ -2,32 +2,15 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { signUpWithEmail } from "../../../reducks/users/operations";
 
 const SignUpEmailInput: React.FC = () => {
-  const { navigate } = useNavigation();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const signUp = async () => {
-    console.log(email, password);
-
-    await axios
-      .post("https://mercari-trace-server.herokuapp.com/api/v1/auth/", {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res);
-        console.log("サインアップ完了");
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log("失敗");
-      });
-  };
+  const [nickname, setNickname] = useState("");
 
   return (
     <SafeAreaView>
@@ -57,7 +40,13 @@ const SignUpEmailInput: React.FC = () => {
           </View>
           <View style={styles.box}>
             <Text style={styles.textStyle}>ニックネーム</Text>
-            <TextInput placeholder="メルカリ内のユーザ名" />
+            <TextInput
+              placeholder="メルカリ内のユーザ名"
+              value={nickname}
+              onChangeText={(newValue) => {
+                setNickname(newValue);
+              }}
+            />
             <View />
           </View>
         </View>
@@ -96,7 +85,10 @@ const SignUpEmailInput: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.buttonBox}>
-          <TouchableOpacity style={styles.button} onPress={signUp}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => dispatch(signUpWithEmail(nickname, email, password))}
+          >
             <Text style={styles.buttonText}>次へ</Text>
           </TouchableOpacity>
         </View>
