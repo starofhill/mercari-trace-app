@@ -13,8 +13,6 @@ export default function MyPage() {
   const dispatch = useDispatch();
   const users = useSelector((state: Store) => state.users);
 
-  console.log(users);
-
   return (
     <SafeAreaView>
       <ScrollView>
