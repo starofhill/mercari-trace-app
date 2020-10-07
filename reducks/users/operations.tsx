@@ -37,12 +37,12 @@ export const signUpWithEmail = (
         password: password,
       })
       .then((res) => {
+        Alert.alert("会員登録できました。");
         console.log(res);
-        console.log("サインアップ完了");
       })
       .catch((err) => {
+        Alert.alert("会員登録に失敗しました。\nもう一度やり直してください。");
         console.log(err);
-        console.log("失敗");
       });
   };
 };
@@ -61,8 +61,6 @@ export const signInWithEmail = (email: string, password: string) => {
         password: password,
       })
       .then((res) => {
-        console.log(res);
-        console.log("サインイン完了");
         dispatch(
           signInWithEmailAction({
             isSignedIn: true,
@@ -70,10 +68,12 @@ export const signInWithEmail = (email: string, password: string) => {
             nickname: res.data.data.nickname,
           })
         );
+        Alert.alert("ログインしました。");
+        console.log(res);
       })
       .catch((err) => {
+        Alert.alert("ログイン失敗です。\nもう一度やり直してください。");
         console.log(err);
-        console.log("失敗");
       });
   };
 };

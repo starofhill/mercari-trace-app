@@ -5,8 +5,6 @@ export const UsersReducer = (
   state = initialState.users,
   action: { type: string; payload?: {} }
 ) => {
-  console.log(action);
-
   switch (action.type) {
     case Actions.SIGN_IN_WITH_EMAIL:
       return {
