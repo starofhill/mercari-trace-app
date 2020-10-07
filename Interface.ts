@@ -25,7 +25,7 @@ export interface Products {
 export interface Users {
   isSignedIn: boolean;
   uid: string;
-  nickname: string;
+  name: string;
 }
 
 export interface Store {

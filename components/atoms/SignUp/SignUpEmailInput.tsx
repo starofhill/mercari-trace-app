@@ -4,13 +4,15 @@ import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 import { signUpWithEmail } from "../../../reducks/users/operations";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUpEmailInput: React.FC = () => {
   const dispatch = useDispatch();
+  const { navigate } = useNavigation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [name, setName] = useState("");
 
   return (
     <SafeAreaView>
@@ -47,9 +49,9 @@ const SignUpEmailInput: React.FC = () => {
             <Text style={styles.textStyle}>ニックネーム</Text>
             <TextInput
               placeholder="メルカリ内のユーザ名"
-              value={nickname}
+              value={name}
               onChangeText={(newValue) => {
-                setNickname(newValue);
+                setName(newValue);
               }}
               style={styles.input}
               autoCapitalize="none"
@@ -94,7 +96,9 @@ const SignUpEmailInput: React.FC = () => {
         <View style={styles.buttonBox}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => dispatch(signUpWithEmail(nickname, email, password))}
+            onPress={() =>
+              dispatch(signUpWithEmail(email, password, name, navigate))
+            }
           >
             <Text style={styles.buttonText}>次へ</Text>
           </TouchableOpacity>

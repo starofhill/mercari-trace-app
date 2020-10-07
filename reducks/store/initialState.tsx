@@ -6,7 +6,7 @@ const initialState = {
   users: {
     isSignedIn: false,
     uid: "",
-    nickname: "",
+    name: "",
   },
 };
 export default initialState;

@@ -4,9 +4,11 @@ import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { signInWithEmail } from "../../../reducks/users/operations";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const SignInEmailInput: React.FC = () => {
   const dispatch = useDispatch();
+  const { navigate } = useNavigation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +42,7 @@ const SignInEmailInput: React.FC = () => {
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => dispatch(signInWithEmail(email, password))}
+          onPress={() => dispatch(signInWithEmail(email, password, navigate))}
         >
           <Text style={styles.buttonText}>ログイン</Text>
         </TouchableOpacity>
