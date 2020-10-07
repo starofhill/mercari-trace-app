@@ -24,6 +24,8 @@ const SignUpEmailInput: React.FC = () => {
               onChangeText={(newValue) => {
                 setEmail(newValue);
               }}
+              style={styles.input}
+              autoCapitalize="none"
             />
             <View />
           </View>
@@ -32,9 +34,12 @@ const SignUpEmailInput: React.FC = () => {
             <TextInput
               placeholder="7文字以上の半角英数字"
               value={password}
+              secureTextEntry={true}
               onChangeText={(newValue) => {
                 setPassword(newValue);
               }}
+              maxLength={15}
+              style={styles.input}
             />
             <View />
           </View>
@@ -46,6 +51,8 @@ const SignUpEmailInput: React.FC = () => {
               onChangeText={(newValue) => {
                 setNickname(newValue);
               }}
+              style={styles.input}
+              autoCapitalize="none"
             />
             <View />
           </View>
@@ -116,6 +123,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
+  },
+  input: {
+    width: "65%",
+    marginRight: 100,
   },
   gender: {
     backgroundColor: "white",

@@ -14,8 +14,19 @@ export const signUpWithEmail = (
       return false;
     }
 
-    if (password.length < 7) {
-      Alert.alert("パスワードは7文字以上の\n半角英数字で入力してください");
+    // email
+    if (
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        email
+      )
+    ) {
+      Alert.alert("無効なメールアドレスを\n入力しました");
+      return false;
+    }
+
+    // password
+    if (!/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,15}$/i.test(password)) {
+      Alert.alert("パスワードは半角英数字\n7-15文字で\n入力してください");
       return false;
     }
 
