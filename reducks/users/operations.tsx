@@ -1,6 +1,6 @@
 import { Alert } from "react-native";
 import axios from "axios";
-import { signInWithEmailAction } from "./actions";
+import { signInWithEmailAction, signOutAction } from "./actions";
 
 export const signUpWithEmail = (
   email: string,
@@ -99,5 +99,22 @@ export const signInWithEmail = (
         Alert.alert("ログイン失敗です。\nもう一度やり直してください。");
         console.log(err);
       });
+  };
+};
+
+export const signOut = () => {
+  return async (dispatch: (a: any) => void) => {
+    Alert.alert("確認", "ログアウトしますか?", [
+      {
+        text: "はい",
+        onPress: () => {
+          dispatch(signOutAction());
+        },
+      },
+      {
+        text: "いいえ",
+        style: "cancel",
+      },
+    ]);
   };
 };

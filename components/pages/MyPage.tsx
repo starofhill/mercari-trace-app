@@ -4,9 +4,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { signOut } from "../../reducks/users/operations";
 
 export default function MyPage() {
   const { navigate } = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView>
@@ -74,6 +77,15 @@ export default function MyPage() {
           <View style={styles.boxes}>
             <TouchableOpacity style={styles.box}>
               <Text>キャッシュを消去する</Text>
+              <Icon name="angle-right" size={24} color="#ccc" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.boxes}>
+            <TouchableOpacity
+              style={styles.box}
+              onPress={() => dispatch(signOut())}
+            >
+              <Text>ログアウト</Text>
               <Icon name="angle-right" size={24} color="#ccc" />
             </TouchableOpacity>
           </View>
