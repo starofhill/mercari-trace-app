@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
-const SearchScreen: React.FC<{ value: string }> = ({ value }) => {
+const SearchScreen: React.FC<{ value: string; category?: string }> = ({
+  value,
+  category,
+}) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -23,9 +26,17 @@ const SearchScreen: React.FC<{ value: string }> = ({ value }) => {
 
   useEffect(() => {
     const updateList = list.filter((item) => {
-      if (value) {
-        return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-      } else return item;
+      if (category) {
+        if (category === item.category) {
+          if (value) {
+            return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+          } else return item;
+        }
+      } else {
+        if (value) {
+          return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        } else return item;
+      }
     });
 
     setItems(updateList);

@@ -17,6 +17,7 @@ import {
   NewArrival,
   Products,
   Search,
+  SearchCategory,
   SearchHome,
 } from "../atoms/Home";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -34,6 +35,8 @@ interface SearchTab {
   setValueArray: React.Dispatch<React.SetStateAction<string[]>>;
   index: number;
   setIndex: React.Dispatch<React.SetStateAction<number>>;
+  category: string;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
   navigation: {
     dispatch: (pushAction: any) => void;
   };
@@ -48,6 +51,8 @@ const SearchTab: React.FC<SearchTab> = ({
   setValueArray,
   index,
   setIndex,
+  category,
+  setCategory,
   ...props
 }) => {
   const navigation = props.navigation;
@@ -55,14 +60,16 @@ const SearchTab: React.FC<SearchTab> = ({
 
   useEffect(() => {
     setValue(valueArray[index]);
-  }, [modalVisible]);
+  }, [modalVisible, navigation]);
 
   return (
     <View style={{ flex: 1 }}>
       <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
         <Tab.Screen name="おすすめ" component={Products} />
         <Tab.Screen name="新着" component={NewArrival} />
-        <Tab.Screen name="カテゴリー" component={Category} />
+        <Tab.Screen name="カテゴリー">
+          {(props) => <Category setCategory={setCategory} {...props} />}
+        </Tab.Screen>
         <Tab.Screen name="保存した検索条件" component={Products} />
       </Tab.Navigator>
       <View>
@@ -145,8 +152,24 @@ const Home: React.FC<any> = (props) => {
   const [valueArray, setValueArray] = useState<string[]>([]);
   const [index, setIndex] = useState(-1);
 
+  const [category, setCategory] = useState("");
+
   const navigation = props.navigation;
   const popAction = StackActions.pop(1);
+
+  navigation.addListener("tabPress", () => {
+    setValue("");
+    setValueArray([]);
+    setCategory("");
+    setIndex(-1);
+
+    navigation.addListener("focus", () => {
+      setValue(value);
+      setValueArray(valueArray);
+      setCategory(category);
+      setIndex(index);
+    });
+  });
 
   return (
     <Stack.Navigator>
@@ -177,6 +200,8 @@ const Home: React.FC<any> = (props) => {
             setValueArray={setValueArray}
             index={index}
             setIndex={setIndex}
+            category={category}
+            setCategory={setCategory}
             {...props}
           />
         )}
@@ -220,7 +245,13 @@ const Home: React.FC<any> = (props) => {
               style={styles.input}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.searchText}>{valueArray[index]}</Text>
+              {category ? (
+                <Text
+                  style={styles.searchText}
+                >{`${valueArray[index]}, ${category}`}</Text>
+              ) : (
+                <Text style={styles.searchText}>{valueArray[index]}</Text>
+              )}
             </TouchableOpacity>
           ),
           headerBackTitleVisible: false,
@@ -240,12 +271,51 @@ const Home: React.FC<any> = (props) => {
               />
             </TouchableOpacity>
           ),
-          headerLeftContainerStyle: {
-            marginLeft: 30,
-          },
+          headerLeftContainerStyle: styles.headerLeft,
         }}
       >
-        {(props) => <SearchHome {...props} value={valueArray[index]} />}
+        {(props) => (
+          <SearchHome
+            {...props}
+            value={valueArray[index]}
+            category={category}
+          />
+        )}
+      </Stack.Screen>
+
+      <Stack.Screen
+        name="SearchCategory"
+        options={{
+          title: "",
+          headerBackTitleVisible: false,
+          headerTitle: () => (
+            <TouchableOpacity
+              style={styles.input}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.searchText}>{category}からさがす</Text>
+            </TouchableOpacity>
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.dispatch(popAction);
+                setCategory("");
+              }}
+            >
+              <Icon
+                name="angle-left"
+                size={40}
+                color="#ccc"
+                style={{ justifyContent: "center", alignItems: "center" }}
+              />
+            </TouchableOpacity>
+          ),
+          headerLeftContainerStyle: styles.headerLeft,
+          headerRightContainerStyle: styles.headerRight,
+        }}
+      >
+        {(props) => <SearchCategory category={category} {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

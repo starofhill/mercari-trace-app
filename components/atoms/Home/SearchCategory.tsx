@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
-import { Item, Store } from "../../../Interface";
+import { Store, Item } from "../../../Interface";
 
-const ByPrice: React.FC<{
-  order: string;
-  value: string;
-  category?: string;
-}> = ({ order, value, category }) => {
+const SearchCategory: React.FC<{ category: string }> = ({ category }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -28,35 +24,19 @@ const ByPrice: React.FC<{
   useEffect(() => {
     const updateList = list.filter((item) => {
       // カテゴリー
-      if (category) {
-        if (category === item.category) {
-          // 検索
-          if (value) {
-            return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-          } else return item;
-        }
-      } else {
-        // 検索
-        if (value) {
-          return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-        } else return item;
+      if (category && category === item.category) {
+        return item;
       }
     });
 
     setItems(updateList);
-  }, [value]);
+  }, [category]);
 
   return (
     <FlatList
-      data={
-        items
-          ? items.sort((a, b) =>
-              order === "ascending" ? a.price - b.price : b.price - a.price
-            )
-          : list
-      }
+      data={items}
       contentContainerStyle={styles.scrollView}
-      keyExtractor={(item: Item) => `products-${item.id}`}
+      keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (
         <View style={styles.imageBox}>
           <TouchableOpacity
@@ -80,9 +60,13 @@ const ByPrice: React.FC<{
   );
 };
 
-export default ByPrice;
+export default SearchCategory;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
   scrollView: {
     justifyContent: "center",
     alignItems: "center",
@@ -104,5 +88,23 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(30,30,30,0.8)",
     color: "white",
     padding: 3,
+  },
+  soldBox: {
+    position: "absolute",
+    margin: 5,
+    borderBottomColor: "transparent",
+    borderBottomWidth: 40,
+    borderLeftColor: "#FE0412",
+    borderLeftWidth: 40,
+  },
+  soldText: {
+    position: "absolute",
+    margin: 5,
+    top: 6,
+    left: 0,
+    transform: [{ rotate: "-45deg" }],
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 10,
   },
 });

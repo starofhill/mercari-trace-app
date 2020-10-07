@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
-const NewArrival: React.FC<{ value?: string }> = ({ value }) => {
+const NewArrival: React.FC<{ value?: string; category?: string }> = ({
+  value,
+  category,
+}) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -23,9 +26,20 @@ const NewArrival: React.FC<{ value?: string }> = ({ value }) => {
 
   useEffect(() => {
     const updateList = list.filter((item) => {
-      if (value) {
-        return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-      } else return item;
+      // カテゴリー
+      if (category) {
+        if (category === item.category) {
+          // 検索
+          if (value) {
+            return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+          } else return item;
+        }
+      } else {
+        // 検索
+        if (value) {
+          return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        } else return item;
+      }
     });
 
     setItems(updateList);

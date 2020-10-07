@@ -11,5 +11,6 @@ export { default as ProductHeaderButton } from "./ProductHeaderButton";
 export { default as Products } from "./Products";
 export { default as Purchase } from "./Purchase";
 export { default as Search } from "./Search";
+export { default as SearchCategory } from "./SearchCategory";
 export { default as SearchHome } from "./SearchHome";
 export { default as SearchScreen } from "./SearchScreen";

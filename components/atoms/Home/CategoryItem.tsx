@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation } from "@react-navigation/native";
 
 interface CategoryItem {
   color: string;
@@ -9,13 +10,20 @@ interface CategoryItem {
   size: number;
   category: string;
   category2?: string;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CategoryItem: React.FC<CategoryItem> = (props) => {
+  const { navigate } = useNavigation();
+
   return (
     <View style={styles.categoryBox}>
       <TouchableOpacity
         style={[styles.iconBox, { backgroundColor: props.color }]}
+        onPress={() => {
+          navigate("SearchCategory", [props.category]);
+          props.setCategory(props.category);
+        }}
       >
         <FontAwesome5 name={props.name} color="white" size={props.size} />
       </TouchableOpacity>

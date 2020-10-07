@@ -3,10 +3,12 @@ import { View, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { CategoryBox, CategoryItems } from ".";
 
-const Category: React.FC = () => {
+const Category: React.FC<{
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ setCategory }) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
-      <CategoryItems />
+      <CategoryItems setCategory={setCategory} />
       <View style={styles.boxes}>
         <CategoryBox title="レディース" />
         <CategoryBox title="メンズ" />
