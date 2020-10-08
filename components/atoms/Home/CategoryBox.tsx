@@ -6,7 +6,10 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useSelector } from "react-redux";
 import { Item, Store } from "../../../Interface";
 
-const CategoryBox: React.FC<{ title: string }> = ({ title }) => {
+const CategoryBox: React.FC<{
+  title: string;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ title, setCategory }) => {
   const { navigate } = useNavigation();
   const selector = useSelector((state: Store) => state);
   const products = selector.products;
@@ -16,7 +19,13 @@ const CategoryBox: React.FC<{ title: string }> = ({ title }) => {
     <View style={styles.box}>
       <View style={styles.boxTitle}>
         <Text style={styles.categoryTitle}>{title}</Text>
-        <TouchableOpacity style={styles.seeAll}>
+        <TouchableOpacity
+          style={styles.seeAll}
+          onPress={() => {
+            navigate("SearchCategory", [title]);
+            setCategory(title);
+          }}
+        >
           <Text style={styles.seeAllText}>すべて見る</Text>
           <FontAwesome name="angle-right" size={18} color="#6495ED" />
         </TouchableOpacity>

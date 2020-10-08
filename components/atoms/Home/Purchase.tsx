@@ -40,8 +40,11 @@ const Purchase: React.FC<Navigation> = (props) => {
       <ScrollView>
         <View style={styles.imageBox}>
           <Image
-            source={require("../../../assets/seigiman369_TP_V.jpg")}
+            source={{
+              uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
+            }}
             style={styles.image}
+            resizeMode="cover"
           />
           <View style={styles.title}>
             <Text>{productData.name}</Text>

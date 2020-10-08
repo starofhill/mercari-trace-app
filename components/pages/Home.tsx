@@ -294,7 +294,9 @@ const Home: React.FC<any> = (props) => {
               style={styles.input}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.searchText}>{category}からさがす</Text>
+              <Text style={styles.searchText}>
+                <Text style={{ fontWeight: "bold" }}>{category}</Text>からさがす
+              </Text>
             </TouchableOpacity>
           ),
           headerLeft: () => (

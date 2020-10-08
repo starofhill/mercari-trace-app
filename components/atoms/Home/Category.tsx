@@ -10,18 +10,24 @@ const Category: React.FC<{
     <ScrollView contentContainerStyle={styles.scrollView}>
       <CategoryItems setCategory={setCategory} />
       <View style={styles.boxes}>
-        <CategoryBox title="レディース" />
-        <CategoryBox title="メンズ" />
-        <CategoryBox title="ベビー・キッズ" />
-        <CategoryBox title="スマホ・タブレット" />
-        <CategoryBox title="本・メディア" />
-        <CategoryBox title="ゲーム" />
-        <CategoryBox title="おもちゃ・ホビー・グッズ" />
-        <CategoryBox title="コスメ・香水・美容" />
-        <CategoryBox title="スポーツ・レジャー" />
-        <CategoryBox title="家電・カメラ" />
-        <CategoryBox title="インテリア・住まい・小物" />
-        <CategoryBox title="自動車・オートバイ" />
+        <CategoryBox title="レディース" setCategory={setCategory} />
+        <CategoryBox title="メンズ" setCategory={setCategory} />
+        <CategoryBox title="ベビー・キッズ" setCategory={setCategory} />
+        <CategoryBox title="スマホ・タブレット" setCategory={setCategory} />
+        <CategoryBox title="本・メディア" setCategory={setCategory} />
+        <CategoryBox title="ゲーム" setCategory={setCategory} />
+        <CategoryBox
+          title="おもちゃ・ホビー・グッズ"
+          setCategory={setCategory}
+        />
+        <CategoryBox title="コスメ・香水・美容" setCategory={setCategory} />
+        <CategoryBox title="スポーツ・レジャー" setCategory={setCategory} />
+        <CategoryBox title="家電・カメラ" setCategory={setCategory} />
+        <CategoryBox
+          title="インテリア・住まい・小物"
+          setCategory={setCategory}
+        />
+        <CategoryBox title="自動車・オートバイ" setCategory={setCategory} />
       </View>
     </ScrollView>
   );
