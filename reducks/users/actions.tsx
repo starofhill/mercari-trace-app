@@ -1,11 +1,15 @@
-export const SIGN_IN = "SIGN_IN";
-export const signInAction = (userState) => {
+export const SIGN_IN_WITH_EMAIL = "SIGN_IN_WITH_EMAIL";
+export const signInWithEmailAction = (userState: {
+  isSignedIn: boolean;
+  uid: number;
+  name: string;
+}) => {
   return {
-    type: "SIGN_IN",
+    type: "SIGN_IN_WITH_EMAIL",
     payload: {
       isSignedIn: true,
       uid: userState.uid,
-      username: userState.username,
+      name: userState.name,
     },
   };
 };
@@ -17,7 +21,7 @@ export const signOutAction = () => {
     payload: {
       isSignedIn: false,
       uid: "",
-      username: "",
+      name: "",
     },
   };
 };

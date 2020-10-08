@@ -4,23 +4,38 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../../reducks/users/operations";
+import { Store } from "../../Interface";
 
 const MyPage: React.FC = () => {
   const { navigate } = useNavigation();
+  const dispatch = useDispatch();
+  const users = useSelector((state: Store) => state.users);
 
   return (
     <SafeAreaView>
       <ScrollView>
-        <TouchableOpacity
-          style={styles.container}
-          onPress={() => navigate("SignUp")}
-        >
-          <Image
-            source={require("../../assets/user_icon.png")}
-            style={styles.icon}
-          />
-          <Text style={styles.headerTitle}>会員情報・ログインへ</Text>
-        </TouchableOpacity>
+        {users.isSignedIn ? (
+          <TouchableOpacity style={styles.container}>
+            <Image
+              source={require("../../assets/user_icon.png")}
+              style={styles.icon}
+            />
+            <Text style={styles.headerTitle}>{users.name}</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.container}
+            onPress={() => navigate("SignUp")}
+          >
+            <Image
+              source={require("../../assets/user_icon.png")}
+              style={styles.icon}
+            />
+            <Text style={styles.headerTitle}>会員情報・ログインへ</Text>
+          </TouchableOpacity>
+        )}
         <View>
           <View style={styles.boxes}>
             <TouchableOpacity style={styles.box}>
@@ -74,6 +89,15 @@ const MyPage: React.FC = () => {
           <View style={styles.boxes}>
             <TouchableOpacity style={styles.box}>
               <Text>キャッシュを消去する</Text>
+              <Icon name="angle-right" size={24} color="#ccc" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.boxes}>
+            <TouchableOpacity
+              style={styles.box}
+              onPress={() => dispatch(signOut())}
+            >
+              <Text>ログアウト</Text>
               <Icon name="angle-right" size={24} color="#ccc" />
             </TouchableOpacity>
           </View>

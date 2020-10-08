@@ -6,10 +6,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { SignIn } from ".";
+import { SignInEmailInput } from "../atoms/SignIn";
+import { SignUpEmailInput } from "../atoms/SignUp";
 
 const Stack = createStackNavigator();
 
-function SignUp() {
+const SignUp: React.FC = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -39,7 +41,10 @@ function SignUp() {
             <Text style={styles.blackColor}>Googleで登録</Text>
             <Text></Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.box, styles.redBackgroundColor]}>
+          <TouchableOpacity
+            style={[styles.box, styles.redBackgroundColor]}
+            onPress={() => navigate("SignUpEmailInput")}
+          >
             <Icon name="envelope-o" size={24} color="white" />
             <Text style={styles.whiteColor}>メールアドレスで登録</Text>
             <Text></Text>
@@ -53,9 +58,9 @@ function SignUp() {
       </View>
     </SafeAreaView>
   );
-}
+};
 
-export default function () {
+const SignUpContainer: React.FC = () => {
   return (
     <Stack.Navigator mode="card">
       <Stack.Screen
@@ -74,9 +79,27 @@ export default function () {
           headerBackTitleVisible: false,
         }}
       />
+      <Stack.Screen
+        name="SignUpEmailInput"
+        component={SignUpEmailInput}
+        options={{
+          title: "会員登録",
+          headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="SignInEmailInput"
+        component={SignInEmailInput}
+        options={{
+          title: "ログイン",
+          headerBackTitleVisible: false,
+        }}
+      />
     </Stack.Navigator>
   );
-}
+};
+
+export default SignUpContainer;
 
 const styles = StyleSheet.create({
   component: {
