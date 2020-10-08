@@ -7,10 +7,10 @@ import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
 const ByPrice: React.FC<{
-  order: string;
   value: string;
-  category?: string;
-}> = ({ order, value, category }) => {
+  category: string;
+  order: string;
+}> = ({ value, category, order }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
