@@ -28,15 +28,19 @@ const CategorySelect: React.FC<{
             category="baby"
             setCategory={setCategory}
           />
-
           <SelectProductDetailsButton
-            categoryName="インテリア・住まい・小物"
-            category="interior"
+            categoryName="スマホ・タブレット"
+            category="smartphone"
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
-            categoryName="本・音楽・ゲーム"
+            categoryName="本・メディア"
             category="book"
+            setCategory={setCategory}
+          />
+          <SelectProductDetailsButton
+            categoryName="ゲーム"
+            category="game"
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
@@ -45,13 +49,18 @@ const CategorySelect: React.FC<{
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
-            categoryName="コスメ・香水・美容"
-            category="cosmetics"
+            categoryName="メルカリ公式・梱包グッズ"
+            category="mercariOfficialPacking Goods"
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
-            categoryName="家電・スマホ・カメラ"
-            category="appliances"
+            categoryName="タレントグッズ"
+            category="talentGoods"
+            setCategory={setCategory}
+          />
+          <SelectProductDetailsButton
+            categoryName="コスメ・香水・美容"
+            category="cosmetics"
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
@@ -60,8 +69,18 @@ const CategorySelect: React.FC<{
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
-            categoryName="ハンドメイド"
-            category="handmade"
+            categoryName="家電・カメラ"
+            category="appliances"
+            setCategory={setCategory}
+          />
+          <SelectProductDetailsButton
+            categoryName="インテリア・住まい・小物"
+            category="interior"
+            setCategory={setCategory}
+          />
+          <SelectProductDetailsButton
+            categoryName="自動車・オートバイ"
+            category="car"
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
@@ -70,8 +89,8 @@ const CategorySelect: React.FC<{
             setCategory={setCategory}
           />
           <SelectProductDetailsButton
-            categoryName="自動車・オートバイ"
-            category="car"
+            categoryName="メルカリ寄付"
+            category="mercariDonation"
             setCategory={setCategory}
           />
           <SelectProductDetailsButton

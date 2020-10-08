@@ -22,7 +22,11 @@ const CategoryItem: React.FC<CategoryItem> = (props) => {
         style={[styles.iconBox, { backgroundColor: props.color }]}
         onPress={() => {
           navigate("SearchCategory", [props.category]);
-          props.setCategory(props.category);
+          {
+            props.category2
+              ? props.setCategory(props.category + "・" + props.category2)
+              : props.setCategory(props.category);
+          }
         }}
       >
         <FontAwesome5 name={props.name} color="white" size={props.size} />

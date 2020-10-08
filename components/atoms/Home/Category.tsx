@@ -13,8 +13,15 @@ const Category: React.FC<{
         <CategoryBox title="レディース" />
         <CategoryBox title="メンズ" />
         <CategoryBox title="ベビー・キッズ" />
+        <CategoryBox title="スマホ・タブレット" />
+        <CategoryBox title="本・メディア" />
+        <CategoryBox title="ゲーム" />
+        <CategoryBox title="おもちゃ・ホビー・グッズ" />
+        <CategoryBox title="コスメ・香水・美容" />
+        <CategoryBox title="スポーツ・レジャー" />
+        <CategoryBox title="家電・カメラ" />
         <CategoryBox title="インテリア・住まい・小物" />
-        <CategoryBox title="本・音楽・ゲーム" />
+        <CategoryBox title="自動車・オートバイ" />
       </View>
     </ScrollView>
   );
