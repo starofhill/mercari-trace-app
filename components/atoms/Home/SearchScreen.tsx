@@ -5,6 +5,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
+import { CheckBox } from "react-native-elements";
 
 const SearchScreen: React.FC<{
   value: string;
@@ -20,6 +21,7 @@ const SearchScreen: React.FC<{
   const list = products.list;
 
   const [items, setItems] = useState<Item[]>();
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -44,50 +46,65 @@ const SearchScreen: React.FC<{
   }, [value]);
 
   return (
-    <FlatList
-      data={
-        items
-          ? order === "ascending"
-            ? items.sort((a, b) => a.price - b.price)
-            : order === "descending"
-            ? items.sort((a, b) => b.price - a.price)
-            : order === "newArrival"
-            ? items.sort((a, b) => b.created_at.localeCompare(a.created_at))
-            : items
-          : list.sort((a, b) => a.id - b.id)
-      }
-      contentContainerStyle={styles.scrollView}
-      keyExtractor={(item) => `products-${item.id}`}
-      renderItem={({ item }) => (
-        <View style={styles.imageBox}>
-          <TouchableOpacity
-            onPress={() => {
-              navigate("Product", { ...item });
-            }}
-          >
-            <Image
-              source={{
-                uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+    <View style={styles.container}>
+      <CheckBox
+        title="販売中のみ表示"
+        checked={toggleCheckBox}
+        onPress={() => setToggleCheckBox(!toggleCheckBox)}
+        containerStyle={{
+          backgroundColor: "white",
+          width: 150,
+          borderWidth: 0,
+        }}
+        textStyle={{ fontWeight: "normal" }}
+      />
+      <FlatList
+        data={
+          items
+            ? order === "ascending"
+              ? items.sort((a, b) => a.price - b.price)
+              : order === "descending"
+              ? items.sort((a, b) => b.price - a.price)
+              : order === "newArrival"
+              ? items.sort((a, b) => b.created_at.localeCompare(a.created_at))
+              : items
+            : list.sort((a, b) => a.id - b.id)
+        }
+        contentContainerStyle={styles.scrollView}
+        keyExtractor={(item) => `products-${item.id}`}
+        renderItem={({ item }) => (
+          <View style={styles.imageBox}>
+            <TouchableOpacity
+              onPress={() => {
+                navigate("Product", { ...item });
               }}
-              style={styles.image}
-              resizeMode="cover"
-            />
-            <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      numColumns={3}
-    />
+            >
+              <Image
+                source={{
+                  uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+                }}
+                style={styles.image}
+                resizeMode="cover"
+              />
+              <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        numColumns={3}
+      />
+    </View>
   );
 };
 
 export default SearchScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+  },
   scrollView: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
   },
   imageBox: {
     position: "relative",
