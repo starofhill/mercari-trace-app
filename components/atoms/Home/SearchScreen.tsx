@@ -6,10 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 
-const SearchScreen: React.FC<{ value: string; category?: string }> = ({
-  value,
-  category,
-}) => {
+const SearchScreen: React.FC<{
+  value: string;
+  order?: string;
+  category?: string;
+}> = ({ value, order, category }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -44,7 +45,17 @@ const SearchScreen: React.FC<{ value: string; category?: string }> = ({
 
   return (
     <FlatList
-      data={items}
+      data={
+        items
+          ? order === "ascending"
+            ? items.sort((a, b) => a.price - b.price)
+            : order === "descending"
+            ? items.sort((a, b) => b.price - a.price)
+            : order === "newArrival"
+            ? items.sort((a, b) => b.created_at.localeCompare(a.created_at))
+            : items
+          : list.sort((a, b) => a.id - b.id)
+      }
       contentContainerStyle={styles.scrollView}
       keyExtractor={(item) => `products-${item.id}`}
       renderItem={({ item }) => (

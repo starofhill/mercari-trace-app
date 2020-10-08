@@ -1,6 +1,6 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { NewArrival, SearchScreen, ByPrice } from ".";
+import { SearchScreen } from ".";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -17,7 +17,7 @@ const SearchHome: React.FC<{ value: string; category: string }> = ({
       </Tab.Screen>
       <Tab.Screen name="価格の安い順">
         {(props) => (
-          <ByPrice
+          <SearchScreen
             {...props}
             value={value}
             order="ascending"
@@ -27,7 +27,7 @@ const SearchHome: React.FC<{ value: string; category: string }> = ({
       </Tab.Screen>
       <Tab.Screen name="価格の高い順">
         {(props) => (
-          <ByPrice
+          <SearchScreen
             {...props}
             value={value}
             order="descending"
@@ -41,7 +41,14 @@ const SearchHome: React.FC<{ value: string; category: string }> = ({
         )}
       </Tab.Screen>
       <Tab.Screen name="新しい順">
-        {(props) => <NewArrival {...props} value={value} category={category} />}
+        {(props) => (
+          <SearchScreen
+            {...props}
+            value={value}
+            category={category}
+            order="newArrival"
+          />
+        )}
       </Tab.Screen>
     </Tab.Navigator>
   );

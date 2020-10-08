@@ -14,7 +14,6 @@ import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
   Category,
-  NewArrival,
   Products,
   Search,
   SearchCategory,
@@ -66,7 +65,9 @@ const SearchTab: React.FC<SearchTab> = ({
     <View style={{ flex: 1 }}>
       <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
         <Tab.Screen name="おすすめ" component={Products} />
-        <Tab.Screen name="新着" component={NewArrival} />
+        <Tab.Screen name="新着">
+          {() => <Products order="newArrival" />}
+        </Tab.Screen>
         <Tab.Screen name="カテゴリー">
           {(props) => <Category setCategory={setCategory} {...props} />}
         </Tab.Screen>

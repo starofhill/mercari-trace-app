@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Store } from "../../../Interface";
 
-const Products: React.FC = () => {
+const Products: React.FC<{ order?: string }> = ({ order }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
@@ -29,7 +29,11 @@ const Products: React.FC = () => {
     <View style={styles.container}>
       {!loading ? (
         <FlatList
-          data={list.sort((a, b) => a.id - b.id)}
+          data={
+            order === "newArrival"
+              ? list.sort((a, b) => b.created_at.localeCompare(a.created_at))
+              : list.sort((a, b) => a.id - b.id)
+          }
           contentContainerStyle={styles.scrollView}
           keyExtractor={(item) => `products-${item.id}`}
           renderItem={({ item }) => (
