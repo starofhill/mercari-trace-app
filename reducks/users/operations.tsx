@@ -8,7 +8,7 @@ export const signUpWithEmail = (
   name: string,
   navigate: (nav: string) => void
 ) => {
-  return async (dispatch: (a: any) => void) => {
+  return async (dispatch: (a: unknown) => void) => {
     // Validation
     if (name === "" || email === "" || password === "") {
       Alert.alert("必須項目が未入力です");
@@ -55,7 +55,7 @@ export const signUpWithEmail = (
         Alert.alert("会員登録できました。", "", [
           {
             text: "OK",
-            onPress: () => navigate("App"),
+            onPress: () => navigate("BottomTabNavigation"),
           },
         ]);
         console.log(res);
@@ -100,7 +100,7 @@ export const signInWithEmail = (
         Alert.alert("ログインしました。", "", [
           {
             text: "OK",
-            onPress: () => navigate!("App"),
+            onPress: () => navigate!("BottomTabNavigation"),
           },
         ]);
       })
@@ -112,7 +112,7 @@ export const signInWithEmail = (
 };
 
 export const signOut = () => {
-  return async (dispatch: (a: any) => void) => {
+  return async (dispatch: (a: unknown) => void) => {
     Alert.alert("確認", "ログアウトしますか?", [
       {
         text: "はい",

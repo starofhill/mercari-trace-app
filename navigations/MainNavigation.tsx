@@ -9,7 +9,7 @@ import {
   EnterProductInformation,
   ProductConditionSelect,
 } from "../components/atoms/Listing";
-import { Product, Purchase } from "../components/atoms/Home";
+import { CommentContainer, Product, Purchase } from "../components/atoms/Home";
 import { BottomTabNavigation } from ".";
 
 export const store = createStore();
@@ -22,7 +22,7 @@ const MainNavigation: React.FC = () => {
       <NavigationContainer>
         <Stack.Navigator mode="card" headerMode="screen">
           <Stack.Screen
-            name="App"
+            name="BottomTabNavigation"
             component={BottomTabNavigation}
             options={{
               headerShown: false,
@@ -70,6 +70,14 @@ const MainNavigation: React.FC = () => {
             component={ProductConditionSelect}
             options={{
               title: "商品の状態",
+              headerBackTitleVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="CommentContainer"
+            component={CommentContainer}
+            options={{
+              title: "コメント",
               headerBackTitleVisible: false,
             }}
           />

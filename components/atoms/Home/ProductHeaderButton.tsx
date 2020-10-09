@@ -10,7 +10,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { StackActions } from "@react-navigation/native";
 
 const ProductHeaderButton: React.FC<{
-  navigation: { dispatch: ({}) => void };
+  navigation: { dispatch: (action: unknown) => void };
   name: string;
 }> = ({ navigation, name }) => {
   const popAction = StackActions.pop(1);
@@ -30,7 +30,7 @@ const ProductHeaderButton: React.FC<{
         <Text style={styles.headerTitle} numberOfLines={1}>
           {name}
         </Text>
-        <View style={styles.headerSide}></View>
+        <View style={styles.headerSide} />
       </View>
     </View>
   );

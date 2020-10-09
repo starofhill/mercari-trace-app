@@ -1,19 +1,12 @@
 import React from "react";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  SafeAreaView,
-} from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { onDelete, ProductFooterButton, ProductHeaderButton } from ".";
-import { Navigation } from "../../../Interface";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import Swiper from "react-native-swiper";
+import { Navigation } from "../../../Interface";
+import { onDelete, ProductFooterButton, ProductHeaderButton } from ".";
 
 const sellerData = {
   name: "りゅう",
@@ -24,23 +17,23 @@ const Product: React.FC<Navigation> = (props) => {
   // 商品情報を取得
   const productData = props.route.params;
 
-  let starIcon = [];
-  for (var i = 0; i < sellerData.starNumber; i++) {
-    starIcon.push(<Icon name="star" size={18} color="#FFCC00" key={i}></Icon>);
+  const starIcon = [];
+  for (let i = 0; i < sellerData.starNumber; i += 1) {
+    starIcon.push(<Icon name="star" size={18} color="#FFCC00" key={i} />);
   }
 
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
 
   return (
-    <View style={{ backgroundColor: "white", height: "100%" }}>
+    <View style={styles.productContainer}>
       <ProductHeaderButton
         name={productData.name}
         navigation={props.navigation}
       />
       <ProductFooterButton productData={productData} />
       <ScrollView style={{ backgroundColor: "#eee" }}>
-        <Swiper style={styles.wrapper} showsButtons={true}>
+        <Swiper style={styles.wrapper} showsButtons>
           <Image
             source={{
               uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
@@ -166,7 +159,10 @@ const Product: React.FC<Navigation> = (props) => {
         </View>
 
         <View>
-          <TouchableOpacity style={styles.doComment}>
+          <TouchableOpacity
+            style={styles.doComment}
+            onPress={() => navigate("CommentContainer", productData)}
+          >
             <Icon name="comment-o" size={24} />
             <Text>コメントする</Text>
           </TouchableOpacity>
@@ -179,6 +175,7 @@ const Product: React.FC<Navigation> = (props) => {
 export default Product;
 
 const styles = StyleSheet.create({
+  productContainer: { backgroundColor: "white", height: "100%" },
   main: {
     backgroundColor: "white",
     padding: 16,

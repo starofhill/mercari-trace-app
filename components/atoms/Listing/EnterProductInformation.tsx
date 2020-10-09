@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import {
   ScrollView,
   TextInput,
@@ -8,11 +8,10 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../../reducks/products/operations";
+import { addProduct } from "../../../reducks/products/operations";
 import { Store } from "../../../Interface";
-import { ExpoImagePicker, ModalItems, Validation } from ".";
+import { ExpoImagePicker, ModalItems } from ".";
 
 const EnterProductInformation: React.FC = () => {
   const [name, setName] = useState("");
@@ -65,64 +64,6 @@ const EnterProductInformation: React.FC = () => {
       setImage(img);
       setSendImage(sendImg);
     }
-  };
-
-  const addProduct = async () => {
-    // バリデーション
-    if (
-      !Validation(
-        image,
-        name,
-        description,
-        category,
-        condition,
-        price as number
-      )
-    ) {
-      return;
-    }
-
-    const product = {
-      product: {
-        name,
-        description,
-        price,
-        image: `data:image/jpg;base64,${sendImage[0]}`,
-        status,
-        category,
-        condition,
-      },
-    };
-
-    await axios
-      .post(
-        "https://mercari-trace-server.herokuapp.com/api/v1/products/",
-        product,
-        {
-          headers: {
-            "access-token": users.headers.accessToken,
-            client: users.headers.client,
-            uid: users.headers.uid,
-          },
-        }
-      )
-      .then(() => {
-        dispatch(fetchProducts());
-        navigate("App");
-      })
-      .catch(() => {
-        Alert.alert(
-          "出品できませんでした。",
-          "",
-          [
-            {
-              text: "OK",
-            },
-          ],
-          { cancelable: false }
-        );
-        return false;
-      });
   };
 
   return (
@@ -261,7 +202,25 @@ const EnterProductInformation: React.FC = () => {
         </View>
       </View>
       <View style={[styles.box, styles.buttonBox]}>
-        <TouchableOpacity style={styles.button} onPress={addProduct}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            dispatch(
+              addProduct(
+                image,
+                name,
+                description,
+                category,
+                condition,
+                price as number,
+                sendImage,
+                status,
+                users,
+                navigate
+              )
+            )
+          }
+        >
           <Text style={styles.buttonText}>出品する</Text>
         </TouchableOpacity>
         <Text>or</Text>

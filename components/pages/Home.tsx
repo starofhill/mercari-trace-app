@@ -155,8 +155,6 @@ const Home: React.FC<any> = (props) => {
 
   const [category, setCategory] = useState("");
 
-  console.log(category, value);
-
   const navigation = props.navigation;
   const popAction = StackActions.pop(1);
 

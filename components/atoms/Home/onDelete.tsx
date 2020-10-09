@@ -5,7 +5,7 @@ import { fetchProducts } from "../../../reducks/products/operations";
 const onDelete = (
   id: number,
   navigate: (Component: string) => void,
-  dispatch: (dispatch: any) => void
+  dispatch: (dispatch: any) => Promise<void>
 ) => {
   Alert.alert(
     "確認",
@@ -24,7 +24,7 @@ const onDelete = (
             )
             .then(() => {
               dispatch(fetchProducts());
-              navigate("App");
+              navigate("BottomTabNavigation");
             });
         },
       },
