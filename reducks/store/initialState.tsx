@@ -7,6 +7,11 @@ const initialState = {
     isSignedIn: false,
     uid: "",
     name: "",
+    headers: {
+      accessToken: "",
+      client: "",
+      uid: "",
+    },
   },
 };
 export default initialState;

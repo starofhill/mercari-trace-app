@@ -93,13 +93,15 @@ const MyPage: React.FC = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.boxes}>
-            <TouchableOpacity
-              style={styles.box}
-              onPress={() => dispatch(signOut())}
-            >
-              <Text>ログアウト</Text>
-              <Icon name="angle-right" size={24} color="#ccc" />
-            </TouchableOpacity>
+            {users.isSignedIn && (
+              <TouchableOpacity
+                style={styles.box}
+                onPress={() => dispatch(signOut())}
+              >
+                <Text>ログアウト</Text>
+                <Icon name="angle-right" size={24} color="#ccc" />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </ScrollView>

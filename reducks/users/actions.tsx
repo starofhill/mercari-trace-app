@@ -1,15 +1,27 @@
 export const SIGN_IN_WITH_EMAIL = "SIGN_IN_WITH_EMAIL";
-export const signInWithEmailAction = (userState: {
+interface userState {
   isSignedIn: boolean;
   uid: number;
   name: string;
-}) => {
+  headers: {
+    accessToken: string;
+    client: string;
+    uid: string;
+  };
+}
+
+export const signInWithEmailAction = (userState: userState) => {
   return {
     type: "SIGN_IN_WITH_EMAIL",
     payload: {
       isSignedIn: true,
       uid: userState.uid,
       name: userState.name,
+    },
+    headers: {
+      accessToken: userState.headers.accessToken,
+      client: userState.headers.client,
+      uid: userState.headers.uid,
     },
   };
 };

@@ -3,6 +3,21 @@ import { View, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { CategoryBox, CategoryItems } from ".";
 
+const categories = [
+  "レディース",
+  "メンズ",
+  "ベビー・キッズ",
+  "スマホ・タブレット",
+  "本・メディア",
+  "ゲーム",
+  "おもちゃ・ホビー・グッズ",
+  "コスメ・香水・美容",
+  "スポーツ・レジャー",
+  "家電・カメラ",
+  "インテリア・住まい・小物",
+  "自動車・オートバイ",
+];
+
 const Category: React.FC<{
   setCategory: React.Dispatch<React.SetStateAction<string>>;
 }> = ({ setCategory }) => {
@@ -10,24 +25,13 @@ const Category: React.FC<{
     <ScrollView contentContainerStyle={styles.scrollView}>
       <CategoryItems setCategory={setCategory} />
       <View style={styles.boxes}>
-        <CategoryBox title="レディース" setCategory={setCategory} />
-        <CategoryBox title="メンズ" setCategory={setCategory} />
-        <CategoryBox title="ベビー・キッズ" setCategory={setCategory} />
-        <CategoryBox title="スマホ・タブレット" setCategory={setCategory} />
-        <CategoryBox title="本・メディア" setCategory={setCategory} />
-        <CategoryBox title="ゲーム" setCategory={setCategory} />
-        <CategoryBox
-          title="おもちゃ・ホビー・グッズ"
-          setCategory={setCategory}
-        />
-        <CategoryBox title="コスメ・香水・美容" setCategory={setCategory} />
-        <CategoryBox title="スポーツ・レジャー" setCategory={setCategory} />
-        <CategoryBox title="家電・カメラ" setCategory={setCategory} />
-        <CategoryBox
-          title="インテリア・住まい・小物"
-          setCategory={setCategory}
-        />
-        <CategoryBox title="自動車・オートバイ" setCategory={setCategory} />
+        {categories.map((category, categoryNumber) => (
+          <CategoryBox
+            title={category}
+            setCategory={setCategory}
+            key={categoryNumber.toString()}
+          />
+        ))}
       </View>
     </ScrollView>
   );

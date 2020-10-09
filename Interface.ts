@@ -1,8 +1,9 @@
+/* eslint-disable camelcase */
 export interface Item {
   created_at: string;
   description: string;
   id: number;
-  image_url: string | null;
+  image_url: string;
   price: number;
   name: string;
   updated_at: string;
@@ -20,10 +21,15 @@ export interface Item {
 }
 
 export interface Products {
-  list: [item: Item];
+  list: Item[];
 }
 
 export interface Users {
+  headers: {
+    accessToken: string;
+    client: string;
+    uid: string;
+  };
   isSignedIn: boolean;
   uid: string;
   name: string;
@@ -36,7 +42,7 @@ export interface Store {
 
 export interface Navigation {
   navigation: {
-    dispatch: (pushAction: any) => void;
+    dispatch: (pushAction: unknown) => void;
   };
   route: {
     params: Item;

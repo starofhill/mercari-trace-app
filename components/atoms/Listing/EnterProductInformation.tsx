@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import {
   ScrollView,
   TextInput,
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ExpoImagePicker, ModalItems, Validation } from ".";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
+import { Store } from "../../../Interface";
+import { ExpoImagePicker, ModalItems, Validation } from ".";
 
 const EnterProductInformation: React.FC = () => {
   const [name, setName] = useState("");
@@ -19,17 +20,38 @@ const EnterProductInformation: React.FC = () => {
   const [image, setImage] = useState<string[]>([]);
   const [sendImage, setSendImage] = useState<string[]>([]);
   const [price, setPrice] = useState<number>();
-  const [status, setStatus] = useState("sale");
+  const [status] = useState("sale");
   const [condition, setCondition] = useState("");
   const [category, setCategory] = useState("");
 
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
+  const users = useSelector((state: Store) => state.users);
 
   // カメラを起動
-  const _takePhoto = async () => {
-    let result = await ImagePicker.launchCameraAsync({
+  const takePhoto = async () => {
+    const result = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
+      base64: true,
+    });
+
+    const img = image.slice();
+    const sendImg = sendImage.slice();
+
+    if (!result.cancelled) {
+      img.push(result.uri);
+      sendImg.push(result.base64!);
+
+      setImage(img);
+      setSendImage(sendImg);
+    }
+  };
+
+  // カメラロールから選択
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [16, 9],
       base64: true,
     });
 
@@ -62,50 +84,52 @@ const EnterProductInformation: React.FC = () => {
 
     const product = {
       product: {
-        name: name,
-        description: description,
-        price: price,
+        name,
+        description,
+        price,
         image: `data:image/jpg;base64,${sendImage[0]}`,
-        status: status,
-        category: category,
-        condition: condition,
+        status,
+        category,
+        condition,
       },
     };
 
-    await axios.post(
-      "https://mercari-trace-server.herokuapp.com/api/v1/products/",
-      product
-    );
-
-    dispatch(fetchProducts());
-    navigate("App");
-  };
-
-  // カメラロールから選択
-  const _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [16, 9],
-      base64: true,
-    });
-
-    const img = image.slice();
-    const sendImg = sendImage.slice();
-
-    if (!result.cancelled) {
-      img.push(result.uri);
-      sendImg.push(result.base64!);
-
-      setImage(img);
-      setSendImage(sendImg);
-    }
+    await axios
+      .post(
+        "https://mercari-trace-server.herokuapp.com/api/v1/products/",
+        product,
+        {
+          headers: {
+            "access-token": users.headers.accessToken,
+            client: users.headers.client,
+            uid: users.headers.uid,
+          },
+        }
+      )
+      .then(() => {
+        dispatch(fetchProducts());
+        navigate("App");
+      })
+      .catch(() => {
+        Alert.alert(
+          "出品できませんでした。",
+          "",
+          [
+            {
+              text: "OK",
+            },
+          ],
+          { cancelable: false }
+        );
+        return false;
+      });
   };
 
   return (
     <ScrollView style={styles.container}>
-      <ModalItems _takePhoto={_takePhoto} _pickImage={_pickImage} />
+      <ModalItems takePhoto={takePhoto} pickImage={pickImage} />
 
-      <ExpoImagePicker _takePhoto={_takePhoto} image={image} />
+      <ExpoImagePicker takePhoto={takePhoto} image={image} />
 
       <View style={styles.box}>
         <Text style={styles.boxTitle}>商品の詳細</Text>
@@ -163,7 +187,7 @@ const EnterProductInformation: React.FC = () => {
             onChangeText={(newValue) => {
               setDescription(newValue);
             }}
-            multiline={true}
+            multiline
             placeholder="商品の説明(任意 1000文字以内)"
             maxLength={1000}
           />

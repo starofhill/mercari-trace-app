@@ -4,8 +4,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const ModalItems: React.FC<{
-  _takePhoto: () => void;
-  _pickImage: () => void;
+  takePhoto: () => void;
+  pickImage: () => void;
 }> = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -30,7 +30,7 @@ const ModalItems: React.FC<{
             <View style={styles.modalCard}>
               <TouchableOpacity
                 style={styles.openButton}
-                onPress={() => props._takePhoto()}
+                onPress={() => props.takePhoto()}
               >
                 <View style={styles.modalBox}>
                   <Icon name="camera" size={24} />
@@ -39,7 +39,7 @@ const ModalItems: React.FC<{
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.openButton}
-                onPress={() => props._pickImage()}
+                onPress={() => props.pickImage()}
               >
                 <View style={styles.modalBox}>
                   <Icon name="photo" size={24} />

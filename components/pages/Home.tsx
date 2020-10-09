@@ -12,6 +12,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { StackActions } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Category,
   Products,
@@ -19,8 +21,6 @@ import {
   SearchCategory,
   SearchHome,
 } from "../atoms/Home";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StackActions } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -76,7 +76,7 @@ const SearchTab: React.FC<SearchTab> = ({
       <View>
         <Modal
           animationType="fade"
-          transparent={true}
+          transparent
           visible={modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
@@ -154,6 +154,8 @@ const Home: React.FC<any> = (props) => {
   const [index, setIndex] = useState(-1);
 
   const [category, setCategory] = useState("");
+
+  console.log(category, value);
 
   const navigation = props.navigation;
   const popAction = StackActions.pop(1);

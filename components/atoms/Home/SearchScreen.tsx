@@ -1,49 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../../../reducks/products/operations";
-import { Item, Store } from "../../../Interface";
 import { CheckBox } from "react-native-elements";
+import { Item } from "../../../Interface";
 
-const SearchScreen: React.FC<{
-  value: string;
-  order?: string;
-  category?: string;
-}> = ({ value, order, category }) => {
+interface SearchScreen {
+  list: Item[];
+}
+
+const SearchScreen: React.FC<SearchScreen> = ({ list }) => {
   const { navigate } = useNavigation();
 
-  const selector = useSelector((state: Store) => state);
-  const dispatch = useDispatch();
-
-  const products = selector.products;
-  const list = products.list;
-
-  const [items, setItems] = useState<Item[]>();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-
-  useEffect(() => {
-    const updateList = list.filter((item) => {
-      if (category) {
-        if (category === item.category) {
-          if (value) {
-            return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-          } else return item;
-        }
-      } else {
-        if (value) {
-          return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-        } else return item;
-      }
-    });
-
-    setItems(updateList);
-  }, [value]);
 
   return (
     <View style={styles.container}>
@@ -51,25 +20,11 @@ const SearchScreen: React.FC<{
         title="販売中のみ表示"
         checked={toggleCheckBox}
         onPress={() => setToggleCheckBox(!toggleCheckBox)}
-        containerStyle={{
-          backgroundColor: "white",
-          width: 150,
-          borderWidth: 0,
-        }}
-        textStyle={{ fontWeight: "normal" }}
+        containerStyle={styles.checkboxContainer}
+        textStyle={styles.checkboxText}
       />
       <FlatList
-        data={
-          items
-            ? order === "ascending"
-              ? items.sort((a, b) => a.price - b.price)
-              : order === "descending"
-              ? items.sort((a, b) => b.price - a.price)
-              : order === "newArrival"
-              ? items.sort((a, b) => b.created_at.localeCompare(a.created_at))
-              : items
-            : list.sort((a, b) => a.id - b.id)
-        }
+        data={list}
         contentContainerStyle={styles.scrollView}
         keyExtractor={(item) => `products-${item.id}`}
         renderItem={({ item }) => (
@@ -81,7 +36,7 @@ const SearchScreen: React.FC<{
             >
               <Image
                 source={{
-                  uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+                  uri: encodeURI(item.image_url.replace(/&/g, "%26")),
                 }}
                 style={styles.image}
                 resizeMode="cover"
@@ -101,6 +56,14 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
+  },
+  checkboxContainer: {
+    backgroundColor: "white",
+    width: 150,
+    borderWidth: 0,
+  },
+  checkboxText: {
+    fontWeight: "normal",
   },
   scrollView: {
     justifyContent: "center",

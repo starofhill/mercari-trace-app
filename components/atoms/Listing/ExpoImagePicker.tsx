@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const ExpoImagePicker: React.FC<{ image: string[]; _takePhoto: () => void }> = (
-  props
-) => {
+interface ExpoImagePicker {
+  image: string[];
+  takePhoto: () => void;
+}
+const ExpoImagePicker: React.FC<ExpoImagePicker> = (props) => {
   const data = [
     { id: 0, name: "camera", text: "(必須)" },
     { id: 1, name: "camera" },
@@ -34,7 +36,7 @@ const ExpoImagePicker: React.FC<{ image: string[]; _takePhoto: () => void }> = (
                 // 1個目
                 <TouchableOpacity
                   style={styles.imageBox}
-                  onPress={() => props._takePhoto()}
+                  onPress={() => props.takePhoto()}
                 >
                   <Text style={styles.imageNumber}>{item.id + 1}</Text>
                   <Icon name={item.name} size={20} />
@@ -44,7 +46,7 @@ const ExpoImagePicker: React.FC<{ image: string[]; _takePhoto: () => void }> = (
                 // 1個目以外 & 1つ前に画像あり
                 <TouchableOpacity
                   style={styles.imageBox}
-                  onPress={() => props._takePhoto()}
+                  onPress={() => props.takePhoto()}
                 >
                   <Text style={styles.imageNumber}>{item.id + 1}</Text>
                   <Icon name={item.name} size={20} color="#ccc" />

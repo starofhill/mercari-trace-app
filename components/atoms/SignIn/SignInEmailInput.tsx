@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { signInWithEmail } from "../../../reducks/users/operations";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmail } from "../../../reducks/users/operations";
 
 const SignInEmailInput: React.FC = () => {
   const dispatch = useDispatch();

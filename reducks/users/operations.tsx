@@ -6,7 +6,7 @@ export const signUpWithEmail = (
   email: string,
   password: string,
   name: string,
-  navigate: (name: string) => void
+  navigate: (nav: string) => void
 ) => {
   return async (dispatch: (a: any) => void) => {
     // Validation
@@ -35,9 +35,9 @@ export const signUpWithEmail = (
 
     return axios
       .post("https://mercari-trace-server.herokuapp.com/api/v1/auth/", {
-        name: name,
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
       })
       .then((res) => {
         dispatch(
@@ -45,6 +45,11 @@ export const signUpWithEmail = (
             isSignedIn: true,
             uid: res.data.data.id,
             name: res.data.data.name,
+            headers: {
+              accessToken: res.headers["access-token"],
+              client: res.headers.client,
+              uid: res.headers.uid,
+            },
           })
         );
         Alert.alert("会員登録できました。", "", [
@@ -65,7 +70,7 @@ export const signUpWithEmail = (
 export const signInWithEmail = (
   email: string,
   password: string,
-  navigate: (name: string) => void
+  navigate: (nav: string) => void
 ) => {
   return async (dispatch: (a: any) => void) => {
     // Validation
@@ -76,8 +81,8 @@ export const signInWithEmail = (
 
     axios
       .post("https://mercari-trace-server.herokuapp.com/api/v1/auth/sign_in/", {
-        email: email,
-        password: password,
+        email,
+        password,
       })
       .then((res) => {
         dispatch(
@@ -85,6 +90,11 @@ export const signInWithEmail = (
             isSignedIn: true,
             uid: res.data.data.id,
             name: res.data.data.name,
+            headers: {
+              accessToken: res.headers["access-token"],
+              client: res.headers.client,
+              uid: res.headers.uid,
+            },
           })
         );
         Alert.alert("ログインしました。", "", [
@@ -93,7 +103,6 @@ export const signInWithEmail = (
             onPress: () => navigate!("App"),
           },
         ]);
-        console.log(res);
       })
       .catch((err) => {
         Alert.alert("ログイン失敗です。\nもう一度やり直してください。");
