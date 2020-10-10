@@ -55,7 +55,9 @@ const SearchHome: React.FC<SearchHome> = ({ value, category }) => {
       }
       // value
       if (value) {
-        result = item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        result =
+          item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
+          item.description.toLowerCase().indexOf(value.toLowerCase()) !== -1;
       }
       return result;
     });
