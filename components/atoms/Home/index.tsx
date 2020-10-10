@@ -4,7 +4,6 @@ export { default as CategoryItem } from "./CategoryItem";
 export { default as CategoryItems } from "./CategoryItems";
 export { default as CommentBox } from "./CommentBox";
 export { default as CommentContainer } from "./CommentContainer";
-export { default as onDelete } from "./onDelete";
 export { default as Product } from "./Product";
 export { default as ProductFooterButton } from "./ProductFooterButton";
 export { default as ProductHeaderButton } from "./ProductHeaderButton";

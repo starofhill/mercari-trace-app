@@ -3,10 +3,11 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swiper from "react-native-swiper";
-import { Navigation } from "../../../Interface";
-import { onDelete, ProductFooterButton, ProductHeaderButton } from ".";
+import { Navigation, Store } from "../../../Interface";
+import { ProductFooterButton, ProductHeaderButton } from ".";
+import { deleteProduct } from "../../../reducks/products/operations";
 
 const sellerData = {
   name: "りゅう",
@@ -25,6 +26,8 @@ const Product: React.FC<Navigation> = (props) => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
 
+  const users = useSelector((state: Store) => state.users);
+
   return (
     <View style={styles.productContainer}>
       <ProductHeaderButton
@@ -32,7 +35,7 @@ const Product: React.FC<Navigation> = (props) => {
         navigation={props.navigation}
       />
       <ProductFooterButton productData={productData} />
-      <ScrollView style={{ backgroundColor: "#eee" }}>
+      <ScrollView style={styles.productScrollView}>
         <Swiper style={styles.wrapper} showsButtons>
           <>
             {productData.status === "sale" && (
@@ -160,7 +163,9 @@ const Product: React.FC<Navigation> = (props) => {
         <View>
           <TouchableOpacity
             style={styles.doDelete}
-            onPress={() => onDelete(productData.id, navigate, dispatch)}
+            onPress={() =>
+              dispatch(deleteProduct(productData.id, navigate, users))
+            }
           >
             <Text>この商品を削除する</Text>
           </TouchableOpacity>
@@ -184,6 +189,9 @@ export default Product;
 
 const styles = StyleSheet.create({
   productContainer: { backgroundColor: "white", height: "100%" },
+  productScrollView: {
+    backgroundColor: "#eee",
+  },
   main: {
     backgroundColor: "white",
     padding: 16,

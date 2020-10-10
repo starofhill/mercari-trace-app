@@ -85,6 +85,60 @@ export const addProduct = (
   };
 };
 
+export const deleteProduct = (
+  id: number,
+  navigate: (Component: string) => void,
+  users: Users
+) => {
+  return async (dispatch) => {
+    Alert.alert(
+      "確認",
+      `削除すると二度と復活できません。削除する代わりに停止することもできます。\n\n本当に削除しますか?`,
+      [
+        {
+          text: "いいえ",
+          style: "cancel",
+        },
+        {
+          text: "はい",
+          onPress: () => {
+            axios
+              .delete(
+                `https://mercari-trace-server.herokuapp.com/api/v1/products/${id}`,
+                {
+                  headers: {
+                    "access-token": users.headers.accessToken,
+                    client: users.headers.client,
+                    uid: users.headers.uid,
+                  },
+                }
+              )
+              .then(() => {
+                Alert.alert("商品を削除できました。", "", [
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      dispatch(fetchProducts());
+                      navigate("BottomTabNavigation");
+                    },
+                  },
+                ]);
+              })
+              .catch(() => {
+                Alert.alert("商品を削除することが\nできませんでした。", "", [
+                  {
+                    text: "OK",
+                  },
+                ]);
+              });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+};
+
 export const doComments = (id: number, comment: string) => {
   return async () => {
     axios
