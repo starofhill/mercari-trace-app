@@ -34,13 +34,21 @@ const Product: React.FC<Navigation> = (props) => {
       <ProductFooterButton productData={productData} />
       <ScrollView style={{ backgroundColor: "#eee" }}>
         <Swiper style={styles.wrapper} showsButtons>
-          <Image
-            source={{
-              uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
-            }}
-            style={styles.slide}
-            resizeMode="contain"
-          />
+          <>
+            {productData.status === "sale" && (
+              <>
+                <View style={styles.soldBox} />
+                <Text style={styles.soldText}>SOLD</Text>
+              </>
+            )}
+            <Image
+              source={{
+                uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
+              }}
+              style={styles.slide}
+              resizeMode="contain"
+            />
+          </>
         </Swiper>
         <View style={styles.main}>
           <Text style={styles.title}>{productData.name}</Text>
@@ -320,12 +328,30 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
   },
   wrapper: {
-    width: "100%",
     height: 380,
   },
   slide: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  soldBox: {
+    position: "absolute",
+    borderBottomColor: "transparent",
+    borderBottomWidth: 120,
+    borderLeftColor: "#FE0412",
+    borderLeftWidth: 120,
+    zIndex: 10,
+  },
+  soldText: {
+    position: "absolute",
+    margin: 5,
+    top: 20,
+    left: 0,
+    transform: [{ rotate: "-45deg" }],
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 30,
+    zIndex: 10,
   },
 });
