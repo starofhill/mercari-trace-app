@@ -1,6 +1,6 @@
 import React from "react";
 import createStore from "./reducks/store/store";
-import { MainNavigation } from "./navigations";
+import { MainNavigation } from "./navigation";
 
 export const store = createStore();
 

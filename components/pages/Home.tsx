@@ -1,152 +1,14 @@
-import React, { useState, useEffect } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { StackActions } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  Category,
-  Products,
-  Search,
-  SearchCategory,
-  SearchHome,
-} from "../atoms/Home";
+import { Search, SearchCategory, SearchHome } from "../atoms/Home";
+import { HomeTabNavigation } from "../../navigation";
 
-const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 
-interface SearchTab {
-  modalVisible: boolean;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  valueArray: string[];
-  setValueArray: React.Dispatch<React.SetStateAction<string[]>>;
-  index: number;
-  setIndex: React.Dispatch<React.SetStateAction<number>>;
-  category: string;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
-  navigation: {
-    dispatch: (pushAction: any) => void;
-  };
-}
-
-const SearchTab: React.FC<SearchTab> = ({
-  modalVisible,
-  setModalVisible,
-  value,
-  setValue,
-  valueArray,
-  setValueArray,
-  index,
-  setIndex,
-  category,
-  setCategory,
-  ...props
-}) => {
-  const navigation = props.navigation;
-  const pushAction = StackActions.push("SearchHome");
-
-  useEffect(() => {
-    setValue(valueArray[index]);
-  }, [modalVisible, navigation]);
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
-        <Tab.Screen name="おすすめ" component={Products} />
-        <Tab.Screen name="新着">
-          {() => <Products order="newArrival" />}
-        </Tab.Screen>
-        <Tab.Screen name="カテゴリー">
-          {(props) => <Category setCategory={setCategory} {...props} />}
-        </Tab.Screen>
-        <Tab.Screen name="保存した検索条件" component={Products} />
-      </Tab.Navigator>
-      <View>
-        <Modal
-          animationType="fade"
-          transparent
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "white",
-            }}
-          >
-            <SafeAreaView>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: 8,
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <Icon
-                    name="close"
-                    size={32}
-                    color="#ccc"
-                    style={{ justifyContent: "center", alignItems: "center" }}
-                  />
-                </TouchableOpacity>
-                {value ? (
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    onSubmitEditing={() => {
-                      navigation.dispatch(pushAction);
-                      setModalVisible(!modalVisible);
-                      setValueArray([...valueArray, value]);
-                      setIndex(index + 1);
-                    }}
-                    placeholder="検索"
-                    autoCapitalize="none"
-                    value={value}
-                  />
-                ) : (
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    placeholder="検索"
-                    autoCapitalize="none"
-                    value={value}
-                  />
-                )}
-              </View>
-              <Search />
-            </SafeAreaView>
-          </View>
-        </Modal>
-      </View>
-    </View>
-  );
-};
-
-const Home: React.FC<any> = (props) => {
+const Home: React.FC<unknown> = (props) => {
   const { navigate } = useNavigation();
   const [value, setValue] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
@@ -155,7 +17,7 @@ const Home: React.FC<any> = (props) => {
 
   const [category, setCategory] = useState("");
 
-  const navigation = props.navigation;
+  const { navigation } = props;
   const popAction = StackActions.pop(1);
 
   navigation.addListener("tabPress", () => {
@@ -191,8 +53,8 @@ const Home: React.FC<any> = (props) => {
           headerRightContainerStyle: styles.headerRight,
         }}
       >
-        {(props) => (
-          <SearchTab
+        {() => (
+          <HomeTabNavigation
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
             value={value}
@@ -201,9 +63,8 @@ const Home: React.FC<any> = (props) => {
             setValueArray={setValueArray}
             index={index}
             setIndex={setIndex}
-            category={category}
             setCategory={setCategory}
-            {...props}
+            navigation={navigation}
           />
         )}
       </Stack.Screen>
@@ -268,20 +129,14 @@ const Home: React.FC<any> = (props) => {
                 name="angle-left"
                 size={40}
                 color="#ccc"
-                style={{ justifyContent: "center", alignItems: "center" }}
+                style={styles.icon}
               />
             </TouchableOpacity>
           ),
           headerLeftContainerStyle: styles.headerLeft,
         }}
       >
-        {(props) => (
-          <SearchHome
-            {...props}
-            value={valueArray[index]}
-            category={category}
-          />
-        )}
+        {() => <SearchHome value={valueArray[index]} category={category} />}
       </Stack.Screen>
 
       <Stack.Screen
@@ -295,7 +150,7 @@ const Home: React.FC<any> = (props) => {
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text style={styles.searchText}>
-                <Text style={{ fontWeight: "bold" }}>{category}</Text>からさがす
+                <Text style={styles.boldText}>{category}</Text>からさがす
               </Text>
             </TouchableOpacity>
           ),
@@ -310,7 +165,7 @@ const Home: React.FC<any> = (props) => {
                 name="angle-left"
                 size={40}
                 color="#ccc"
-                style={{ justifyContent: "center", alignItems: "center" }}
+                style={styles.icon}
               />
             </TouchableOpacity>
           ),
@@ -318,7 +173,7 @@ const Home: React.FC<any> = (props) => {
           headerRightContainerStyle: styles.headerRight,
         }}
       >
-        {(props) => <SearchCategory category={category} {...props} />}
+        {() => <SearchCategory category={category} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
@@ -348,5 +203,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 8,
+  },
+  boldText: {
+    fontWeight: "bold",
+  },
+  icon: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

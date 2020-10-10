@@ -12,18 +12,17 @@ const Products: React.FC<{ order?: string }> = ({ order }) => {
   const selector = useSelector((state: Store) => state);
   const dispatch = useDispatch();
 
-  const products = selector.products;
-  const list = products.list;
+  const { products } = selector;
+  const { list } = products;
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchProducts());
-    setTimeout(() => {
+    dispatch(fetchProducts()).then(() => {
       setLoading(false);
-    }, 500);
-  }, []);
+    });
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -45,14 +44,14 @@ const Products: React.FC<{ order?: string }> = ({ order }) => {
               >
                 <Image
                   source={{
-                    uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+                    uri: encodeURI(item.image_url?.replace(/&/g, "%26")),
                   }}
                   style={styles.image}
                   resizeMode="cover"
                 />
                 {item.status === "sale" && (
                   <>
-                    <View style={styles.soldBox}></View>
+                    <View style={styles.soldBox} />
                     <Text style={styles.soldText}>SOLD</Text>
                   </>
                 )}

@@ -6,14 +6,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Store, Item } from "../../../Interface";
 
-const SearchCategory: React.FC<{ category: string }> = ({ category }) => {
+interface SearchCategory {
+  category: string;
+}
+
+const SearchCategory: React.FC<SearchCategory> = ({ category }) => {
   const { navigate } = useNavigation();
 
   const selector = useSelector((state: Store) => state);
   const dispatch = useDispatch();
 
-  const products = selector.products;
-  const list = products.list;
+  const { products } = selector;
+  const { list } = products;
 
   const [items, setItems] = useState<Item[]>();
 
@@ -30,7 +34,7 @@ const SearchCategory: React.FC<{ category: string }> = ({ category }) => {
     });
 
     setItems(updateList);
-  }, [category]);
+  }, [category, list]);
 
   return (
     <FlatList
@@ -46,7 +50,7 @@ const SearchCategory: React.FC<{ category: string }> = ({ category }) => {
           >
             <Image
               source={{
-                uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+                uri: encodeURI(item.image_url?.replace(/&/g, "%26")),
               }}
               style={styles.image}
               resizeMode="cover"
