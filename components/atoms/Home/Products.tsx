@@ -1,38 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image, ActivityIndicator } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../../../reducks/products/operations";
-import { Store } from "../../../Interface";
+import { Item } from "../../../Interface";
 
-const Products: React.FC<{ order?: string }> = ({ order }) => {
+interface Products {
+  list: Item[];
+  loading: boolean;
+}
+
+const Products: React.FC<Products> = ({ list, loading }) => {
   const { navigate } = useNavigation();
-
-  const selector = useSelector((state: Store) => state);
-  const dispatch = useDispatch();
-
-  const { products } = selector;
-  const { list } = products;
-
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    dispatch(fetchProducts()).then(() => {
-      setLoading(false);
-    });
-  }, [dispatch]);
 
   return (
     <View style={styles.container}>
       {!loading ? (
         <FlatList
-          data={
-            order === "newArrival"
-              ? list.sort((a, b) => b.created_at.localeCompare(a.created_at))
-              : list.sort((a, b) => a.id - b.id)
-          }
+          data={list}
           contentContainerStyle={styles.scrollView}
           keyExtractor={(item) => `products-${item.id}`}
           renderItem={({ item }) => (

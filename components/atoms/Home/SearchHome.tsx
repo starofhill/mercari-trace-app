@@ -61,8 +61,9 @@ const SearchHome: React.FC<SearchHome> = ({ value, category }) => {
     });
 
     // sort
-    /// Price ascending order
+    /// Recommended order
     setRecommendedProducts(updateList);
+    /// Price ascending order
     setPriceAscendingOrderProducts(
       updateList.slice().sort((a, b) => a.price - b.price)
     );

@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Category, Products, SearchModal } from "../components/atoms/Home";
+import { Item, Store } from "../Interface";
+import { fetchProducts } from "../reducks/products/operations";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -32,6 +35,43 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
   setCategory,
   navigation,
 }) => {
+  const selector = useSelector((state: Store) => state);
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
+  const { products } = selector;
+  const { list } = products;
+
+  // 「おすすめ」の商品リスト
+  const [recommendedProducts, setRecommendedProducts] = useState<Item[]>([]);
+
+  // 「新着順」の商品リスト
+  const [newArrivalOrderProducts, setNewArrivalOrderProducts] = useState<
+    Item[]
+  >([]);
+
+  // 商品情報をStoreから取得
+  useEffect(() => {
+    setLoading(true);
+    dispatch(fetchProducts()).then(() => {
+      setLoading(false);
+    });
+  }, [dispatch, setLoading]);
+
+  useEffect(() => {
+    const updateList = list.slice();
+
+    // sort
+    /// Recommended order
+    setRecommendedProducts(updateList.slice().sort((a, b) => a.id - b.id));
+
+    // New arrival order
+    setNewArrivalOrderProducts(
+      updateList.sort((a, b) => b.created_at.localeCompare(a.created_at))
+    );
+  }, [list, value]);
+
   useEffect(() => {
     setValue(valueArray[index]);
   }, [index, modalVisible, navigation, setValue, valueArray]);
@@ -39,14 +79,18 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
   return (
     <View style={styles.homeTabNavigationContainer}>
       <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
-        <Tab.Screen name="おすすめ" component={Products} />
+        <Tab.Screen name="おすすめ">
+          {() => <Products list={recommendedProducts} loading={loading} />}
+        </Tab.Screen>
         <Tab.Screen name="新着">
-          {() => <Products order="newArrival" />}
+          {() => <Products list={newArrivalOrderProducts} loading={loading} />}
         </Tab.Screen>
         <Tab.Screen name="カテゴリー">
           {() => <Category setCategory={setCategory} />}
         </Tab.Screen>
-        <Tab.Screen name="保存した検索条件" component={Products} />
+        <Tab.Screen name="保存した検索条件">
+          {() => <Products list={recommendedProducts} loading={loading} />}
+        </Tab.Screen>
       </Tab.Navigator>
 
       <SearchModal
