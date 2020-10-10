@@ -70,7 +70,7 @@ const SearchModal: React.FC<SearchModal> = ({
                 }}
                 onSubmitEditing={() => {
                   navigation.dispatch(pushAction);
-                  setModalVisible(!modalVisible);
+                  setModalVisible(false);
                   setValueArray([...valueArray, value]);
                   setIndex(index + 1);
                 }}
