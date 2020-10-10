@@ -5,9 +5,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 interface ExpoImagePicker {
   image: string[];
-  takePhoto: () => void;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const ExpoImagePicker: React.FC<ExpoImagePicker> = (props) => {
+const ExpoImagePicker: React.FC<ExpoImagePicker> = ({
+  image,
+  setModalVisible,
+}) => {
   const data = [
     { id: 0, name: "camera", text: "(必須)" },
     { id: 1, name: "camera" },
@@ -29,24 +32,24 @@ const ExpoImagePicker: React.FC<ExpoImagePicker> = (props) => {
       keyExtractor={(item) => `enterProductInformation-${item.id}`}
       renderItem={({ item }) => (
         <View>
-          {!props.image[item.id] && (
+          {!image[item.id] && (
             // 画像なし
             <>
               {item.id === 0 ? (
                 // 1個目
                 <TouchableOpacity
                   style={styles.imageBox}
-                  onPress={() => props.takePhoto()}
+                  onPress={() => setModalVisible(true)}
                 >
                   <Text style={styles.imageNumber}>{item.id + 1}</Text>
                   <Icon name={item.name} size={20} />
                   <Text style={styles.imageText}>{item.text}</Text>
                 </TouchableOpacity>
-              ) : props.image[item.id - 1] ? (
+              ) : image[item.id - 1] ? (
                 // 1個目以外 & 1つ前に画像あり
                 <TouchableOpacity
                   style={styles.imageBox}
-                  onPress={() => props.takePhoto()}
+                  onPress={() => setModalVisible(true)}
                 >
                   <Text style={styles.imageNumber}>{item.id + 1}</Text>
                   <Icon name={item.name} size={20} color="#ccc" />
@@ -59,12 +62,12 @@ const ExpoImagePicker: React.FC<ExpoImagePicker> = (props) => {
               )}
             </>
           )}
-          {props.image[item.id] && (
+          {image[item.id] && (
             // 画像あり
             <TouchableOpacity style={styles.imageBox}>
               <Text style={styles.imageNumber}>{item.id + 1}</Text>
               <Image
-                source={{ uri: props.image[item.id] }}
+                source={{ uri: image[item.id] }}
                 style={{ width: 60, height: 60 }}
               />
             </TouchableOpacity>

@@ -3,12 +3,19 @@ import { View, Text, StyleSheet, Modal, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const ModalItems: React.FC<{
+interface ModalItems {
   takePhoto: () => void;
   pickImage: () => void;
-}> = (props) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const ModalItems: React.FC<ModalItems> = ({
+  takePhoto,
+  pickImage,
+  modalVisible,
+  setModalVisible,
+}) => {
   useEffect(() => {
     setTimeout(() => setModalVisible(true), 500);
   }, []);
@@ -17,7 +24,7 @@ const ModalItems: React.FC<{
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent
         visible={modalVisible}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
@@ -30,7 +37,7 @@ const ModalItems: React.FC<{
             <View style={styles.modalCard}>
               <TouchableOpacity
                 style={styles.openButton}
-                onPress={() => props.takePhoto()}
+                onPress={() => takePhoto()}
               >
                 <View style={styles.modalBox}>
                   <Icon name="camera" size={24} />
@@ -39,7 +46,7 @@ const ModalItems: React.FC<{
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.openButton}
-                onPress={() => props.pickImage()}
+                onPress={() => pickImage()}
               >
                 <View style={styles.modalBox}>
                   <Icon name="photo" size={24} />

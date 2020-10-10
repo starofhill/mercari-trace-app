@@ -22,6 +22,7 @@ const EnterProductInformation: React.FC = () => {
   const [status] = useState("sale");
   const [condition, setCondition] = useState("");
   const [category, setCategory] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const EnterProductInformation: React.FC = () => {
   // カメラを起動
   const takePhoto = async () => {
     const result = await ImagePicker.launchCameraAsync({
-      allowsEditing: false,
+      allowsEditing: true,
       base64: true,
     });
 
@@ -43,6 +44,7 @@ const EnterProductInformation: React.FC = () => {
 
       setImage(img);
       setSendImage(sendImg);
+      setModalVisible(false);
     }
   };
 
@@ -63,14 +65,20 @@ const EnterProductInformation: React.FC = () => {
 
       setImage(img);
       setSendImage(sendImg);
+      setModalVisible(false);
     }
   };
 
   return (
     <ScrollView style={styles.container}>
-      <ModalItems takePhoto={takePhoto} pickImage={pickImage} />
+      <ModalItems
+        takePhoto={takePhoto}
+        pickImage={pickImage}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
 
-      <ExpoImagePicker takePhoto={takePhoto} image={image} />
+      <ExpoImagePicker image={image} setModalVisible={setModalVisible} />
 
       <View style={styles.box}>
         <Text style={styles.boxTitle}>商品の詳細</Text>
