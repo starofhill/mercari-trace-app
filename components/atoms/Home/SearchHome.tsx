@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
-import { SearchScreen } from ".";
+import { SearchTabNavigation } from "../../../navigation";
 
 interface SearchHome {
   value?: string;
   category?: string;
 }
-
-const Tab = createMaterialTopTabNavigator();
 
 const SearchHome: React.FC<SearchHome> = ({ value, category }) => {
   const selector = useSelector((state: Store) => state);
@@ -80,23 +77,12 @@ const SearchHome: React.FC<SearchHome> = ({ value, category }) => {
   }, [list, category, value]);
 
   return (
-    <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
-      <Tab.Screen name="おすすめ">
-        {() => <SearchScreen list={recommendedProducts} />}
-      </Tab.Screen>
-      <Tab.Screen name="価格の安い順">
-        {() => <SearchScreen list={priceAscendingOrderProducts} />}
-      </Tab.Screen>
-      <Tab.Screen name="価格の高い順">
-        {() => <SearchScreen list={priceDescendingOrderProducts} />}
-      </Tab.Screen>
-      <Tab.Screen name="いいね！順">
-        {() => <SearchScreen list={recommendedProducts} />}
-      </Tab.Screen>
-      <Tab.Screen name="新しい順">
-        {() => <SearchScreen list={newArrivalOrderProducts} />}
-      </Tab.Screen>
-    </Tab.Navigator>
+    <SearchTabNavigation
+      recommendedProducts={recommendedProducts}
+      priceAscendingOrderProducts={priceAscendingOrderProducts}
+      priceDescendingOrderProducts={priceDescendingOrderProducts}
+      newArrivalOrderProducts={newArrivalOrderProducts}
+    />
   );
 };
 
