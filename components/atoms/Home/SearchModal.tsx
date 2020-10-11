@@ -85,7 +85,6 @@ const SearchModal: React.FC<SearchModal> = ({
               />
             )}
           </View>
-
           <SearchModalContent />
         </SafeAreaView>
       </View>

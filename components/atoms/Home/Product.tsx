@@ -14,9 +14,9 @@ const sellerData = {
   starNumber: 3,
 };
 
-const Product: React.FC<Navigation> = (props) => {
+const Product: React.FC<Navigation> = ({ navigation, route }) => {
   // 商品情報を取得
-  const productData = props.route.params;
+  const productData = route.params;
 
   const starIcon = [];
   for (let i = 0; i < sellerData.starNumber; i += 1) {
@@ -30,10 +30,7 @@ const Product: React.FC<Navigation> = (props) => {
 
   return (
     <View style={styles.productContainer}>
-      <ProductHeaderButton
-        name={productData.name}
-        navigation={props.navigation}
-      />
+      <ProductHeaderButton name={productData.name} navigation={navigation} />
       <ProductFooterButton productData={productData} />
       <ScrollView style={styles.productScrollView}>
         <Swiper style={styles.wrapper} showsButtons>
@@ -46,7 +43,7 @@ const Product: React.FC<Navigation> = (props) => {
             )}
             <Image
               source={{
-                uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
+                uri: encodeURI(productData.image_url?.replace(/&/g, "%26")),
               }}
               style={styles.slide}
               resizeMode="contain"

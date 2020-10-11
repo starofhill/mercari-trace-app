@@ -12,8 +12,8 @@ const CategoryBox: React.FC<{
 }> = ({ title, setCategory }) => {
   const { navigate } = useNavigation();
   const selector = useSelector((state: Store) => state);
-  const products = selector.products;
-  const list = products.list;
+  const { products } = selector;
+  const { list } = products;
 
   return (
     <View style={styles.box}>
@@ -45,7 +45,7 @@ const CategoryBox: React.FC<{
               >
                 <Image
                   source={{
-                    uri: encodeURI(item.image_url!.replace(/&/g, "%26")),
+                    uri: encodeURI(item.image_url?.replace(/&/g, "%26")),
                   }}
                   style={styles.image}
                   resizeMode="cover"
@@ -54,7 +54,7 @@ const CategoryBox: React.FC<{
               </TouchableOpacity>
             </View>
           ) : (
-            <View></View>
+            <View />
           )
         }
       />

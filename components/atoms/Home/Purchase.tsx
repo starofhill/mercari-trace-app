@@ -12,20 +12,20 @@ import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Navigation } from "../../../Interface";
 
-const Purchase: React.FC<Navigation> = (props) => {
+const Purchase: React.FC<Navigation> = ({ route }) => {
   const { navigate } = useNavigation();
-  const productData = props.route.params;
+  const productData = route.params;
 
   return (
-    <View style={{ height: "100%" }}>
+    <View style={styles.purchaseContainer}>
       <View style={styles.footer}>
-        <View style={{ width: "45%" }}>
+        <View style={styles.footerButtonContainer}>
           <TouchableOpacity style={styles.footerLeftButton}>
             <Text style={styles.footerLeftButtonText}>アップルPay</Text>
           </TouchableOpacity>
           <SafeAreaView />
         </View>
-        <View style={{ width: "45%" }}>
+        <View style={styles.footerButtonContainer}>
           <TouchableOpacity
             style={styles.footerRightButton}
             onPress={() => {
@@ -41,7 +41,7 @@ const Purchase: React.FC<Navigation> = (props) => {
         <View style={styles.imageBox}>
           <Image
             source={{
-              uri: encodeURI(productData.image_url!.replace(/&/g, "%26")),
+              uri: encodeURI(productData.image_url?.replace(/&/g, "%26")),
             }}
             style={styles.image}
             resizeMode="cover"
@@ -107,7 +107,7 @@ const Purchase: React.FC<Navigation> = (props) => {
               <Text style={styles.deliveryText}>飯塚花子(イイヅカ ハナコ)</Text>
               <Text style={styles.deliveryText}>〒111-1111</Text>
               <Text style={styles.deliveryText}>福岡県福岡市博多区</Text>
-              <Text></Text>
+              <Text />
               <Text style={styles.deliveryText}>※郵便局/コンビニ受取可能</Text>
               <Text style={styles.deliveryText}>※匿名配送</Text>
             </View>
@@ -122,6 +122,7 @@ const Purchase: React.FC<Navigation> = (props) => {
 export default Purchase;
 
 const styles = StyleSheet.create({
+  purchaseContainer: { height: "100%" },
   footer: {
     backgroundColor: "white",
     padding: 10,
@@ -132,6 +133,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 10,
     width: "100%",
+  },
+  footerButtonContainer: {
+    width: "45%",
   },
   footerLeftButton: {
     backgroundColor: "black",

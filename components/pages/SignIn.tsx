@@ -13,7 +13,7 @@ const SignIn: React.FC = () => {
       <View style={styles.title}>
         <Image
           source={require("../../assets/IMG_6606.jpg")}
-          style={{ width: 100, height: 100 }}
+          style={styles.mercariImage}
         />
         <Text style={styles.titleText}>mercari</Text>
       </View>
@@ -22,17 +22,17 @@ const SignIn: React.FC = () => {
           <TouchableOpacity style={[styles.box, styles.blackBackgroundColor]}>
             <Icon name="apple" size={24} color="white" />
             <Text style={styles.whiteColor}>Appleでログイン</Text>
-            <Text></Text>
+            <Text />
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.blueBackgroundColor]}>
             <Icon name="facebook-official" size={24} color="white" />
             <Text style={styles.whiteColor}>Facebookでログイン</Text>
-            <Text></Text>
+            <Text />
           </TouchableOpacity>
           <TouchableOpacity style={[styles.box, styles.whiteBackgroundColor]}>
             <Icon name="google" size={24} />
             <Text style={styles.blackColor}>Googleでログイン</Text>
-            <Text></Text>
+            <Text />
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.box, styles.redBackgroundColor]}
@@ -40,7 +40,7 @@ const SignIn: React.FC = () => {
           >
             <Icon name="envelope-o" size={24} color="white" />
             <Text style={styles.whiteColor}>メールアドレスでログイン</Text>
-            <Text></Text>
+            <Text />
           </TouchableOpacity>
         </View>
       </View>
@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 30,
+  },
+  mercariImage: {
+    width: 100,
+    height: 100,
   },
   titleText: {
     fontWeight: "bold",

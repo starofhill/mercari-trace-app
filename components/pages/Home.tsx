@@ -5,10 +5,11 @@ import { useNavigation, StackActions } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { SearchModalContent, SearchCategory, SearchHome } from "../atoms/Home";
 import { HomeTabNavigation } from "../../navigation";
+import { Navigation } from "../../Interface";
 
 const Stack = createStackNavigator();
 
-const Home: React.FC<unknown> = (props) => {
+const Home: React.FC<Navigation> = ({ navigation }) => {
   const { navigate } = useNavigation();
   const [value, setValue] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,7 +17,6 @@ const Home: React.FC<unknown> = (props) => {
 
   const [category, setCategory] = useState("");
 
-  const { navigation } = props;
   const popAction = StackActions.pop(1);
 
   navigation.addListener("tabPress", () => {

@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { News, NewsDetail, Notice, NoticeDetail } from "../atoms/Notices";
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
+import { News, NewsDetail, Notice, NoticeDetail } from "../atoms/Notices";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -17,7 +17,7 @@ const NoticesBody: React.FC = () => {
     <Tab.Navigator
       style={styles.container}
       tabBarOptions={{ style: { marginTop: insets.top } }}
-      swipeEnabled={true}
+      swipeEnabled
     >
       <Tab.Screen name="お知らせ" component={Notice} />
       <Tab.Screen name="ニュース" component={News} />

@@ -43,6 +43,7 @@ export interface Store {
 export interface Navigation {
   navigation: {
     dispatch: (pushAction: unknown) => void;
+    addListener: (s: string, f: () => void) => void;
   };
   route: {
     params: Item;

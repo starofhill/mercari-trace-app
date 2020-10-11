@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
-
-const icon = require("../../../assets/user_icon.png");
+import icon from "../../../assets/user_icon.png";
 
 const CommentBox: React.FC = () => {
   return (

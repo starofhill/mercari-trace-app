@@ -23,14 +23,16 @@ const SearchCategory: React.FC<SearchCategory> = ({ category }) => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const updateList = list.filter((item) => {
       // カテゴリー
       if (category && category === item.category) {
-        return item;
+        return true;
       }
+
+      return false;
     });
 
     setItems(updateList);

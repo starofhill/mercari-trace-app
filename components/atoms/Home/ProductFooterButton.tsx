@@ -16,7 +16,7 @@ const ProductFooterButton: React.FC<{
 
   return (
     <View style={styles.footer}>
-      <View style={{ width: "40%" }}>
+      <View style={styles.footerLeftButtonContainer}>
         <TouchableOpacity
           style={[styles.footerLeftButton, styles.footerButton]}
         >
@@ -26,7 +26,7 @@ const ProductFooterButton: React.FC<{
         </TouchableOpacity>
         <SafeAreaView />
       </View>
-      <View style={{ width: "50%" }}>
+      <View style={styles.footerRightButtonContainer}>
         <TouchableOpacity
           style={[styles.footerRightButton, styles.footerButton]}
           onPress={() => {
@@ -65,6 +65,12 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     padding: 5,
     borderRadius: 5,
+  },
+  footerLeftButtonContainer: {
+    width: "40%",
+  },
+  footerRightButtonContainer: {
+    width: "50%",
   },
   footerLeftButton: {
     borderColor: "#EA352E",

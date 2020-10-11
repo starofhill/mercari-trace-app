@@ -25,16 +25,11 @@ const Listing: React.FC = () => {
           <View style={styles.topImage}>
             <Image
               source={require("../../assets/IMG_6604.jpeg")}
-              style={{
-                width: 300,
-                height: 150,
-                marginTop: 20,
-                marginBottom: 20,
-              }}
+              style={styles.image}
               resizeMode="contain"
             />
           </View>
-          <View style={styles.shortcuts}>
+          <View>
             <Text style={styles.shortcutTitle}>出品へのショートカット</Text>
             <View style={styles.shortcut}>
               <TouchableOpacity style={styles.shortcutBox}>
@@ -121,7 +116,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  shortcuts: {},
+  image: {
+    width: 300,
+    height: 150,
+    marginTop: 20,
+    marginBottom: 20,
+  },
   shortcut: {
     flexDirection: "row",
     justifyContent: "space-between",
