@@ -15,8 +15,6 @@ interface HomeTabNavigation {
   setValue: React.Dispatch<React.SetStateAction<string>>;
   valueArray: string[];
   setValueArray: React.Dispatch<React.SetStateAction<string[]>>;
-  index: number;
-  setIndex: React.Dispatch<React.SetStateAction<number>>;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   navigation: {
     dispatch: (pushAction: unknown) => void;
@@ -30,8 +28,6 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
   setValue,
   valueArray,
   setValueArray,
-  index,
-  setIndex,
   setCategory,
   navigation,
 }) => {
@@ -73,8 +69,8 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
   }, [list, value]);
 
   useEffect(() => {
-    setValue(valueArray[index]);
-  }, [index, modalVisible, navigation, setValue, valueArray]);
+    setValue(valueArray[valueArray.length - 1]);
+  }, [modalVisible, navigation, setValue, valueArray]);
 
   return (
     <View style={styles.homeTabNavigationContainer}>
@@ -100,8 +96,6 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
         setValue={setValue}
         valueArray={valueArray}
         setValueArray={setValueArray}
-        index={index}
-        setIndex={setIndex}
         navigation={navigation}
       />
     </View>

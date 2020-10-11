@@ -19,8 +19,6 @@ interface SearchModal {
   setValue: React.Dispatch<React.SetStateAction<string>>;
   valueArray: string[];
   setValueArray: React.Dispatch<React.SetStateAction<string[]>>;
-  index: number;
-  setIndex: React.Dispatch<React.SetStateAction<number>>;
   navigation: {
     dispatch: (pushAction: unknown) => void;
   };
@@ -33,15 +31,13 @@ const SearchModal: React.FC<SearchModal> = ({
   setValue,
   valueArray,
   setValueArray,
-  index,
-  setIndex,
   navigation,
 }) => {
   const pushAction = StackActions.push("SearchHome");
 
   useEffect(() => {
-    setValue(valueArray[index]);
-  }, [index, modalVisible, navigation, setValue, valueArray]);
+    setValue(valueArray[valueArray.length - 1]);
+  }, [modalVisible, navigation, setValue, valueArray]);
 
   return (
     <Modal
@@ -72,7 +68,6 @@ const SearchModal: React.FC<SearchModal> = ({
                   navigation.dispatch(pushAction);
                   setModalVisible(false);
                   setValueArray([...valueArray, value]);
-                  setIndex(index + 1);
                 }}
                 placeholder="検索"
                 autoCapitalize="none"

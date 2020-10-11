@@ -13,7 +13,6 @@ const Home: React.FC<unknown> = (props) => {
   const [value, setValue] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [valueArray, setValueArray] = useState<string[]>([]);
-  const [index, setIndex] = useState(-1);
 
   const [category, setCategory] = useState("");
 
@@ -24,13 +23,11 @@ const Home: React.FC<unknown> = (props) => {
     setValue("");
     setValueArray([]);
     setCategory("");
-    setIndex(-1);
 
     navigation.addListener("focus", () => {
       setValue(value);
       setValueArray(valueArray);
       setCategory(category);
-      setIndex(index);
     });
   });
 
@@ -61,8 +58,6 @@ const Home: React.FC<unknown> = (props) => {
             setValue={setValue}
             valueArray={valueArray}
             setValueArray={setValueArray}
-            index={index}
-            setIndex={setIndex}
             setCategory={setCategory}
             navigation={navigation}
           />
@@ -108,11 +103,13 @@ const Home: React.FC<unknown> = (props) => {
               onPress={() => setModalVisible(!modalVisible)}
             >
               {category ? (
-                <Text
-                  style={styles.searchText}
-                >{`${valueArray[index]}, ${category}`}</Text>
+                <Text style={styles.searchText}>{`${
+                  valueArray[valueArray.length - 1]
+                }, ${category}`}</Text>
               ) : (
-                <Text style={styles.searchText}>{valueArray[index]}</Text>
+                <Text style={styles.searchText}>
+                  {valueArray[valueArray.length - 1]}
+                </Text>
               )}
             </TouchableOpacity>
           ),
@@ -121,7 +118,6 @@ const Home: React.FC<unknown> = (props) => {
             <TouchableOpacity
               onPress={() => {
                 setValueArray([...valueArray].splice(0, valueArray.length - 1));
-                setIndex(index - 1);
                 navigation.dispatch(popAction);
               }}
             >
@@ -136,7 +132,12 @@ const Home: React.FC<unknown> = (props) => {
           headerLeftContainerStyle: styles.headerLeft,
         }}
       >
-        {() => <SearchHome value={valueArray[index]} category={category} />}
+        {() => (
+          <SearchHome
+            value={valueArray[valueArray.length - 1]}
+            category={category}
+          />
+        )}
       </Stack.Screen>
 
       <Stack.Screen
