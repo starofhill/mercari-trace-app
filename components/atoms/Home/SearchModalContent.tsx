@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const Search: React.FC = () => {
+const SearchModalContent: React.FC = () => {
   return (
     <ScrollView>
       <View style={styles.boxes}>
@@ -49,7 +49,7 @@ const Search: React.FC = () => {
   );
 };
 
-export default Search;
+export default SearchModalContent;
 
 const styles = StyleSheet.create({
   boxes: {

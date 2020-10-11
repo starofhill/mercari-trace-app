@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation, StackActions } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Search, SearchCategory, SearchHome } from "../atoms/Home";
+import { SearchModalContent, SearchCategory, SearchHome } from "../atoms/Home";
 import { HomeTabNavigation } from "../../navigation";
 
 const Stack = createStackNavigator();
@@ -42,7 +42,7 @@ const Home: React.FC<unknown> = (props) => {
           headerTitle: () => (
             <TouchableOpacity
               style={styles.input}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => setModalVisible(true)}
             >
               <Text style={styles.searchText}>なにをお探しですか?</Text>
             </TouchableOpacity>
@@ -70,8 +70,8 @@ const Home: React.FC<unknown> = (props) => {
       </Stack.Screen>
 
       <Stack.Screen
-        name="Search"
-        component={Search}
+        name="SearchModalContent"
+        component={SearchModalContent}
         options={{
           // TextInputが入力されていなければページ遷移なし
           headerTitle: () =>
@@ -147,7 +147,7 @@ const Home: React.FC<unknown> = (props) => {
           headerTitle: () => (
             <TouchableOpacity
               style={styles.input}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => setModalVisible(true)}
             >
               <Text style={styles.searchText}>
                 <Text style={styles.boldText}>{category}</Text>からさがす

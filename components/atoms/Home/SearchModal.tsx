@@ -10,7 +10,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StackActions } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Search } from ".";
+import { SearchModalContent } from ".";
 
 interface SearchModal {
   modalVisible: boolean;
@@ -90,7 +90,8 @@ const SearchModal: React.FC<SearchModal> = ({
               />
             )}
           </View>
-          <Search />
+
+          <SearchModalContent />
         </SafeAreaView>
       </View>
     </Modal>
