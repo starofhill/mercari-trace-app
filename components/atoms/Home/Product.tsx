@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Swiper from "react-native-swiper";
 import { Navigation, Store } from "../../../Interface";
 import { ProductFooterButton, ProductHeaderButton } from ".";
-import { deleteProduct } from "../../../reducks/products/operations";
+import {
+  deleteProduct,
+  getComments,
+} from "../../../reducks/products/operations";
 
 const sellerData = {
   name: "りゅう",
@@ -16,7 +19,9 @@ const sellerData = {
 
 const Product: React.FC<Navigation> = ({ navigation, route }) => {
   // 商品情報を取得
-  const productData = route.params;
+  const [productData, setProductData] = useState(route.params);
+
+  const { id } = route.params;
 
   const starIcon = [];
   for (let i = 0; i < sellerData.starNumber; i += 1) {
@@ -27,6 +32,10 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   const users = useSelector((state: Store) => state.users);
+
+  useEffect(() => {
+    dispatch(getComments(id, setProductData));
+  }, [dispatch, id]);
 
   return (
     <View style={styles.productContainer}>
@@ -70,10 +79,17 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
                 <Text style={styles.buttonText}>{productData.likes}</Text>
               </View>
               <View style={styles.buttonItem}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() =>
+                    navigate("CommentContainer", {
+                      productData,
+                      setProductData,
+                    })
+                  }
+                >
                   <Text>コメント</Text>
                 </TouchableOpacity>
-                <Text style={styles.buttonText}>{productData.comments}</Text>
               </View>
             </View>
             <View style={styles.buttonBox}>
@@ -171,7 +187,12 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
         <View>
           <TouchableOpacity
             style={styles.doComment}
-            onPress={() => navigate("CommentContainer", productData)}
+            onPress={() =>
+              navigate("CommentContainer", {
+                productData,
+                setProductData,
+              })
+            }
           >
             <Icon name="comment-o" size={24} />
             <Text>コメントする</Text>

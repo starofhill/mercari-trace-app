@@ -2,19 +2,18 @@ import React from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
 import icon from "../../../assets/user_icon.png";
 
-const CommentBox: React.FC = () => {
+interface CommentBox {
+  item: { content: string };
+}
+
+const CommentBox: React.FC<CommentBox> = ({ item }) => {
   return (
     <View style={styles.commentBox}>
       <Image source={icon} style={styles.icon} />
       <View style={styles.commentContent}>
         <Text>name</Text>
         <View style={styles.commentTextBox}>
-          <Text>commentcommentcommentcommentcommentcommentcomment</Text>
-          <Text>comment</Text>
-          <Text>comment</Text>
-          <Text>comment</Text>
-          <Text>comment</Text>
-          <Text>comment</Text>
+          <Text>{item.content}</Text>
         </View>
       </View>
     </View>

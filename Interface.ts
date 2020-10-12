@@ -10,7 +10,14 @@ export interface Item {
 
   status?: string;
   likes?: number;
-  comments?: number;
+  comments?: {
+    id: number;
+    content: string;
+    user_id: number;
+    product_id: number;
+    created_at: string;
+    update_at: string;
+  }[];
   category?: string;
   condition?: string;
   shippingCharges?: string;

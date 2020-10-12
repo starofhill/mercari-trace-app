@@ -2,7 +2,7 @@ import axios from "axios";
 import { Alert } from "react-native";
 import { Validation } from "../../components/atoms/Listing";
 import { fetchProductsAction } from "./actions";
-import { Users } from "../../Interface";
+import { Item, Users } from "../../Interface";
 
 export const fetchProducts = () => {
   return async (dispatch) => {
@@ -139,21 +139,50 @@ export const deleteProduct = (
   };
 };
 
-export const doComments = (id: number, comment: string) => {
+export const getComments = (id: number, setProductData) => {
   return async () => {
     axios
+      .get(`https://mercari-trace-server.herokuapp.com/api/v1/products/${id}/`)
+      .then((res) => {
+        setProductData({ ...res.data });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const doComments = (
+  id: number,
+  comment: string,
+  users: Users,
+  setProductData: React.Dispatch<React.SetStateAction<Item>>,
+  comments,
+  setComments,
+  navigate: (nav: string) => void
+) => {
+  return async (dispatch) => {
+    axios
       .post(
-        `https://mercari-trace-server.herokuapp.com/api/v1/products/:${id}/comments/`,
+        `https://mercari-trace-server.herokuapp.com/api/v1/products/${id}/comments/`,
         {
-          comments: {
+          comment: {
             content: comment,
+          },
+        },
+        {
+          headers: {
+            "access-token": users.headers.accessToken,
+            client: users.headers.client,
+            uid: users.headers.uid,
           },
         }
       )
       .then((res) => {
+        dispatch(getComments(id, setProductData));
+        setComments([...comments, res.data]);
         console.log(res);
       })
       .catch((err) => {
+        navigate("SignUp");
         console.log(err);
       });
   };
