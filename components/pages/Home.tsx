@@ -11,22 +11,22 @@ const Stack = createStackNavigator();
 
 const Home: React.FC<Navigation> = ({ navigation }) => {
   const { navigate } = useNavigation();
-  const [value, setValue] = useState("");
+  const [searchWord, setSearchWord] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const [valueArray, setValueArray] = useState<string[]>([]);
+  const [searchWordArray, setSearchWordArray] = useState<string[]>([]);
 
   const [category, setCategory] = useState("");
 
   const popAction = StackActions.pop(1);
 
   navigation.addListener("tabPress", () => {
-    setValue("");
-    setValueArray([]);
+    setSearchWord("");
+    setSearchWordArray([]);
     setCategory("");
 
     navigation.addListener("focus", () => {
-      setValue(value);
-      setValueArray(valueArray);
+      setSearchWord(searchWord);
+      setSearchWordArray(searchWordArray);
       setCategory(category);
     });
   });
@@ -54,10 +54,10 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
           <HomeTabNavigation
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
-            value={value}
-            setValue={setValue}
-            valueArray={valueArray}
-            setValueArray={setValueArray}
+            searchWord={searchWord}
+            setSearchWord={setSearchWord}
+            searchWordArray={searchWordArray}
+            setSearchWordArray={setSearchWordArray}
             setCategory={setCategory}
             navigation={navigation}
           />
@@ -70,11 +70,11 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
         options={{
           // TextInputが入力されていなければページ遷移なし
           headerTitle: () =>
-            value ? (
+            searchWord ? (
               <TextInput
                 style={styles.input}
                 onChangeText={(newValue) => {
-                  setValue(newValue);
+                  setSearchWord(newValue);
                 }}
                 placeholder="検索"
                 autoCapitalize="none"
@@ -84,7 +84,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
               <TextInput
                 style={styles.input}
                 onChangeText={(newValue) => {
-                  setValue(newValue);
+                  setSearchWord(newValue);
                 }}
                 placeholder="検索"
                 autoCapitalize="none"
@@ -104,11 +104,11 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
             >
               {category ? (
                 <Text style={styles.searchText}>{`${
-                  valueArray[valueArray.length - 1]
+                  searchWordArray[searchWordArray.length - 1]
                 }, ${category}`}</Text>
               ) : (
                 <Text style={styles.searchText}>
-                  {valueArray[valueArray.length - 1]}
+                  {searchWordArray[searchWordArray.length - 1]}
                 </Text>
               )}
             </TouchableOpacity>
@@ -117,7 +117,9 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                setValueArray([...valueArray].splice(0, valueArray.length - 1));
+                setSearchWordArray(
+                  [...searchWordArray].splice(0, searchWordArray.length - 1)
+                );
                 navigation.dispatch(popAction);
               }}
             >
@@ -134,7 +136,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
       >
         {() => (
           <SearchHome
-            value={valueArray[valueArray.length - 1]}
+            searchWord={searchWordArray[searchWordArray.length - 1]}
             category={category}
           />
         )}

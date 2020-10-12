@@ -5,11 +5,11 @@ import { Item, Store } from "../../../Interface";
 import { SearchTabNavigation } from "../../../navigation";
 
 interface SearchHome {
-  value?: string;
+  searchWord?: string;
   category?: string;
 }
 
-const SearchHome: React.FC<SearchHome> = ({ value, category }) => {
+const SearchHome: React.FC<SearchHome> = ({ searchWord, category }) => {
   const selector = useSelector((state: Store) => state);
   const dispatch = useDispatch();
 
@@ -50,11 +50,11 @@ const SearchHome: React.FC<SearchHome> = ({ value, category }) => {
         result = category === item.category;
         if (!result) return false;
       }
-      // value
-      if (value) {
+      // searchWord
+      if (searchWord) {
         result =
-          item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
-          item.description.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+          item.name.toLowerCase().indexOf(searchWord.toLowerCase()) !== -1 ||
+          item.description.toLowerCase().indexOf(searchWord.toLowerCase()) !== -1;
       }
       return result;
     });
@@ -74,7 +74,7 @@ const SearchHome: React.FC<SearchHome> = ({ value, category }) => {
     setNewArrivalOrderProducts(
       updateList.sort((a, b) => b.created_at.localeCompare(a.created_at))
     );
-  }, [list, category, value]);
+  }, [list, category, searchWord]);
 
   return (
     <SearchTabNavigation

@@ -11,10 +11,10 @@ const Tab = createMaterialTopTabNavigator();
 interface HomeTabNavigation {
   modalVisible: boolean;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  valueArray: string[];
-  setValueArray: React.Dispatch<React.SetStateAction<string[]>>;
+  searchWord: string;
+  setSearchWord: React.Dispatch<React.SetStateAction<string>>;
+  searchWordArray: string[];
+  setSearchWordArray: React.Dispatch<React.SetStateAction<string[]>>;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   navigation: {
     dispatch: (pushAction: unknown) => void;
@@ -24,10 +24,10 @@ interface HomeTabNavigation {
 const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
   modalVisible,
   setModalVisible,
-  value,
-  setValue,
-  valueArray,
-  setValueArray,
+  searchWord,
+  setSearchWord,
+  searchWordArray,
+  setSearchWordArray,
   setCategory,
   navigation,
 }) => {
@@ -66,11 +66,11 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
     setNewArrivalOrderProducts(
       updateList.sort((a, b) => b.created_at.localeCompare(a.created_at))
     );
-  }, [list, value]);
+  }, [list, searchWord]);
 
   useEffect(() => {
-    setValue(valueArray[valueArray.length - 1]);
-  }, [modalVisible, navigation, setValue, valueArray]);
+    setSearchWord(searchWordArray[searchWordArray.length - 1]);
+  }, [modalVisible, navigation, searchWordArray, setSearchWord]);
 
   return (
     <View style={styles.homeTabNavigationContainer}>
@@ -92,10 +92,10 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
       <SearchModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        value={value}
-        setValue={setValue}
-        valueArray={valueArray}
-        setValueArray={setValueArray}
+        searchWord={searchWord}
+        setSearchWord={setSearchWord}
+        searchWordArray={searchWordArray}
+        setSearchWordArray={setSearchWordArray}
         navigation={navigation}
       />
     </View>
