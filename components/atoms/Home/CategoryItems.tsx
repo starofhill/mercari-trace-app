@@ -4,9 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CategoryItem } from ".";
 
-const CategoryItems: React.FC<{
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
-}> = ({ setCategory }) => {
+const CategoryItems: React.FC = () => {
   const [showFlag, setShowFlag] = useState(false);
 
   return (
@@ -17,21 +15,13 @@ const CategoryItems: React.FC<{
           name="female"
           size={32}
           category="レディース"
-          setCategory={setCategory}
         />
-        <CategoryItem
-          color="#005FFF"
-          name="male"
-          size={32}
-          category="メンズ"
-          setCategory={setCategory}
-        />
+        <CategoryItem color="#005FFF" name="male" size={32} category="メンズ" />
         <CategoryItem
           color="#FFCC00"
           name="baby"
           size={32}
           category="ベビー・キッズ"
-          setCategory={setCategory}
         />
         <CategoryItem
           color="#CC66CC"
@@ -39,7 +29,6 @@ const CategoryItems: React.FC<{
           size={32}
           category="スマホ"
           category2="タブレット"
-          setCategory={setCategory}
         />
       </View>
       <View style={styles.category}>
@@ -48,14 +37,12 @@ const CategoryItems: React.FC<{
           name="book-open"
           size={28}
           category="本・メディア"
-          setCategory={setCategory}
         />
         <CategoryItem
           color="#FF8C00"
           name="gamepad"
           size={28}
           category="ゲーム"
-          setCategory={setCategory}
         />
         <CategoryItem
           color="#32CD32"
@@ -63,7 +50,6 @@ const CategoryItems: React.FC<{
           size={32}
           category="おもちゃ"
           category2="ホビー・グッズ"
-          setCategory={setCategory}
         />
         <CategoryItem
           color="#A9A9A9"
@@ -71,7 +57,6 @@ const CategoryItems: React.FC<{
           size={28}
           category="メルカリ公式"
           category2="梱包グッズ"
-          setCategory={setCategory}
         />
       </View>
 
@@ -79,7 +64,7 @@ const CategoryItems: React.FC<{
         <TouchableOpacity
           style={styles.seeMore}
           onPress={() => {
-            setShowFlag(!showFlag);
+            setShowFlag(true);
           }}
         >
           <Text style={styles.seeMoreText}>もっと見る</Text>
@@ -95,7 +80,6 @@ const CategoryItems: React.FC<{
               name="microphone-alt"
               size={28}
               category="タレントグッズ"
-              setCategory={setCategory}
             />
             <CategoryItem
               color="#DC143C"
@@ -103,7 +87,6 @@ const CategoryItems: React.FC<{
               size={28}
               category="コスメ"
               category2="香水・美容"
-              setCategory={setCategory}
             />
             <CategoryItem
               color="#00FFFF"
@@ -111,14 +94,12 @@ const CategoryItems: React.FC<{
               size={32}
               category="スポーツ"
               category2="レンジャー"
-              setCategory={setCategory}
             />
             <CategoryItem
               color="#9400D3"
               name="camera"
               size={28}
               category="家電・カメラ"
-              setCategory={setCategory}
             />
           </View>
           <View style={styles.category}>
@@ -128,7 +109,6 @@ const CategoryItems: React.FC<{
               size={28}
               category="インテリア"
               category2="住まい・小物"
-              setCategory={setCategory}
             />
             <CategoryItem
               color="#1E90FF"
@@ -136,21 +116,18 @@ const CategoryItems: React.FC<{
               size={28}
               category="自動車"
               category2="オートバイ"
-              setCategory={setCategory}
             />
             <CategoryItem
               color="#555"
               name="ticket-alt"
               size={28}
               category="チケット"
-              setCategory={setCategory}
             />
             <CategoryItem
               color="#FF4F50"
               name="donate"
               size={28}
               category="メルカリ寄付"
-              setCategory={setCategory}
             />
           </View>
         </View>

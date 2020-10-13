@@ -18,19 +18,13 @@ const categories = [
   "自動車・オートバイ",
 ];
 
-const Category: React.FC<{
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
-}> = ({ setCategory }) => {
+const Category: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
-      <CategoryItems setCategory={setCategory} />
+      <CategoryItems />
       <View style={styles.boxes}>
         {categories.map((category, categoryNumber) => (
-          <CategoryBox
-            title={category}
-            setCategory={setCategory}
-            key={categoryNumber.toString()}
-          />
+          <CategoryBox title={category} key={categoryNumber.toString()} />
         ))}
       </View>
     </ScrollView>

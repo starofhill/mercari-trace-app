@@ -1,9 +1,10 @@
+/* eslint-disable camelcase */
 import React from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
 import icon from "../../../assets/user_icon.png";
 
 interface CommentBox {
-  item: { content: string };
+  item: { content: string; user_name: string };
 }
 
 const CommentBox: React.FC<CommentBox> = ({ item }) => {
@@ -11,7 +12,7 @@ const CommentBox: React.FC<CommentBox> = ({ item }) => {
     <View style={styles.commentBox}>
       <Image source={icon} style={styles.icon} />
       <View style={styles.commentContent}>
-        <Text>name</Text>
+        {item.user_name ? <Text>{item.user_name}</Text> : <Text>no Name</Text>}
         <View style={styles.commentTextBox}>
           <Text>{item.content}</Text>
         </View>

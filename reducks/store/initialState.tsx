@@ -13,5 +13,11 @@ const initialState = {
       uid: "",
     },
   },
+
+  search: {
+    searchWord: "",
+    searchWordArray: [],
+    category: "",
+  },
 };
 export default initialState;

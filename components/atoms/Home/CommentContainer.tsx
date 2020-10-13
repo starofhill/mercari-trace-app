@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -151,6 +151,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   safeAreaView: {
-    backgroundColor: "white",
+    backgroundColor: "#eee",
   },
 });

@@ -19,7 +19,16 @@ const SearchTabNavigation: React.FC<SearchTabNavigation> = ({
   newArrivalOrderProducts,
 }) => {
   return (
-    <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
+    <Tab.Navigator
+      tabBarOptions={{
+        scrollEnabled: true,
+        tabStyle: {
+          width: "auto",
+          paddingLeft: 20,
+          paddingRight: 20,
+        },
+      }}
+    >
       <Tab.Screen name="おすすめ">
         {() => <SearchScreen list={recommendedProducts} />}
       </Tab.Screen>

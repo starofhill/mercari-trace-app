@@ -1,34 +1,35 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useNavigation, StackActions } from "@react-navigation/native";
+import { StackActions } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { SearchModalContent, SearchCategory, SearchHome } from "../atoms/Home";
+import { useDispatch, useSelector } from "react-redux";
+import { SearchCategory, SearchHome } from "../atoms/Home";
 import { HomeTabNavigation } from "../../navigation";
-import { Navigation } from "../../Interface";
+import { Navigation, Store } from "../../Interface";
+import {
+  resetCategoryAction,
+  resetSearchWordAction,
+  deleteSearchWordAction,
+} from "../../reducks/search/actions";
 
 const Stack = createStackNavigator();
 
 const Home: React.FC<Navigation> = ({ navigation }) => {
-  const { navigate } = useNavigation();
-  const [searchWord, setSearchWord] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
-  const [searchWordArray, setSearchWordArray] = useState<string[]>([]);
+  const dispatch = useDispatch();
 
-  const [category, setCategory] = useState("");
+  const search = useSelector((state: Store) => state.search);
+  const { category } = search;
+  const { searchWordArray } = search;
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const popAction = StackActions.pop(1);
 
   navigation.addListener("tabPress", () => {
-    setSearchWord("");
-    setSearchWordArray([]);
-    setCategory("");
-
-    navigation.addListener("focus", () => {
-      setSearchWord(searchWord);
-      setSearchWordArray(searchWordArray);
-      setCategory(category);
-    });
+    navigation.navigate("Home");
+    dispatch(resetSearchWordAction());
+    dispatch(resetCategoryAction());
   });
 
   return (
@@ -50,49 +51,14 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
           headerRightContainerStyle: styles.headerRight,
         }}
       >
-        {() => (
+        {(props) => (
           <HomeTabNavigation
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
-            searchWord={searchWord}
-            setSearchWord={setSearchWord}
-            searchWordArray={searchWordArray}
-            setSearchWordArray={setSearchWordArray}
-            setCategory={setCategory}
-            navigation={navigation}
+            navigation={props.navigation}
           />
         )}
       </Stack.Screen>
-
-      <Stack.Screen
-        name="SearchModalContent"
-        component={SearchModalContent}
-        options={{
-          // TextInputが入力されていなければページ遷移なし
-          headerTitle: () =>
-            searchWord ? (
-              <TextInput
-                style={styles.input}
-                onChangeText={(newValue) => {
-                  setSearchWord(newValue);
-                }}
-                placeholder="検索"
-                autoCapitalize="none"
-                onSubmitEditing={() => navigate("SearchHome")}
-              />
-            ) : (
-              <TextInput
-                style={styles.input}
-                onChangeText={(newValue) => {
-                  setSearchWord(newValue);
-                }}
-                placeholder="検索"
-                autoCapitalize="none"
-              />
-            ),
-          headerBackTitleVisible: false,
-        }}
-      />
 
       <Stack.Screen
         name="SearchHome"
@@ -117,9 +83,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                setSearchWordArray(
-                  [...searchWordArray].splice(0, searchWordArray.length - 1)
-                );
+                dispatch(deleteSearchWordAction());
                 navigation.dispatch(popAction);
               }}
             >
@@ -134,12 +98,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
           headerLeftContainerStyle: styles.headerLeft,
         }}
       >
-        {() => (
-          <SearchHome
-            searchWord={searchWordArray[searchWordArray.length - 1]}
-            category={category}
-          />
-        )}
+        {() => <SearchHome />}
       </Stack.Screen>
 
       <Stack.Screen
@@ -161,7 +120,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => {
                 navigation.dispatch(popAction);
-                setCategory("");
+                dispatch(resetCategoryAction);
               }}
             >
               <Icon

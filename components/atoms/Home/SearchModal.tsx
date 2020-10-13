@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Modal,
@@ -9,16 +9,15 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StackActions } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SearchModalContent } from ".";
+import { addSearchWordAction } from "../../../reducks/search/actions";
+import { Store } from "../../../Interface";
 
 interface SearchModal {
   modalVisible: boolean;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  searchWord: string;
-  setSearchWord: React.Dispatch<React.SetStateAction<string>>;
-  searchWordArray: string[];
-  setSearchWordArray: React.Dispatch<React.SetStateAction<string[]>>;
   navigation: {
     dispatch: (pushAction: unknown) => void;
   };
@@ -27,17 +26,19 @@ interface SearchModal {
 const SearchModal: React.FC<SearchModal> = ({
   modalVisible,
   setModalVisible,
-  searchWord,
-  setSearchWord,
-  searchWordArray,
-  setSearchWordArray,
   navigation,
 }) => {
   const pushAction = StackActions.push("SearchHome");
+  const search = useSelector((state: Store) => state.search);
+  const { searchWord } = search;
+
+  const dispatch = useDispatch();
+
+  const [value, setValue] = useState(searchWord);
 
   useEffect(() => {
-    setSearchWord(searchWordArray[searchWordArray.length - 1]);
-  }, [modalVisible, navigation, setSearchWord, searchWordArray]);
+    setValue(searchWord);
+  }, [modalVisible, navigation, searchWord]);
 
   return (
     <Modal
@@ -58,30 +59,31 @@ const SearchModal: React.FC<SearchModal> = ({
             >
               <Icon name="close" size={32} color="#ccc" style={styles.icon} />
             </TouchableOpacity>
-            {searchWord ? (
+            {value ? (
               <TextInput
                 style={styles.input}
                 onChangeText={(newValue) => {
-                  setSearchWord(newValue);
+                  setValue(newValue);
                 }}
                 onSubmitEditing={() => {
                   navigation.dispatch(pushAction);
                   setModalVisible(false);
-                  setSearchWordArray([...searchWordArray, searchWord]);
+                  dispatch(addSearchWordAction(value));
+                  setValue("");
                 }}
                 placeholder="検索"
                 autoCapitalize="none"
-                value={searchWord}
+                value={value}
               />
             ) : (
               <TextInput
                 style={styles.input}
                 onChangeText={(newValue) => {
-                  setSearchWord(newValue);
+                  setValue(newValue);
                 }}
                 placeholder="検索"
                 autoCapitalize="none"
-                value={searchWord}
+                value={value}
               />
             )}
           </View>

@@ -3,6 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { addCategoryAction } from "../../../reducks/search/actions";
 
 interface CategoryItem {
   color: string;
@@ -10,7 +12,6 @@ interface CategoryItem {
   size: number;
   category: string;
   category2?: string;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CategoryItem: React.FC<CategoryItem> = ({
@@ -19,17 +20,17 @@ const CategoryItem: React.FC<CategoryItem> = ({
   size,
   category,
   category2,
-  setCategory,
 }) => {
+  const dispatch = useDispatch();
   const { navigate } = useNavigation();
 
   const onPressCategory = () => {
     navigate("SearchCategory", [category]);
 
     if (category2) {
-      setCategory(`${category}・${category2}`);
+      dispatch(addCategoryAction(`${category}・${category2}`));
     } else {
-      setCategory(category);
+      dispatch(addCategoryAction(category));
     }
   };
 

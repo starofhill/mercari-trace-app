@@ -13,11 +13,14 @@ import {
 } from "../../../reducks/products/operations";
 
 const sellerData = {
-  name: "りゅう",
   starNumber: 3,
 };
 
 const Product: React.FC<Navigation> = ({ navigation, route }) => {
+  const { navigate } = useNavigation();
+  const dispatch = useDispatch();
+  const users = useSelector((state: Store) => state.users);
+
   // 商品情報を取得
   const [productData, setProductData] = useState(route.params);
 
@@ -28,11 +31,7 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
     starIcon.push(<Icon name="star" size={18} color="#FFCC00" key={i} />);
   }
 
-  const { navigate } = useNavigation();
-  const dispatch = useDispatch();
-
-  const users = useSelector((state: Store) => state.users);
-
+  // 商品の個別の情報を取得
   useEffect(() => {
     dispatch(getComments(id, setProductData));
   }, [dispatch, id]);
@@ -160,7 +159,9 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
                 style={styles.icon}
               />
               <View style={styles.sellerInformation}>
-                <Text style={styles.sellerName}>{sellerData.name}</Text>
+                <Text style={styles.sellerName}>
+                  {productData.user && productData.user.name}
+                </Text>
                 <View style={styles.sellerStarContent}>
                   {starIcon}
                   <Text style={styles.sellerStarNumber}>

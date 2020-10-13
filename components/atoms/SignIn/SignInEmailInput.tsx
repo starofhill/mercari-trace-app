@@ -24,6 +24,8 @@ const SignInEmailInput: React.FC = () => {
             onChangeText={(newValue) => {
               setEmail(newValue);
             }}
+            keyboardType="email-address"
+            autoCompleteType="email"
           />
           <View />
         </View>
@@ -32,9 +34,11 @@ const SignInEmailInput: React.FC = () => {
           <TextInput
             placeholder="7文字以上の半角英数字"
             value={password}
+            secureTextEntry
             onChangeText={(newValue) => {
               setPassword(newValue);
             }}
+            autoCompleteType="password"
           />
           <View />
         </View>

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 export interface Item {
+  user: unknown;
   created_at: string;
   description: string;
   id: number;
@@ -42,15 +43,23 @@ export interface Users {
   name: string;
 }
 
+export interface Search {
+  searchWord: string;
+  searchWordArray: string[];
+  category: string;
+}
+
 export interface Store {
   products: Products;
   users: Users;
+  search: Search;
 }
 
 export interface Navigation {
   navigation: {
     dispatch: (pushAction: unknown) => void;
     addListener: (s: string, f: () => void) => void;
+    navigate: (s: string) => void;
   };
   route: {
     params: Item;

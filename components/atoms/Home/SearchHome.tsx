@@ -4,17 +4,15 @@ import { fetchProducts } from "../../../reducks/products/operations";
 import { Item, Store } from "../../../Interface";
 import { SearchTabNavigation } from "../../../navigation";
 
-interface SearchHome {
-  searchWord?: string;
-  category?: string;
-}
-
-const SearchHome: React.FC<SearchHome> = ({ searchWord, category }) => {
-  const selector = useSelector((state: Store) => state);
-  const dispatch = useDispatch();
-
-  const { products } = selector;
+const SearchHome: React.FC = () => {
+  const products = useSelector((state: Store) => state.products);
   const { list } = products;
+
+  const search = useSelector((state: Store) => state.search);
+  const { category } = search;
+  const { searchWord } = search;
+
+  const dispatch = useDispatch();
 
   // 「おすすめ」の商品リスト
   const [recommendedProducts, setRecommendedProducts] = useState<Item[]>([]);
@@ -54,7 +52,8 @@ const SearchHome: React.FC<SearchHome> = ({ searchWord, category }) => {
       if (searchWord) {
         result =
           item.name.toLowerCase().indexOf(searchWord.toLowerCase()) !== -1 ||
-          item.description.toLowerCase().indexOf(searchWord.toLowerCase()) !== -1;
+          item.description.toLowerCase().indexOf(searchWord.toLowerCase()) !==
+            -1;
       }
       return result;
     });

@@ -11,11 +11,6 @@ const Tab = createMaterialTopTabNavigator();
 interface HomeTabNavigation {
   modalVisible: boolean;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  searchWord: string;
-  setSearchWord: React.Dispatch<React.SetStateAction<string>>;
-  searchWordArray: string[];
-  setSearchWordArray: React.Dispatch<React.SetStateAction<string[]>>;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
   navigation: {
     dispatch: (pushAction: unknown) => void;
   };
@@ -24,20 +19,15 @@ interface HomeTabNavigation {
 const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
   modalVisible,
   setModalVisible,
-  searchWord,
-  setSearchWord,
-  searchWordArray,
-  setSearchWordArray,
-  setCategory,
   navigation,
 }) => {
-  const selector = useSelector((state: Store) => state);
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
-
+  const selector = useSelector((state: Store) => state);
   const { products } = selector;
   const { list } = products;
+
+  const [loading, setLoading] = useState(false);
 
   // 「おすすめ」の商品リスト
   const [recommendedProducts, setRecommendedProducts] = useState<Item[]>([]);
@@ -66,24 +56,27 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
     setNewArrivalOrderProducts(
       updateList.sort((a, b) => b.created_at.localeCompare(a.created_at))
     );
-  }, [list, searchWord]);
-
-  useEffect(() => {
-    setSearchWord(searchWordArray[searchWordArray.length - 1]);
-  }, [modalVisible, navigation, searchWordArray, setSearchWord]);
+  }, [list]);
 
   return (
     <View style={styles.homeTabNavigationContainer}>
-      <Tab.Navigator tabBarOptions={{ scrollEnabled: true }}>
+      <Tab.Navigator
+        tabBarOptions={{
+          scrollEnabled: true,
+          tabStyle: {
+            width: "auto",
+            paddingLeft: 20,
+            paddingRight: 20,
+          },
+        }}
+      >
         <Tab.Screen name="おすすめ">
           {() => <Products list={recommendedProducts} loading={loading} />}
         </Tab.Screen>
         <Tab.Screen name="新着">
           {() => <Products list={newArrivalOrderProducts} loading={loading} />}
         </Tab.Screen>
-        <Tab.Screen name="カテゴリー">
-          {() => <Category setCategory={setCategory} />}
-        </Tab.Screen>
+        <Tab.Screen name="カテゴリー" component={Category} />
         <Tab.Screen name="保存した検索条件">
           {() => <Products list={recommendedProducts} loading={loading} />}
         </Tab.Screen>
@@ -92,10 +85,6 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
       <SearchModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        searchWord={searchWord}
-        setSearchWord={setSearchWord}
-        searchWordArray={searchWordArray}
-        setSearchWordArray={setSearchWordArray}
         navigation={navigation}
       />
     </View>

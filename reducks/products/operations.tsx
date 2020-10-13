@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from "axios";
 import { Alert } from "react-native";
 import { Validation } from "../../components/atoms/Listing";
@@ -139,7 +140,10 @@ export const deleteProduct = (
   };
 };
 
-export const getComments = (id: number, setProductData) => {
+export const getComments = (
+  id: number,
+  setProductData: React.Dispatch<React.SetStateAction<Item>>
+) => {
   return async () => {
     axios
       .get(`https://mercari-trace-server.herokuapp.com/api/v1/products/${id}/`)
@@ -155,8 +159,29 @@ export const doComments = (
   comment: string,
   users: Users,
   setProductData: React.Dispatch<React.SetStateAction<Item>>,
-  comments,
-  setComments,
+  comments:
+    | {
+        id: number;
+        content: string;
+        user_id: number;
+        product_id: number;
+        created_at: string;
+        update_at: string;
+      }[]
+    | undefined,
+  setComments: React.Dispatch<
+    React.SetStateAction<
+      | {
+          id: number;
+          content: string;
+          user_id: number;
+          product_id: number;
+          created_at: string;
+          update_at: string;
+        }[]
+      | undefined
+    >
+  >,
   navigate: (nav: string) => void
 ) => {
   return async (dispatch) => {

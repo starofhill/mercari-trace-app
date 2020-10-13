@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
-import { signUpWithEmail } from "../../../reducks/users/operations";
 import { useNavigation } from "@react-navigation/native";
+import { signUpWithEmail } from "../../../reducks/users/operations";
 
 const SignUpEmailInput: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,6 +28,8 @@ const SignUpEmailInput: React.FC = () => {
               }}
               style={styles.input}
               autoCapitalize="none"
+              keyboardType="email-address"
+              autoCompleteType="email"
             />
             <View />
           </View>
@@ -36,12 +38,13 @@ const SignUpEmailInput: React.FC = () => {
             <TextInput
               placeholder="7文字以上の半角英数字"
               value={password}
-              secureTextEntry={true}
+              secureTextEntry
               onChangeText={(newValue) => {
                 setPassword(newValue);
               }}
               maxLength={15}
               style={styles.input}
+              autoCompleteType="password"
             />
             <View />
           </View>

@@ -3,14 +3,16 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Item, Store } from "../../../Interface";
+import { addCategoryAction } from "../../../reducks/search/actions";
 
 const CategoryBox: React.FC<{
   title: string;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
-}> = ({ title, setCategory }) => {
+}> = ({ title }) => {
   const { navigate } = useNavigation();
+  const dispatch = useDispatch();
+
   const selector = useSelector((state: Store) => state);
   const { products } = selector;
   const { list } = products;
@@ -23,7 +25,7 @@ const CategoryBox: React.FC<{
           style={styles.seeAll}
           onPress={() => {
             navigate("SearchCategory", [title]);
-            setCategory(title);
+            dispatch(addCategoryAction(title));
           }}
         >
           <Text style={styles.seeAllText}>すべて見る</Text>
