@@ -1,6 +1,7 @@
 import { Alert } from "react-native";
 import axios from "axios";
 import { signInWithEmailAction, signOutAction } from "./actions";
+import { storeUser } from "./asyncStorage";
 
 export const signUpWithEmail = (
   email: string,
@@ -85,24 +86,28 @@ export const signInWithEmail = (
         password,
       })
       .then((res) => {
-        dispatch(
-          signInWithEmailAction({
-            isSignedIn: true,
-            uid: res.data.data.id,
-            name: res.data.data.name,
-            headers: {
-              accessToken: res.headers["access-token"],
-              client: res.headers.client,
-              uid: res.headers.uid,
-            },
-          })
-        );
+        const userData = {
+          isSignedIn: true,
+          uid: res.data.data.id,
+          name: res.data.data.name,
+          headers: {
+            accessToken: res.headers["access-token"],
+            client: res.headers.client,
+            uid: res.headers.uid,
+          },
+        };
+
+        dispatch(signInWithEmailAction(userData));
+
         Alert.alert("ログインしました。", "", [
           {
             text: "OK",
-            onPress: () => navigate!("BottomTabNavigation"),
+            onPress: () => navigate("BottomTabNavigation"),
           },
         ]);
+
+        // 永続化
+        storeUser(userData);
       })
       .catch((err) => {
         Alert.alert("ログイン失敗です。\nもう一度やり直してください。");
@@ -118,6 +123,9 @@ export const signOut = () => {
         text: "はい",
         onPress: () => {
           dispatch(signOutAction());
+
+          // // 永続化
+          storeUser(null);
         },
       },
       {
