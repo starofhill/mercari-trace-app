@@ -12,6 +12,9 @@ const SearchHome: React.FC = () => {
   const { category } = search;
   const { searchWord } = search;
 
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
   const dispatch = useDispatch();
 
   // 「おすすめ」の商品リスト
@@ -36,8 +39,19 @@ const SearchHome: React.FC = () => {
 
   // 商品情報をStoreから取得
   useEffect(() => {
-    dispatch(fetchProducts());
+    setLoading(true);
+    dispatch(fetchProducts()).then(() => {
+      setLoading(false);
+    });
   }, [dispatch]);
+
+  // Pull to Refresh
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(fetchProducts()).then(() => {
+      setRefreshing(false);
+    });
+  };
 
   useEffect(() => {
     // filter
@@ -81,6 +95,9 @@ const SearchHome: React.FC = () => {
       priceAscendingOrderProducts={priceAscendingOrderProducts}
       priceDescendingOrderProducts={priceDescendingOrderProducts}
       newArrivalOrderProducts={newArrivalOrderProducts}
+      loading={loading}
+      onRefresh={onRefresh}
+      refreshing={refreshing}
     />
   );
 };

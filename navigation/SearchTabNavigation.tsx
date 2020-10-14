@@ -10,6 +10,9 @@ interface SearchTabNavigation {
   priceAscendingOrderProducts: Item[];
   priceDescendingOrderProducts: Item[];
   newArrivalOrderProducts: Item[];
+  loading: boolean;
+  onRefresh: () => void;
+  refreshing: boolean;
 }
 
 const SearchTabNavigation: React.FC<SearchTabNavigation> = ({
@@ -17,6 +20,9 @@ const SearchTabNavigation: React.FC<SearchTabNavigation> = ({
   priceAscendingOrderProducts,
   priceDescendingOrderProducts,
   newArrivalOrderProducts,
+  loading,
+  onRefresh,
+  refreshing,
 }) => {
   return (
     <Tab.Navigator
@@ -30,19 +36,54 @@ const SearchTabNavigation: React.FC<SearchTabNavigation> = ({
       }}
     >
       <Tab.Screen name="おすすめ">
-        {() => <SearchScreen list={recommendedProducts} />}
+        {() => (
+          <SearchScreen
+            list={recommendedProducts}
+            loading={loading}
+            onRefresh={onRefresh}
+            refreshing={refreshing}
+          />
+        )}
       </Tab.Screen>
       <Tab.Screen name="価格の安い順">
-        {() => <SearchScreen list={priceAscendingOrderProducts} />}
+        {() => (
+          <SearchScreen
+            list={priceAscendingOrderProducts}
+            loading={loading}
+            onRefresh={onRefresh}
+            refreshing={refreshing}
+          />
+        )}
       </Tab.Screen>
       <Tab.Screen name="価格の高い順">
-        {() => <SearchScreen list={priceDescendingOrderProducts} />}
+        {() => (
+          <SearchScreen
+            list={priceDescendingOrderProducts}
+            loading={loading}
+            onRefresh={onRefresh}
+            refreshing={refreshing}
+          />
+        )}
       </Tab.Screen>
       <Tab.Screen name="いいね！順">
-        {() => <SearchScreen list={recommendedProducts} />}
+        {() => (
+          <SearchScreen
+            list={recommendedProducts}
+            loading={loading}
+            onRefresh={onRefresh}
+            refreshing={refreshing}
+          />
+        )}
       </Tab.Screen>
       <Tab.Screen name="新しい順">
-        {() => <SearchScreen list={newArrivalOrderProducts} />}
+        {() => (
+          <SearchScreen
+            list={newArrivalOrderProducts}
+            loading={loading}
+            onRefresh={onRefresh}
+            refreshing={refreshing}
+          />
+        )}
       </Tab.Screen>
     </Tab.Navigator>
   );
