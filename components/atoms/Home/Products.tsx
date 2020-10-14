@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  RefreshControl,
+} from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Item } from "../../../Interface";
@@ -7,9 +14,16 @@ import { Item } from "../../../Interface";
 interface Products {
   list: Item[];
   loading: boolean;
+  onRefresh: () => void;
+  refreshing: boolean;
 }
 
-const Products: React.FC<Products> = ({ list, loading }) => {
+const Products: React.FC<Products> = ({
+  list,
+  loading,
+  onRefresh,
+  refreshing,
+}) => {
   const { navigate } = useNavigation();
 
   return (
@@ -19,6 +33,9 @@ const Products: React.FC<Products> = ({ list, loading }) => {
           data={list}
           contentContainerStyle={styles.scrollView}
           keyExtractor={(item) => `products-${item.id}`}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           renderItem={({ item }) => (
             <View style={styles.imageBox}>
               <TouchableOpacity

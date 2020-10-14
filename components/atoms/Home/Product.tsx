@@ -90,6 +90,9 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
                   <Text>コメント</Text>
                 </TouchableOpacity>
               </View>
+              {productData.comments && productData.comments.length > 0 && (
+                <Text>{productData.comments.length}</Text>
+              )}
             </View>
             <View style={styles.buttonBox}>
               <TouchableOpacity style={styles.button}>

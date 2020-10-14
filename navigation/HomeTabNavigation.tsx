@@ -28,6 +28,7 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
   const { list } = products;
 
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   // 「おすすめ」の商品リスト
   const [recommendedProducts, setRecommendedProducts] = useState<Item[]>([]);
@@ -45,10 +46,18 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
     });
   }, [dispatch, setLoading]);
 
+  // Pull to Refresh
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(fetchProducts()).then(() => {
+      setRefreshing(false);
+    });
+  };
+
+  // sort
   useEffect(() => {
     const updateList = list.slice();
 
-    // sort
     /// Recommended order
     setRecommendedProducts(updateList.slice().sort((a, b) => a.id - b.id));
 
@@ -71,14 +80,35 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
         }}
       >
         <Tab.Screen name="おすすめ">
-          {() => <Products list={recommendedProducts} loading={loading} />}
+          {() => (
+            <Products
+              list={recommendedProducts}
+              loading={loading}
+              onRefresh={onRefresh}
+              refreshing={refreshing}
+            />
+          )}
         </Tab.Screen>
         <Tab.Screen name="新着">
-          {() => <Products list={newArrivalOrderProducts} loading={loading} />}
+          {() => (
+            <Products
+              list={newArrivalOrderProducts}
+              loading={loading}
+              onRefresh={onRefresh}
+              refreshing={refreshing}
+            />
+          )}
         </Tab.Screen>
         <Tab.Screen name="カテゴリー" component={Category} />
         <Tab.Screen name="保存した検索条件">
-          {() => <Products list={recommendedProducts} loading={loading} />}
+          {() => (
+            <Products
+              list={recommendedProducts}
+              loading={loading}
+              onRefresh={onRefresh}
+              refreshing={refreshing}
+            />
+          )}
         </Tab.Screen>
       </Tab.Navigator>
 
