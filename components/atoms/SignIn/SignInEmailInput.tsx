@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ActivityIndicator,
+} from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
@@ -13,50 +19,60 @@ const SignInEmailInput: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   return (
-    <SafeAreaView>
-      <View style={styles.boxes}>
-        <View style={styles.box}>
-          <Text style={styles.textStyle}>メールアドレス</Text>
-          <TextInput
-            placeholder="メールまたは電話番号"
-            value={email}
-            onChangeText={(newValue) => {
-              setEmail(newValue);
-            }}
-            keyboardType="email-address"
-            autoCompleteType="email"
-          />
-          <View />
+    <View>
+      <SafeAreaView>
+        <View style={styles.boxes}>
+          <View style={styles.box}>
+            <Text style={styles.textStyle}>メールアドレス</Text>
+            <TextInput
+              placeholder="メールまたは電話番号"
+              value={email}
+              onChangeText={(newValue) => {
+                setEmail(newValue);
+              }}
+              keyboardType="email-address"
+              autoCompleteType="email"
+            />
+            <View />
+          </View>
+          <View style={styles.box}>
+            <Text style={styles.textStyle}>パスワード</Text>
+            <TextInput
+              placeholder="7文字以上の半角英数字"
+              value={password}
+              secureTextEntry
+              onChangeText={(newValue) => {
+                setPassword(newValue);
+              }}
+              autoCompleteType="password"
+            />
+            <View />
+          </View>
         </View>
-        <View style={styles.box}>
-          <Text style={styles.textStyle}>パスワード</Text>
-          <TextInput
-            placeholder="7文字以上の半角英数字"
-            value={password}
-            secureTextEntry
-            onChangeText={(newValue) => {
-              setPassword(newValue);
+        <View style={styles.buttonBox}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setLoading(true);
+              dispatch(signInWithEmail(email, password, navigate)).then(() => {
+                setLoading(false);
+              });
             }}
-            autoCompleteType="password"
-          />
-          <View />
+          >
+            <Text style={styles.buttonText}>ログイン</Text>
+          </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.buttonBox}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => dispatch(signInWithEmail(email, password, navigate))}
-        >
-          <Text style={styles.buttonText}>ログイン</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.login}>
-        <TouchableOpacity>
-          <Text style={styles.loginText}>パスワードを忘れた方はこちら</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        <View style={styles.login}>
+          <TouchableOpacity>
+            <Text style={styles.loginText}>パスワードを忘れた方はこちら</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+      {loading && <ActivityIndicator size="large" />}
+    </View>
   );
 };
 

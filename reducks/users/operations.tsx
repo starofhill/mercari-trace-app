@@ -41,25 +41,27 @@ export const signUpWithEmail = (
         password,
       })
       .then((res) => {
-        dispatch(
-          signInWithEmailAction({
-            isSignedIn: true,
-            uid: res.data.data.id,
-            name: res.data.data.name,
-            headers: {
-              accessToken: res.headers["access-token"],
-              client: res.headers.client,
-              uid: res.headers.uid,
-            },
-          })
-        );
+        const userData = {
+          isSignedIn: true,
+          uid: res.data.data.id,
+          name: res.data.data.name,
+          headers: {
+            accessToken: res.headers["access-token"],
+            client: res.headers.client,
+            uid: res.headers.uid,
+          },
+        };
+
+        dispatch(signInWithEmailAction(userData));
         Alert.alert("会員登録できました。", "", [
           {
             text: "OK",
             onPress: () => navigate("BottomTabNavigation"),
           },
         ]);
-        console.log(res);
+
+        // 永続化
+        storeUser(userData);
       })
       .catch((err) => {
         Alert.alert("会員登録に失敗しました。\nもう一度やり直してください。");
@@ -80,7 +82,7 @@ export const signInWithEmail = (
       return false;
     }
 
-    axios
+    return axios
       .post("https://mercari-trace-server.herokuapp.com/api/v1/auth/sign_in/", {
         email,
         password,
@@ -118,7 +120,7 @@ export const signInWithEmail = (
 
 export const signOut = () => {
   return async (dispatch: (a: unknown) => void) => {
-    Alert.alert("確認", "ログアウトしますか?", [
+    return Alert.alert("確認", "ログアウトしますか?", [
       {
         text: "はい",
         onPress: () => {
@@ -126,6 +128,12 @@ export const signOut = () => {
 
           // // 永続化
           storeUser(null);
+
+          Alert.alert("ログアウトしました。", "", [
+            {
+              text: "OK",
+            },
+          ]);
         },
       },
       {

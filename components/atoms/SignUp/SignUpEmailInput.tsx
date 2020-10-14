@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
@@ -14,106 +21,120 @@ const SignUpEmailInput: React.FC = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.boxes}>
-          <View style={styles.box}>
-            <Text style={styles.textStyle}>メールアドレス</Text>
-            <TextInput
-              placeholder="メールまたは電話番号"
-              value={email}
-              onChangeText={(newValue) => {
-                setEmail(newValue);
-              }}
-              style={styles.input}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              autoCompleteType="email"
-            />
-            <View />
-          </View>
-          <View style={styles.box}>
-            <Text style={styles.textStyle}>パスワード</Text>
-            <TextInput
-              placeholder="7文字以上の半角英数字"
-              value={password}
-              secureTextEntry
-              onChangeText={(newValue) => {
-                setPassword(newValue);
-              }}
-              maxLength={15}
-              style={styles.input}
-              autoCompleteType="password"
-            />
-            <View />
-          </View>
-          <View style={styles.box}>
-            <Text style={styles.textStyle}>ニックネーム</Text>
-            <TextInput
-              placeholder="メルカリ内のユーザ名"
-              value={name}
-              onChangeText={(newValue) => {
-                setName(newValue);
-              }}
-              style={styles.input}
-              autoCapitalize="none"
-            />
-            <View />
-          </View>
-        </View>
-        <View style={styles.boxes}>
-          <View style={styles.gender}>
-            <Text style={styles.textStyle}>性別(任意)</Text>
-            <View style={styles.genderAnswer}>
-              <TouchableOpacity style={styles.answerButton}>
-                <Text style={styles.answerButtonText}>女性</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.answerButton}>
-                <Text style={styles.answerButtonText}>男性</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.answerButton}>
-                <Text style={styles.answerButtonText}>無回答</Text>
-              </TouchableOpacity>
+    <View style={styles.container}>
+      <SafeAreaView>
+        <ScrollView>
+          <View style={styles.boxes}>
+            <View style={styles.box}>
+              <Text style={styles.textStyle}>メールアドレス</Text>
+              <TextInput
+                placeholder="メールまたは電話番号"
+                value={email}
+                onChangeText={(newValue) => {
+                  setEmail(newValue);
+                }}
+                style={styles.input}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                autoCompleteType="email"
+              />
+              <View />
             </View>
-            <Text style={styles.answerText}>
-              性別は公開されることはありません
-            </Text>
-            <View />
+            <View style={styles.box}>
+              <Text style={styles.textStyle}>パスワード</Text>
+              <TextInput
+                placeholder="7文字以上の半角英数字"
+                value={password}
+                secureTextEntry
+                onChangeText={(newValue) => {
+                  setPassword(newValue);
+                }}
+                maxLength={15}
+                style={styles.input}
+                autoCompleteType="password"
+              />
+              <View />
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.textStyle}>ニックネーム</Text>
+              <TextInput
+                placeholder="メルカリ内のユーザ名"
+                value={name}
+                onChangeText={(newValue) => {
+                  setName(newValue);
+                }}
+                style={styles.input}
+                autoCapitalize="none"
+              />
+              <View />
+            </View>
           </View>
-          <View style={styles.box}>
-            <Text style={styles.textStyle}>招待コード</Text>
-            <TextInput placeholder="お持ちの方のみ(任意)" />
-            <View />
+          <View style={styles.boxes}>
+            <View style={styles.gender}>
+              <Text style={styles.textStyle}>性別(任意)</Text>
+              <View style={styles.genderAnswer}>
+                <TouchableOpacity style={styles.answerButton}>
+                  <Text style={styles.answerButtonText}>女性</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.answerButton}>
+                  <Text style={styles.answerButtonText}>男性</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.answerButton}>
+                  <Text style={styles.answerButtonText}>無回答</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.answerText}>
+                性別は公開されることはありません
+              </Text>
+              <View />
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.textStyle}>招待コード</Text>
+              <TextInput placeholder="お持ちの方のみ(任意)" />
+              <View />
+            </View>
           </View>
-        </View>
-        <View style={styles.service}>
-          <TouchableOpacity>
-            <Text style={styles.serviceText}>
-              「次へ」のボタンを押すことにより、
-              <Text style={styles.serviceBlueText}>利用規約</Text>に
-            </Text>
-            <Text style={styles.serviceText}>同意したものとみなします。</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonBox}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              dispatch(signUpWithEmail(email, password, name, navigate))
-            }
-          >
-            <Text style={styles.buttonText}>次へ</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <View style={styles.service}>
+            <TouchableOpacity>
+              <Text style={styles.serviceText}>
+                「次へ」のボタンを押すことにより、
+                <Text style={styles.serviceBlueText}>利用規約</Text>に
+              </Text>
+              <Text style={styles.serviceText}>同意したものとみなします。</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.buttonBox}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setLoading(true);
+                dispatch(signUpWithEmail(email, password, name, navigate)).then(
+                  () => {
+                    setLoading(false);
+                  }
+                );
+              }}
+            >
+              <Text style={styles.buttonText}>次へ</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+      {loading && <ActivityIndicator size="large" style={styles.loading} />}
+    </View>
   );
 };
 
 export default SignUpEmailInput;
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   boxes: {
     marginTop: 30,
     marginBottom: 10,
@@ -205,5 +226,8 @@ const styles = StyleSheet.create({
     borderBottomColor: "#136FFF",
     borderBottomWidth: 1,
     color: "#136FFF",
+  },
+  loading: {
+    position: "absolute",
   },
 });
