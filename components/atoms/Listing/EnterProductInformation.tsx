@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, KeyboardAvoidingView, SafeAreaView } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   EnterProductInformationButton,
@@ -74,6 +74,7 @@ const EnterProductInformation: React.FC = () => {
           sendImage={sendImage}
           status={status}
         />
+        <SafeAreaView />
       </ScrollView>
     </KeyboardAvoidingView>
   );
