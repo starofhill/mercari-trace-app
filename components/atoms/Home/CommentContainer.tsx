@@ -7,6 +7,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   SafeAreaView,
+  NativeModules,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -40,6 +41,17 @@ const CommentContainer: React.FC<CommentContainer> = ({ route }) => {
 
   const users = useSelector((state: Store) => state.users);
 
+  const { StatusBarManager } = NativeModules;
+  const [statusBarHeight, setStatusBarHeight] = useState(0);
+
+  React.useEffect(() => {
+    StatusBarManager.getHeight(
+      (statusBarFrameData: { height: React.SetStateAction<number> }) => {
+        setStatusBarHeight(statusBarFrameData.height);
+      }
+    );
+  }, [StatusBarManager]);
+
   return (
     <View style={styles.commentContainer}>
       <ScrollView>
@@ -47,7 +59,10 @@ const CommentContainer: React.FC<CommentContainer> = ({ route }) => {
           <CommentBox key={item.id} item={item} />
         ))}
       </ScrollView>
-      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={60}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={statusBarHeight + 44}
+      >
         <View style={styles.BottomContainer}>
           <View style={styles.commentTextInputContainer}>
             <TextInput
