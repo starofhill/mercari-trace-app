@@ -23,6 +23,7 @@ const EnterProductInformation: React.FC = () => {
   const [condition, setCondition] = useState("");
   const [category, setCategory] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [priceString, setPriceString] = useState("");
 
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
@@ -187,11 +188,38 @@ const EnterProductInformation: React.FC = () => {
                 <TextInput
                   style={[styles.boxText, styles.inputPrice]}
                   keyboardType="numeric"
-                  value={price?.toString()}
-                  maxLength={8}
+                  maxLength={7}
                   placeholder="¥0"
+                  value={priceString}
                   onChangeText={(newPrice) => {
-                    setPrice(+newPrice);
+                    if (
+                      newPrice !== "0" &&
+                      newPrice !== "00" &&
+                      newPrice !== "000" &&
+                      newPrice !== "0000" &&
+                      newPrice !== "00000" &&
+                      newPrice !== "000000" &&
+                      newPrice !== "0000000" &&
+                      newPrice !== ""
+                    ) {
+                      setPrice(+newPrice);
+                      setPriceString(Number(newPrice).toString());
+                    } else {
+                      setPriceString("");
+                      setPrice(0);
+                    }
+                  }}
+                  onFocus={(e) => {
+                    setPriceString(e.nativeEvent.text.replace(/[^0-9-.]/g, ""));
+                  }}
+                  onEndEditing={(e) => {
+                    if (e.nativeEvent.text === "") {
+                      setPriceString("");
+                    } else {
+                      setPriceString(
+                        `¥${(+e.nativeEvent.text).toLocaleString()}`
+                      );
+                    }
                   }}
                 />
               </View>
@@ -219,6 +247,7 @@ const EnterProductInformation: React.FC = () => {
                   ) : (
                     <Text style={styles.boxText}>-</Text>
                   )}
+                  <Text>{price}</Text>
                 </View>
               </View>
             </View>
