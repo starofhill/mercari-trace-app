@@ -50,7 +50,7 @@ const Products: React.FC<Products> = ({
                   style={styles.image}
                   resizeMode="cover"
                 />
-                {item.status === "sale" && (
+                {item.status === "sold" && (
                   <>
                     <View style={styles.soldBox} />
                     <Text style={styles.soldText}>SOLD</Text>

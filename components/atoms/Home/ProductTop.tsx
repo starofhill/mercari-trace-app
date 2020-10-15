@@ -14,7 +14,7 @@ const ProductTop: React.FC<{
     <>
       <Swiper style={styles.wrapper} showsButtons>
         <>
-          {productData.status === "sale" && (
+          {productData.status === "sold" && (
             <>
               <View style={styles.soldBox} />
               <Text style={styles.soldText}>SOLD</Text>
