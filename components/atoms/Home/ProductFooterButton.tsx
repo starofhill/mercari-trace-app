@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Item } from "../../../Interface";
 
@@ -24,18 +18,16 @@ const ProductFooterButton: React.FC<{
             メルペイスマート払い{"\n"}で購入手続き
           </Text>
         </TouchableOpacity>
-        <SafeAreaView />
       </View>
       <View style={styles.footerRightButtonContainer}>
         <TouchableOpacity
           style={[styles.footerRightButton, styles.footerButton]}
           onPress={() => {
-            navigate("Purchase", productData);
+            navigate("PurchaseScreen", productData);
           }}
         >
           <Text style={styles.footerRightButtonText}>購入手続きへ</Text>
         </TouchableOpacity>
-        <SafeAreaView />
       </View>
     </View>
   );
@@ -50,8 +42,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    position: "absolute",
-    bottom: 0,
     zIndex: 10,
     width: "100%",
   },

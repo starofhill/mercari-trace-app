@@ -8,35 +8,15 @@ import {
   SafeAreaView,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Navigation } from "../../../Interface";
+import { PurchaseScreenFooter } from ".";
 
-const Purchase: React.FC<Navigation> = ({ route }) => {
-  const { navigate } = useNavigation();
+const PurchaseScreen: React.FC<Navigation> = ({ route }) => {
   const productData = route.params;
 
   return (
-    <View style={styles.purchaseContainer}>
-      <View style={styles.footer}>
-        <View style={styles.footerButtonContainer}>
-          <TouchableOpacity style={styles.footerLeftButton}>
-            <Text style={styles.footerLeftButtonText}>アップルPay</Text>
-          </TouchableOpacity>
-          <SafeAreaView />
-        </View>
-        <View style={styles.footerButtonContainer}>
-          <TouchableOpacity
-            style={styles.footerRightButton}
-            onPress={() => {
-              navigate("Purchase");
-            }}
-          >
-            <Text style={styles.footerRightButtonText}>購入する</Text>
-          </TouchableOpacity>
-          <SafeAreaView />
-        </View>
-      </View>
+    <View style={styles.PurchaseScreenContainer}>
       <ScrollView>
         <View style={styles.imageBox}>
           <Image
@@ -115,53 +95,21 @@ const Purchase: React.FC<Navigation> = ({ route }) => {
           </View>
         </View>
       </ScrollView>
+
+      <PurchaseScreenFooter />
+      <SafeAreaView style={styles.safeAreaView} />
     </View>
   );
 };
 
-export default Purchase;
+export default PurchaseScreen;
 
 const styles = StyleSheet.create({
-  purchaseContainer: { height: "100%" },
-  footer: {
+  PurchaseScreenContainer: {
+    flex: 1,
+  },
+  safeAreaView: {
     backgroundColor: "white",
-    padding: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    bottom: 0,
-    zIndex: 10,
-    width: "100%",
-  },
-  footerButtonContainer: {
-    width: "45%",
-  },
-  footerLeftButton: {
-    backgroundColor: "black",
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 5,
-    borderRadius: 5,
-  },
-  footerLeftButtonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  footerRightButton: {
-    backgroundColor: "#EA352E",
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 5,
-    borderRadius: 5,
-  },
-  footerRightButtonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
   },
   imageBox: {
     flexDirection: "row",
@@ -256,7 +204,6 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: "white",
     marginTop: 50,
-    marginBottom: 120,
   },
   deliveryRight: {
     flexDirection: "row",

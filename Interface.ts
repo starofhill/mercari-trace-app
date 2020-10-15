@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 export interface Item {
-  user: unknown;
+  user: { name: string | undefined };
   created_at: string;
   description: string;
   id: number;

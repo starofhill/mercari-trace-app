@@ -8,7 +8,11 @@ import {
   EnterProductInformation,
   ProductConditionSelect,
 } from "../components/atoms/Listing";
-import { CommentContainer, Product, Purchase } from "../components/atoms/Home";
+import {
+  CommentContainer,
+  Product,
+  PurchaseScreen,
+} from "../components/atoms/Home";
 import { BottomTabNavigation } from ".";
 import { getUser } from "../reducks/users/asyncStorage";
 import { signInWithEmailAction } from "../reducks/users/actions";
@@ -51,8 +55,8 @@ const MainNavigation: React.FC = () => {
           }}
         />
         <Stack.Screen
-          name="Purchase"
-          component={Purchase}
+          name="PurchaseScreen"
+          component={PurchaseScreen}
           options={{ title: "購入手続き", headerBackTitle: "" }}
         />
         <Stack.Screen
