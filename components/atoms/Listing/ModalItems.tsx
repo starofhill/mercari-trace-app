@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Modal, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -18,7 +18,7 @@ const ModalItems: React.FC<ModalItems> = ({
 }) => {
   useEffect(() => {
     setTimeout(() => setModalVisible(true), 500);
-  }, []);
+  }, [setModalVisible]);
 
   return (
     <View style={styles.centeredView}>
