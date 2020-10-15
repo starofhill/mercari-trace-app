@@ -200,13 +200,25 @@ const EnterProductInformation: React.FC = () => {
               <View style={styles.priceContent}>
                 <Text style={styles.priceTitleText}>販売手数料</Text>
                 <View style={styles.boxContent}>
-                  <Text style={styles.boxText}>-</Text>
+                  {price && price >= 300 && price < 10000000 ? (
+                    <Text style={styles.boxText}>
+                      ¥{Math.floor(price / 10).toLocaleString()}
+                    </Text>
+                  ) : (
+                    <Text style={styles.boxText}>-</Text>
+                  )}
                 </View>
               </View>
               <View style={styles.priceContent}>
                 <Text style={styles.priceTitleText}>販売利益</Text>
                 <View style={styles.boxContent}>
-                  <Text style={styles.boxText}>-</Text>
+                  {price && price >= 300 && price < 10000000 ? (
+                    <Text style={styles.boxText}>
+                      ¥{(price - Math.floor(price / 10)).toLocaleString()}
+                    </Text>
+                  ) : (
+                    <Text style={styles.boxText}>-</Text>
+                  )}
                 </View>
               </View>
             </View>
