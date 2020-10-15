@@ -74,6 +74,7 @@ const SearchModal: React.FC<SearchModal> = ({
                 placeholder="検索"
                 autoCapitalize="none"
                 value={value}
+                clearButtonMode="always"
               />
             ) : (
               <TextInput
