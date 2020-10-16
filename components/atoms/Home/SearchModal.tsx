@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StackActions } from "@react-navigation/native";
@@ -49,7 +50,11 @@ const SearchModal: React.FC<SearchModal> = ({
         Alert.alert("Modal has been closed.");
       }}
     >
-      <View style={styles.modalContainer}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={44}
+        style={styles.modalContainer}
+      >
         <SafeAreaView>
           <View style={styles.modalContent}>
             <TouchableOpacity
@@ -96,7 +101,7 @@ const SearchModal: React.FC<SearchModal> = ({
           </View>
           <SearchModalContent />
         </SafeAreaView>
-      </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };

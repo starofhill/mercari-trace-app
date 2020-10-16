@@ -32,7 +32,7 @@ const EnterProductInformation: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={60}>
+    <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={100}>
       <ScrollView style={styles.container}>
         <ModalItems
           takePhoto={() =>

@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   ActivityIndicator,
+  KeyboardAvoidingView,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -24,7 +25,7 @@ const SignUpEmailInput: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={150}>
       <SafeAreaView>
         <ScrollView>
           <View style={styles.boxes}>
@@ -128,7 +129,7 @@ const SignUpEmailInput: React.FC = () => {
         </ScrollView>
       </SafeAreaView>
       {loading && <ActivityIndicator size="large" style={styles.loading} />}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
   buttonBox: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 250,
+    marginBottom: 100,
   },
   button: {
     backgroundColor: "#EA352E",
