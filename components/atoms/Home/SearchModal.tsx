@@ -92,6 +92,7 @@ const SearchModal: React.FC<SearchModal> = ({
                 value={value}
               />
             )}
+            <View />
           </View>
           <SearchModalContent />
         </SafeAreaView>
@@ -109,9 +110,11 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     marginTop: 5,
+    marginRight: 15,
+    marginLeft: 15,
   },
   icon: {
     justifyContent: "center",
