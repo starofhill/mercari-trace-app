@@ -29,6 +29,7 @@ const SignInEmailInput: React.FC = () => {
             <Text style={styles.textStyle}>メールアドレス</Text>
             <TextInput
               placeholder="メールまたは電話番号"
+              style={styles.input}
               value={email}
               onChangeText={(newValue) => {
                 setEmail(newValue);
@@ -41,13 +42,15 @@ const SignInEmailInput: React.FC = () => {
           <View style={styles.box}>
             <Text style={styles.textStyle}>パスワード</Text>
             <TextInput
-              placeholder="7文字以上の半角英数字"
+              placeholder="7文字以上15文字以下の半角英数字"
+              style={styles.input}
               value={password}
               secureTextEntry
               onChangeText={(newValue) => {
                 setPassword(newValue);
               }}
               autoCompleteType="password"
+              maxLength={15}
             />
             <View />
           </View>
@@ -103,6 +106,9 @@ const styles = StyleSheet.create({
   textStyle: {
     width: 110,
     fontWeight: "bold",
+  },
+  input: {
+    width: "70%",
   },
   buttonBox: {
     justifyContent: "center",

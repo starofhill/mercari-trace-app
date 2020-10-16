@@ -46,7 +46,7 @@ const SignUpEmailInput: React.FC = () => {
             <View style={styles.box}>
               <Text style={styles.textStyle}>パスワード</Text>
               <TextInput
-                placeholder="7文字以上の半角英数字"
+                placeholder="7文字以上15文字以下の半角英数字"
                 value={password}
                 secureTextEntry
                 onChangeText={(newValue) => {
@@ -93,7 +93,10 @@ const SignUpEmailInput: React.FC = () => {
             </View>
             <View style={styles.box}>
               <Text style={styles.textStyle}>招待コード</Text>
-              <TextInput placeholder="お持ちの方のみ(任意)" />
+              <TextInput
+                style={styles.input}
+                placeholder="お持ちの方のみ(任意)"
+              />
               <View />
             </View>
           </View>
