@@ -34,12 +34,16 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
 
   const users = useSelector((state: Store) => state.users);
 
+  const [disabled, setDisabled] = React.useState(false);
+
   return (
     <View style={[styles.box, styles.buttonBox]}>
       <TouchableOpacity
         style={styles.button}
+        disabled={disabled}
         onPress={() => {
           setLoading(true);
+          setDisabled(true);
           dispatch(
             addProduct(
               image,
@@ -55,6 +59,7 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
             )
           ).then(() => {
             setLoading(false);
+            setDisabled(false);
           });
         }}
       >
