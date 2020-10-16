@@ -8,6 +8,7 @@ export interface Item {
   price: number;
   name: string;
   updated_at: string;
+  user_id: number;
 
   status?: string;
   likes?: number;

@@ -63,7 +63,7 @@ const MainNavigation: React.FC = () => {
           name="EnterProductInformation"
           component={EnterProductInformation}
           options={{
-            title: "商品の状態を入力",
+            title: "商品の情報を入力",
             headerBackTitleVisible: false,
           }}
         />

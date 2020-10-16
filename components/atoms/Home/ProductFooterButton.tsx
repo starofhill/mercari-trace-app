@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { Item } from "../../../Interface";
 
@@ -7,28 +8,42 @@ const ProductFooterButton: React.FC<{
   productData: Item;
 }> = ({ productData }) => {
   const { navigate } = useNavigation();
+  const users = useSelector((state) => state.users);
 
   return (
     <View style={styles.footer}>
-      <View style={styles.footerLeftButtonContainer}>
-        <TouchableOpacity
-          style={[styles.footerLeftButton, styles.footerButton]}
-        >
-          <Text style={styles.footerLeftButtonText}>
-            メルペイスマート払い{"\n"}で購入手続き
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.footerRightButtonContainer}>
-        <TouchableOpacity
-          style={[styles.footerRightButton, styles.footerButton]}
-          onPress={() => {
-            navigate("PurchaseScreen", productData);
-          }}
-        >
-          <Text style={styles.footerRightButtonText}>購入手続きへ</Text>
-        </TouchableOpacity>
-      </View>
+      {users.uid === productData.user_id ? (
+        <View style={styles.productEditingButtonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              navigate("EnterProductInformation");
+            }}
+            style={[styles.productEditingButton, styles.footerButton]}
+          >
+            <Text style={styles.productEditingButtonText}>商品の編集</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <>
+          <View style={styles.footerLeftButtonContainer}>
+            <TouchableOpacity
+              style={[styles.footerLeftButton, styles.footerButton]}
+            >
+              <Text style={styles.footerLeftButtonText}>あと払いする</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.footerRightButtonContainer}>
+            <TouchableOpacity
+              style={[styles.footerRightButton, styles.footerButton]}
+              onPress={() => {
+                navigate("PurchaseScreen", productData);
+              }}
+            >
+              <Text style={styles.footerRightButtonText}>購入手続きへ</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
     </View>
   );
 };
@@ -68,7 +83,7 @@ const styles = StyleSheet.create({
   },
   footerLeftButtonText: {
     color: "#EA352E",
-    fontSize: 12,
+    fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
   },
@@ -78,6 +93,18 @@ const styles = StyleSheet.create({
   footerRightButtonText: {
     color: "white",
     fontSize: 16,
+    fontWeight: "bold",
+  },
+  productEditingButtonContainer: {
+    width: "95%",
+  },
+  productEditingButton: {
+    backgroundColor: "#88CC33",
+  },
+  productEditingButtonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
     fontWeight: "bold",
   },
 });
