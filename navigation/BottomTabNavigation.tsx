@@ -1,7 +1,8 @@
 import React from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Notices, Listing, MerPay, MyPage } from "../components/pages";
+import { Home, Listing, MerPay, MyPage } from "../components/pages";
+import { NoticesNavigation } from ".";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +18,7 @@ const BottomTabNavigation: React.FC = () => {
       />
       <Tab.Screen
         name="お知らせ"
-        component={Notices}
+        component={NoticesNavigation}
         options={{
           tabBarIcon: () => <Icon name="bell" size={24} color="black" />,
         }}

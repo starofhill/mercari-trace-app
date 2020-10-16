@@ -3,13 +3,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import { SignIn } from ".";
-import { SignInEmailInput } from "../atoms/SignIn";
-import { SignUpEmailInput } from "../atoms/SignUp";
-
-const Stack = createStackNavigator();
 
 const SignUp: React.FC = () => {
   const { navigate } = useNavigation();
@@ -60,46 +54,7 @@ const SignUp: React.FC = () => {
   );
 };
 
-const SignUpContainer: React.FC = () => {
-  return (
-    <Stack.Navigator mode="card">
-      <Stack.Screen
-        name="MyPage"
-        component={SignUp}
-        options={{
-          title: "会員登録",
-          headerBackTitle: "",
-        }}
-      />
-      <Stack.Screen
-        name="SignIn"
-        component={SignIn}
-        options={{
-          title: "ログイン",
-          headerBackTitleVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="SignUpEmailInput"
-        component={SignUpEmailInput}
-        options={{
-          title: "会員登録",
-          headerBackTitleVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="SignInEmailInput"
-        component={SignInEmailInput}
-        options={{
-          title: "ログイン",
-          headerBackTitleVisible: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
-
-export default SignUpContainer;
+export default SignUp;
 
 const styles = StyleSheet.create({
   component: {

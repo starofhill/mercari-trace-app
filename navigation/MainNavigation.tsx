@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useDispatch } from "react-redux";
-import { SignUp } from "../components/pages";
 import {
   CategorySelect,
   EnterProductInformation,
@@ -13,7 +12,7 @@ import {
   Product,
   PurchaseScreen,
 } from "../components/atoms/Home";
-import { BottomTabNavigation } from ".";
+import { BottomTabNavigation, SignUpNavigation } from ".";
 import { getUser } from "../reducks/users/asyncStorage";
 import { signInWithEmailAction } from "../reducks/users/actions";
 
@@ -40,7 +39,7 @@ const MainNavigation: React.FC = () => {
         />
         <Stack.Screen
           name="SignUp"
-          component={SignUp}
+          component={SignUpNavigation}
           options={{
             headerShown: false,
           }}
