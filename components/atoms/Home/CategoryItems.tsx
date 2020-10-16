@@ -93,7 +93,7 @@ const CategoryItems: React.FC = () => {
               name="basketball-ball"
               size={32}
               category="スポーツ"
-              category2="レンジャー"
+              category2="レジャー"
             />
             <CategoryItem
               color="#9400D3"
