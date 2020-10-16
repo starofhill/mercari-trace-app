@@ -57,7 +57,12 @@ const SearchModal: React.FC<SearchModal> = ({
                 setModalVisible(!modalVisible);
               }}
             >
-              <Icon name="close" size={32} color="#ccc" style={styles.icon} />
+              <Icon
+                name="angle-left"
+                size={32}
+                color="#ccc"
+                style={styles.icon}
+              />
             </TouchableOpacity>
             {value ? (
               <TextInput
