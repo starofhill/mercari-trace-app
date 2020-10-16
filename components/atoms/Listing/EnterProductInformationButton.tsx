@@ -15,6 +15,7 @@ interface EnterProductInformationButton {
   price: number | undefined;
   sendImage: string[];
   status: string;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const EnterProductInformationButton: React.FC<EnterProductInformationButton> = ({
@@ -26,6 +27,7 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
   price,
   sendImage,
   status,
+  setLoading,
 }) => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
@@ -36,7 +38,8 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
     <View style={[styles.box, styles.buttonBox]}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() =>
+        onPress={() => {
+          setLoading(true);
           dispatch(
             addProduct(
               image,
@@ -50,8 +53,10 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
               users,
               navigate
             )
-          )
-        }
+          ).then(() => {
+            setLoading(false);
+          });
+        }}
       >
         <Text style={styles.buttonText}>出品する</Text>
       </TouchableOpacity>

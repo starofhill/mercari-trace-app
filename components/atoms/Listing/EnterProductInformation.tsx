@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, KeyboardAvoidingView, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   EnterProductInformationButton,
@@ -23,6 +28,8 @@ const EnterProductInformation: React.FC = () => {
   const [condition, setCondition] = useState("");
   const [category, setCategory] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   return (
     <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={60}>
@@ -73,9 +80,11 @@ const EnterProductInformation: React.FC = () => {
           price={price}
           sendImage={sendImage}
           status={status}
+          setLoading={setLoading}
         />
         <SafeAreaView />
       </ScrollView>
+      {loading && <ActivityIndicator size="large" style={styles.loading} />}
     </KeyboardAvoidingView>
   );
 };
@@ -83,7 +92,12 @@ const EnterProductInformation: React.FC = () => {
 export default EnterProductInformation;
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
+  container: { marginTop: 20 },
+  loading: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });
