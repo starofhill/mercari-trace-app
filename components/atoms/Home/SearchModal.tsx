@@ -59,7 +59,7 @@ const SearchModal: React.FC<SearchModal> = ({
             >
               <Icon
                 name="angle-left"
-                size={32}
+                size={40}
                 color="#ccc"
                 style={styles.icon}
               />
@@ -111,11 +111,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 8,
+    marginTop: 5,
   },
   icon: {
     justifyContent: "center",
     alignItems: "center",
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   input: {
     width: 256,
