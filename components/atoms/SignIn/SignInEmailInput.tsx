@@ -22,7 +22,7 @@ const SignInEmailInput: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <View>
+    <View style={styles.container}>
       <SafeAreaView>
         <View style={styles.boxes}>
           <View style={styles.box}>
@@ -55,6 +55,7 @@ const SignInEmailInput: React.FC = () => {
         <View style={styles.buttonBox}>
           <TouchableOpacity
             style={styles.button}
+            disabled={loading}
             onPress={() => {
               setLoading(true);
               dispatch(signInWithEmail(email, password, navigate)).then(() => {
@@ -71,7 +72,7 @@ const SignInEmailInput: React.FC = () => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-      {loading && <ActivityIndicator size="large" />}
+      {loading && <ActivityIndicator size="large" style={styles.loading} />}
     </View>
   );
 };
@@ -79,6 +80,9 @@ const SignInEmailInput: React.FC = () => {
 export default SignInEmailInput;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   boxes: {
     marginTop: 30,
     marginBottom: 10,
@@ -127,5 +131,12 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "#136FFF",
+  },
+  loading: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });

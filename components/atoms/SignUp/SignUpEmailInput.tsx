@@ -109,6 +109,7 @@ const SignUpEmailInput: React.FC = () => {
           <View style={styles.buttonBox}>
             <TouchableOpacity
               style={styles.button}
+              disabled={loading}
               onPress={() => {
                 setLoading(true);
                 dispatch(signUpWithEmail(email, password, name, navigate)).then(
@@ -132,8 +133,7 @@ export default SignUpEmailInput;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    flex: 1,
   },
   boxes: {
     marginTop: 30,
@@ -229,5 +229,9 @@ const styles = StyleSheet.create({
   },
   loading: {
     position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
