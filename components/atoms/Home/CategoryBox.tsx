@@ -17,6 +17,8 @@ const CategoryBox: React.FC<{
   const { products } = selector;
   const { list } = products;
 
+  const productData = list.filter((item) => item.category === title);
+
   return (
     <View style={styles.box}>
       <View style={styles.boxTitle}>
@@ -33,7 +35,7 @@ const CategoryBox: React.FC<{
         </TouchableOpacity>
       </View>
       <FlatList
-        data={list}
+        data={productData}
         contentContainerStyle={styles.list}
         horizontal
         keyExtractor={(item: Item) => `${item.id}`}
