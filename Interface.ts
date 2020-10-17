@@ -40,7 +40,7 @@ export interface Users {
     uid: string;
   };
   isSignedIn: boolean;
-  uid: string;
+  uid: number;
   name: string;
 }
 

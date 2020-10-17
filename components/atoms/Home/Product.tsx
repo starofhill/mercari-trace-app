@@ -49,16 +49,18 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
         <ProductInformation productData={productData} />
         <ProductSeller productData={productData} />
 
-        <View>
-          <TouchableOpacity
-            style={styles.doDelete}
-            onPress={() =>
-              dispatch(deleteProduct(productData.id, navigate, users))
-            }
-          >
-            <Text>この商品を削除する</Text>
-          </TouchableOpacity>
-        </View>
+        {productData.user_id === users.uid && (
+          <View>
+            <TouchableOpacity
+              style={styles.doDelete}
+              onPress={() =>
+                dispatch(deleteProduct(productData.id, navigate, users))
+              }
+            >
+              <Text>この商品を削除する</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         <View>
           <TouchableOpacity
