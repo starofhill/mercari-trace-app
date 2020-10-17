@@ -10,6 +10,6 @@ export { default as ExpoImagePicker } from "./ExpoImagePicker";
 export { default as ModalItems } from "./ModalItems";
 export { default as pickImage } from "./pickImage";
 export { default as ProductConditionSelect } from "./ProductConditionSelect";
-export { default as SelectProductDetailsButton } from "./SelectProductDetailsButton";
+export { default as SelectProductBoxButton } from "./SelectProductBoxButton";
 export { default as takePhoto } from "./takePhoto";
 export { default as Validation } from "./Validation";

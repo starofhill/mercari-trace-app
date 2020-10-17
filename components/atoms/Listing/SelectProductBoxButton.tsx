@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-const SelectProductDetailsButton: React.FC<{
+const SelectProductBoxButton: React.FC<{
   categoryName?: string;
   category?: string;
   conditionName?: string;
@@ -46,7 +46,7 @@ const SelectProductDetailsButton: React.FC<{
   );
 };
 
-export default SelectProductDetailsButton;
+export default SelectProductBoxButton;
 
 const styles = StyleSheet.create({
   box: {
