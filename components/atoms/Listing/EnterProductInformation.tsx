@@ -27,6 +27,10 @@ const EnterProductInformation: React.FC = () => {
   const [status] = useState("sale");
   const [condition, setCondition] = useState("");
   const [category, setCategory] = useState("");
+  const [shippingArea, setShippingArea] = useState("");
+  const [shippingCharges, setShippingCharges] = useState("");
+  const [shippingDays, setShippingDays] = useState("");
+  const [shippingMethod, setShippingMethod] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -69,7 +73,16 @@ const EnterProductInformation: React.FC = () => {
           description={description}
           setDescription={setDescription}
         />
-        <EnterProductInformationDelivery />
+        <EnterProductInformationDelivery
+          shippingArea={shippingArea}
+          setShippingArea={setShippingArea}
+          shippingCharges={shippingCharges}
+          setShippingCharges={setShippingCharges}
+          shippingDays={shippingDays}
+          setShippingDays={setShippingDays}
+          shippingMethod={shippingMethod}
+          setShippingMethod={setShippingMethod}
+        />
         <EnterProductInformationPrice price={price} setPrice={setPrice} />
         <EnterProductInformationButton
           image={image}

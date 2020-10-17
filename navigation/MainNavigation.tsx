@@ -6,6 +6,10 @@ import {
   CategorySelect,
   EnterProductInformation,
   ProductConditionSelect,
+  ShippingAreaSelect,
+  ShippingChargesSelect,
+  ShippingDaysSelect,
+  ShippingMethodSelect,
 } from "../components/atoms/Listing";
 import {
   CommentContainer,
@@ -79,6 +83,38 @@ const MainNavigation: React.FC = () => {
           component={ProductConditionSelect}
           options={{
             title: "商品の状態",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShippingChargesSelect"
+          component={ShippingChargesSelect}
+          options={{
+            title: "配送料の負担",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShippingMethodSelect"
+          component={ShippingMethodSelect}
+          options={{
+            title: "配送の方法",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShippingAreaSelect"
+          component={ShippingAreaSelect}
+          options={{
+            title: "発送元の地域",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShippingDaysSelect"
+          component={ShippingDaysSelect}
+          options={{
+            title: "発送までの日数",
             headerBackTitleVisible: false,
           }}
         />

@@ -1,38 +1,93 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const EnterProductInformationDelivery: React.FC = () => {
+interface EnterProductInformationDelivery {
+  shippingArea: string;
+  setShippingArea: React.Dispatch<React.SetStateAction<string>>;
+  shippingCharges: string;
+  setShippingCharges: React.Dispatch<React.SetStateAction<string>>;
+  shippingDays: string;
+  setShippingDays: React.Dispatch<React.SetStateAction<string>>;
+  shippingMethod: string;
+  setShippingMethod: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const EnterProductInformationDelivery: React.FC<EnterProductInformationDelivery> = ({
+  shippingArea,
+  setShippingArea,
+  shippingCharges,
+  setShippingCharges,
+  shippingDays,
+  setShippingDays,
+  shippingMethod,
+  setShippingMethod,
+}) => {
+  const { navigate } = useNavigation();
+
   return (
     <View style={styles.box}>
       <Text style={styles.boxTitle}>配送について</Text>
       <View style={styles.boxContents}>
-        <TouchableOpacity style={[styles.content, styles.borderBottom]}>
+        <TouchableOpacity
+          style={[styles.content, styles.borderBottom]}
+          onPress={() =>
+            navigate("ShippingChargesSelect", { setShippingCharges })
+          }
+        >
           <Text style={styles.boxTitleText}>配送料の負担</Text>
           <View style={styles.boxContent}>
-            <Text style={styles.boxText}>(必須)</Text>
+            {shippingCharges ? (
+              <Text style={styles.boxText}>{shippingCharges}</Text>
+            ) : (
+              <Text style={styles.boxText}>(必須)</Text>
+            )}
             <Icon name="angle-right" size={22} color="#888" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.content, styles.borderBottom]}>
+        <TouchableOpacity
+          style={[styles.content, styles.borderBottom]}
+          onPress={() =>
+            navigate("ShippingMethodSelect", { setShippingMethod })
+          }
+        >
           <Text style={styles.boxTitleText}>配送の方法</Text>
           <View style={styles.boxContent}>
-            <Text style={styles.boxText}>(必須)</Text>
+            {shippingMethod ? (
+              <Text style={styles.boxText}>{shippingMethod}</Text>
+            ) : (
+              <Text style={styles.boxText}>(必須)</Text>
+            )}
             <Icon name="angle-right" size={22} color="#888" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.content, styles.borderBottom]}>
+        <TouchableOpacity
+          style={[styles.content, styles.borderBottom]}
+          onPress={() => navigate("ShippingAreaSelect", { setShippingArea })}
+        >
           <Text style={styles.boxTitleText}>配送元の地域</Text>
           <View style={styles.boxContent}>
-            <Text style={styles.boxText}>(必須)</Text>
+            {shippingArea ? (
+              <Text style={styles.boxText}>{shippingArea}</Text>
+            ) : (
+              <Text style={styles.boxText}>(必須)</Text>
+            )}
             <Icon name="angle-right" size={22} color="#888" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.content, styles.borderBottom]}>
+        <TouchableOpacity
+          style={[styles.content, styles.borderBottom]}
+          onPress={() => navigate("ShippingDaysSelect", { setShippingDays })}
+        >
           <Text style={styles.boxTitleText}>配送までの日数</Text>
           <View style={styles.boxContent}>
-            <Text style={styles.boxText}>(必須)</Text>
+            {shippingDays ? (
+              <Text style={styles.boxText}>{shippingDays}</Text>
+            ) : (
+              <Text style={styles.boxText}>(必須)</Text>
+            )}
             <Icon name="angle-right" size={22} color="#888" />
           </View>
         </TouchableOpacity>

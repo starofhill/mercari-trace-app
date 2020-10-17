@@ -13,91 +13,44 @@ const CategorySelect: React.FC<{
     <SafeAreaView>
       <ScrollView>
         <View>
+          <SelectProductBoxButton name="レディース" setName={setCategory} />
+          <SelectProductBoxButton name="メンズ" setName={setCategory} />
+          <SelectProductBoxButton name="ベビー・キッズ" setName={setCategory} />
           <SelectProductBoxButton
-            categoryName="レディース"
-            category="women"
-            setCategory={setCategory}
+            name="スマホ・タブレット"
+            setName={setCategory}
+          />
+          <SelectProductBoxButton name="本・メディア" setName={setCategory} />
+          <SelectProductBoxButton name="ゲーム" setName={setCategory} />
+          <SelectProductBoxButton
+            name="おもちゃ・ホビー・グッズ"
+            setName={setCategory}
           />
           <SelectProductBoxButton
-            categoryName="メンズ"
-            category="mens"
-            setCategory={setCategory}
+            name="メルカリ公式・梱包グッズ"
+            setName={setCategory}
+          />
+          <SelectProductBoxButton name="タレントグッズ" setName={setCategory} />
+          <SelectProductBoxButton
+            name="コスメ・香水・美容"
+            setName={setCategory}
           />
           <SelectProductBoxButton
-            categoryName="ベビー・キッズ"
-            category="baby"
-            setCategory={setCategory}
+            name="スポーツ・レジャー"
+            setName={setCategory}
+          />
+          <SelectProductBoxButton name="家電・カメラ" setName={setCategory} />
+          <SelectProductBoxButton
+            name="インテリア・住まい・小物"
+            setName={setCategory}
           />
           <SelectProductBoxButton
-            categoryName="スマホ・タブレット"
-            category="smartphone"
-            setCategory={setCategory}
+            name="自動車・オートバイ"
+            setName={setCategory}
           />
-          <SelectProductBoxButton
-            categoryName="本・メディア"
-            category="book"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="ゲーム"
-            category="game"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="おもちゃ・ホビー・グッズ"
-            category="toys"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="メルカリ公式・梱包グッズ"
-            category="mercariOfficialPacking Goods"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="タレントグッズ"
-            category="talentGoods"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="コスメ・香水・美容"
-            category="cosmetics"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="スポーツ・レジャー"
-            category="sports"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="家電・カメラ"
-            category="appliances"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="インテリア・住まい・小物"
-            category="interior"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="自動車・オートバイ"
-            category="car"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="チケット"
-            category="ticket"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="メルカリ寄付"
-            category="mercariDonation"
-            setCategory={setCategory}
-          />
-          <SelectProductBoxButton
-            categoryName="その他"
-            category="other"
-            setCategory={setCategory}
-          />
+          <SelectProductBoxButton name="チケット" setName={setCategory} />
+          <SelectProductBoxButton name="メルカリ寄付" setName={setCategory} />
+          <SelectProductBoxButton name="その他" setName={setCategory} />
         </View>
       </ScrollView>
     </SafeAreaView>

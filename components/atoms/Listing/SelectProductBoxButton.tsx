@@ -5,42 +5,21 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 const SelectProductBoxButton: React.FC<{
-  categoryName?: string;
-  category?: string;
-  conditionName?: string;
-  condition?: number;
-  setCategory?: (categoryName: string) => void;
-  setCondition?: (categoryName: string) => void;
-}> = ({
-  categoryName,
-  category,
-  conditionName,
-  condition,
-  setCategory,
-  setCondition,
-}) => {
+  name: string;
+  setName: (name: string) => void;
+}> = ({ name, setName }) => {
   const { navigate } = useNavigation();
 
   return (
     <TouchableOpacity
       style={styles.box}
       onPress={() => {
-        if (setCategory && categoryName) {
-          setCategory(categoryName);
-        }
-
-        if (setCondition && conditionName) {
-          setCondition(conditionName);
-        }
+        setName(name);
 
         navigate("EnterProductInformation");
       }}
     >
-      {categoryName ? (
-        <Text>{categoryName}</Text>
-      ) : (
-        <Text>{conditionName}</Text>
-      )}
+      <Text>{name}</Text>
       <Icon name="angle-right" size={24} color="#ccc" />
     </TouchableOpacity>
   );

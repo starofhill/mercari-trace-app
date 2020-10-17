@@ -11,35 +11,20 @@ const ProductConditionSelect: React.FC<{
   return (
     <SafeAreaView>
       <View>
+        <SelectProductBoxButton name="新品、未使用" setName={setCondition} />
+        <SelectProductBoxButton name="未使用に近い" setName={setCondition} />
         <SelectProductBoxButton
-          conditionName="新品、未使用"
-          condition={1}
-          setCondition={setCondition}
+          name="目立った傷や汚れなし"
+          setName={setCondition}
         />
         <SelectProductBoxButton
-          conditionName="未使用に近い"
-          condition={2}
-          setCondition={setCondition}
+          name="やや傷や汚れあり"
+          setName={setCondition}
         />
+        <SelectProductBoxButton name="傷や汚れあり" setName={setCondition} />
         <SelectProductBoxButton
-          conditionName="目立った傷や汚れなし"
-          condition={3}
-          setCondition={setCondition}
-        />
-        <SelectProductBoxButton
-          conditionName="やや傷や汚れあり"
-          condition={4}
-          setCondition={setCondition}
-        />
-        <SelectProductBoxButton
-          conditionName="傷や汚れあり"
-          condition={5}
-          setCondition={setCondition}
-        />
-        <SelectProductBoxButton
-          conditionName="全体的に状態が悪い"
-          condition={6}
-          setCondition={setCondition}
+          name="全体的に状態が悪い"
+          setName={setCondition}
         />
       </View>
     </SafeAreaView>
