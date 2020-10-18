@@ -39,9 +39,6 @@ const ProductFooterButton: React.FC<{
       {productData.status !== "sold" && users.uid === productData.user_id && (
         <View style={styles.productEditingButtonContainer}>
           <TouchableOpacity
-            onPress={() => {
-              navigate("EnterProductInformation");
-            }}
             style={[styles.productEditingButton, styles.footerButton]}
           >
             <Text style={styles.productEditingButtonText}>商品の編集</Text>
