@@ -10,20 +10,11 @@ const ProductFooterButton: React.FC<{
   const { navigate } = useNavigation();
   const users = useSelector((state) => state.users);
 
+  console.log(productData.status);
+
   return (
     <View style={styles.footer}>
-      {users.uid === productData.user_id ? (
-        <View style={styles.productEditingButtonContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              navigate("EnterProductInformation");
-            }}
-            style={[styles.productEditingButton, styles.footerButton]}
-          >
-            <Text style={styles.productEditingButtonText}>商品の編集</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
+      {productData.status !== "sold" && users.uid !== productData.user_id && (
         <>
           <View style={styles.footerLeftButtonContainer}>
             <TouchableOpacity
@@ -43,6 +34,29 @@ const ProductFooterButton: React.FC<{
             </TouchableOpacity>
           </View>
         </>
+      )}
+
+      {productData.status !== "sold" && users.uid === productData.user_id && (
+        <View style={styles.productEditingButtonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              navigate("EnterProductInformation");
+            }}
+            style={[styles.productEditingButton, styles.footerButton]}
+          >
+            <Text style={styles.productEditingButtonText}>商品の編集</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {productData.status === "sold" && (
+        <View style={styles.productEditingButtonContainer}>
+          <TouchableOpacity
+            style={[styles.footerSoldButton, styles.footerButton]}
+          >
+            <Text style={styles.productEditingButtonText}>売り切れました</Text>
+          </TouchableOpacity>
+        </View>
       )}
     </View>
   );
@@ -106,5 +120,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
+  },
+  footerSoldButton: {
+    backgroundColor: "#FCBFCC",
   },
 });
