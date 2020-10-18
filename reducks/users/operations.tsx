@@ -118,9 +118,13 @@ export const signInWithEmail = (
   };
 };
 
-export const signOut = () => {
+export const signOut = (
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   return async (dispatch: (a: unknown) => void) => {
-    return Alert.alert("確認", "ログアウトしますか?", [
+    setTimeout(() => setLoading(true), 500);
+
+    Alert.alert("確認", "ログアウトしますか?", [
       {
         text: "はい",
         onPress: () => {
@@ -128,6 +132,8 @@ export const signOut = () => {
 
           // // 永続化
           storeUser(null);
+
+          setLoading(false);
 
           Alert.alert("ログアウトしました。", "", [
             {
@@ -139,6 +145,9 @@ export const signOut = () => {
       {
         text: "いいえ",
         style: "cancel",
+        onPress: () => {
+          setLoading(false);
+        },
       },
     ]);
   };

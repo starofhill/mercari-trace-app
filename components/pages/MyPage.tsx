@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, ActivityIndicator } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -12,6 +12,7 @@ const MyPage: React.FC = () => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
   const users = useSelector((state: Store) => state.users);
+  const [loading, setLoading] = useState(false);
 
   return (
     <SafeAreaView>
@@ -96,7 +97,7 @@ const MyPage: React.FC = () => {
             {users.isSignedIn && (
               <TouchableOpacity
                 style={styles.box}
-                onPress={() => dispatch(signOut())}
+                onPress={() => dispatch(signOut(setLoading))}
               >
                 <Text>ログアウト</Text>
                 <Icon name="angle-right" size={24} color="#ccc" />
@@ -105,6 +106,7 @@ const MyPage: React.FC = () => {
           </View>
         </View>
       </ScrollView>
+      {loading && <ActivityIndicator size="large" style={styles.loading} />}
     </SafeAreaView>
   );
 };
@@ -163,5 +165,12 @@ const styles = StyleSheet.create({
     maxWidth: 500,
     alignItems: "center",
     justifyContent: "center",
+  },
+  loading: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });

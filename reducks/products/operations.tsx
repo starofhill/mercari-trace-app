@@ -89,7 +89,8 @@ export const addProduct = (
 export const deleteProduct = (
   id: number,
   navigate: (Component: string) => void,
-  users: Users
+  users: Users,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   return async (dispatch) => {
     Alert.alert(
@@ -103,6 +104,7 @@ export const deleteProduct = (
         {
           text: "はい",
           onPress: () => {
+            setLoading(true);
             axios
               .delete(
                 `https://mercari-trace-server.herokuapp.com/api/v1/products/${id}`,
@@ -115,6 +117,7 @@ export const deleteProduct = (
                 }
               )
               .then(() => {
+                setLoading(false);
                 Alert.alert("商品を削除できました。", "", [
                   {
                     text: "OK",
@@ -126,6 +129,7 @@ export const deleteProduct = (
                 ]);
               })
               .catch(() => {
+                setLoading(false);
                 Alert.alert("商品を削除することが\nできませんでした。", "", [
                   {
                     text: "OK",
@@ -310,11 +314,11 @@ export const PurchaseProducts = (
                 }
               )
               .then(() => {
+                setLoading(false);
                 Alert.alert("商品を購入することが\nできました。", "", [
                   {
                     text: "OK",
                     onPress: () => {
-                      setLoading(false);
                       dispatch(fetchProducts());
                       navigate("Home");
                     },
@@ -322,12 +326,10 @@ export const PurchaseProducts = (
                 ]);
               })
               .catch(() => {
+                setLoading(false);
                 Alert.alert("商品を購入することが\nできませんでした。", "", [
                   {
                     text: "OK",
-                    onPress: () => {
-                      setLoading(false);
-                    },
                   },
                 ]);
               });

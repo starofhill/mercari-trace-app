@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  ActivityIndicator,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -31,6 +32,7 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
 
   // 商品情報を取得
   const [productData, setProductData] = useState(route.params);
+  const [loading, setLoading] = useState(false);
 
   const { id } = route.params;
 
@@ -54,7 +56,9 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
             <TouchableOpacity
               style={styles.doDelete}
               onPress={() =>
-                dispatch(deleteProduct(productData.id, navigate, users))
+                dispatch(
+                  deleteProduct(productData.id, navigate, users, setLoading)
+                )
               }
             >
               <Text>この商品を削除する</Text>
@@ -79,6 +83,7 @@ const Product: React.FC<Navigation> = ({ navigation, route }) => {
       </ScrollView>
       <ProductFooterButton productData={productData} />
       <SafeAreaView />
+      {loading && <ActivityIndicator size="large" style={styles.loading} />}
     </View>
   );
 };
@@ -112,5 +117,12 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     marginBottom: 100,
     marginLeft: "auto",
+  },
+  loading: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });
