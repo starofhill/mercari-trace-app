@@ -218,7 +218,8 @@ export const PurchaseProducts = (
   id: number,
   paymentMethod: string,
   users: Users,
-  navigate: (Component: string) => void
+  navigate: (Component: string) => void,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   return async (dispatch) => {
     if (!users.isSignedIn) {
@@ -288,8 +289,10 @@ export const PurchaseProducts = (
         },
         {
           text: "はい",
-          onPress: () => {
-            axios
+          onPress: async () => {
+            setLoading(true);
+
+            await axios
               .post(
                 "https://mercari-trace-server.herokuapp.com/api/v1/purchases/",
                 {
@@ -311,6 +314,7 @@ export const PurchaseProducts = (
                   {
                     text: "OK",
                     onPress: () => {
+                      setLoading(false);
                       dispatch(fetchProducts());
                       navigate("Home");
                     },
@@ -318,9 +322,13 @@ export const PurchaseProducts = (
                 ]);
               })
               .catch(() => {
+                console.log(2222222222222);
                 Alert.alert("商品を購入することが\nできませんでした。", "", [
                   {
                     text: "OK",
+                    onPress: () => {
+                      setLoading(false);
+                    },
                   },
                 ]);
               });

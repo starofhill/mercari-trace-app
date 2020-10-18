@@ -8,11 +8,13 @@ import { Store } from "../../../Interface";
 interface PurchaseScreenFooter {
   id: number;
   paymentMethod: string;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PurchaseScreenFooter: React.FC<PurchaseScreenFooter> = ({
   id,
   paymentMethod,
+  setLoading,
 }) => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
@@ -29,7 +31,9 @@ const PurchaseScreenFooter: React.FC<PurchaseScreenFooter> = ({
         <TouchableOpacity
           style={styles.footerRightButton}
           onPress={() => {
-            dispatch(PurchaseProducts(id, paymentMethod, users, navigate));
+            dispatch(
+              PurchaseProducts(id, paymentMethod, users, navigate, setLoading)
+            );
           }}
         >
           <Text style={styles.footerRightButtonText}>購入する</Text>

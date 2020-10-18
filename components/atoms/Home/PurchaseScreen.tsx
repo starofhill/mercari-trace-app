@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
+  ActivityIndicator,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -17,6 +18,7 @@ const PurchaseScreen: React.FC<Navigation> = ({ route }) => {
   const productData = route.params;
   const { navigate } = useNavigation();
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <View style={styles.PurchaseScreenContainer}>
@@ -108,8 +110,13 @@ const PurchaseScreen: React.FC<Navigation> = ({ route }) => {
         </View>
       </ScrollView>
 
-      <PurchaseScreenFooter id={productData.id} paymentMethod={paymentMethod} />
+      <PurchaseScreenFooter
+        id={productData.id}
+        paymentMethod={paymentMethod}
+        setLoading={setLoading}
+      />
       <SafeAreaView style={styles.safeAreaView} />
+      {loading && <ActivityIndicator size="large" style={styles.loading} />}
     </View>
   );
 };
@@ -227,5 +234,12 @@ const styles = StyleSheet.create({
   },
   deliveryText: {
     fontSize: 12,
+  },
+  loading: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });
