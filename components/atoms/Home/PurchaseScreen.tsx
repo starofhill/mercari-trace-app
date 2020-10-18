@@ -18,7 +18,7 @@ const PurchaseScreen: React.FC<Navigation> = ({ route }) => {
   const productData = route.params;
   const { navigate } = useNavigation();
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <View style={styles.PurchaseScreenContainer}>

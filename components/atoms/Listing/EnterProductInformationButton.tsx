@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -34,7 +34,7 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
 
   const users = useSelector((state: Store) => state.users);
 
-  const [disabled, setDisabled] = React.useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   return (
     <View style={[styles.box, styles.buttonBox]}>
