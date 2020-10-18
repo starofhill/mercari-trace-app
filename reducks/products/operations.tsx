@@ -212,3 +212,122 @@ export const doComments = (
       });
   };
 };
+
+// 商品の購入
+export const PurchaseProducts = (
+  id: number,
+  paymentMethod: string,
+  users: Users,
+  navigate: (Component: string) => void
+) => {
+  return async (dispatch) => {
+    if (!users.isSignedIn) {
+      Alert.alert(
+        "エラー",
+        "ログインをしてください",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: false }
+      );
+      return false;
+    }
+
+    let method: string | undefined;
+
+    switch (paymentMethod) {
+      case "クレジットカード":
+        method = "credit";
+        break;
+      case "メルペイ":
+        method = "merpay";
+        break;
+      case "コンビニ/ATM払い":
+        method = "convenience";
+        break;
+      case "d払い(ドコモ)":
+        method = "docomo";
+        break;
+      case "auかんたん決済":
+        method = "au";
+        break;
+      case "ソフトバンクまとめて支払い":
+        method = "softbank";
+        break;
+      case "FamilyPay":
+        method = "familymart";
+        break;
+      default:
+        break;
+    }
+
+    // Validation
+    if (!method) {
+      Alert.alert(
+        "エラー",
+        "支払い方法を登録してください",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: false }
+      );
+      return false;
+    }
+
+    Alert.alert(
+      "確認",
+      `購入してもよろしいですか?`,
+      [
+        {
+          text: "いいえ",
+          style: "cancel",
+        },
+        {
+          text: "はい",
+          onPress: () => {
+            axios
+              .post(
+                "https://mercari-trace-server.herokuapp.com/api/v1/purchases/",
+                {
+                  purchase: {
+                    product_id: id,
+                    payment_method: method,
+                  },
+                },
+                {
+                  headers: {
+                    "access-token": users.headers.accessToken,
+                    client: users.headers.client,
+                    uid: users.headers.uid,
+                  },
+                }
+              )
+              .then(() => {
+                Alert.alert("商品を購入することが\nできました。", "", [
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      dispatch(fetchProducts());
+                      navigate("Home");
+                    },
+                  },
+                ]);
+              })
+              .catch(() => {
+                Alert.alert("商品を購入することが\nできませんでした。", "", [
+                  {
+                    text: "OK",
+                  },
+                ]);
+              });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+};

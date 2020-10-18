@@ -1,9 +1,22 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { PurchaseProducts } from "../../../reducks/products/operations";
+import { Store } from "../../../Interface";
 
-const PurchaseScreenFooter: React.FC = () => {
+interface PurchaseScreenFooter {
+  id: number;
+  paymentMethod: string;
+}
+
+const PurchaseScreenFooter: React.FC<PurchaseScreenFooter> = ({
+  id,
+  paymentMethod,
+}) => {
   const { navigate } = useNavigation();
+  const dispatch = useDispatch();
+  const users = useSelector((state: Store) => state.users);
 
   return (
     <View style={styles.footer}>
@@ -16,7 +29,7 @@ const PurchaseScreenFooter: React.FC = () => {
         <TouchableOpacity
           style={styles.footerRightButton}
           onPress={() => {
-            navigate("Home");
+            dispatch(PurchaseProducts(id, paymentMethod, users, navigate));
           }}
         >
           <Text style={styles.footerRightButtonText}>購入する</Text>

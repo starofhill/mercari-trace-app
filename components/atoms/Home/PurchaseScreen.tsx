@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -9,11 +9,14 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 import { Navigation } from "../../../Interface";
 import { PurchaseScreenFooter } from ".";
 
 const PurchaseScreen: React.FC<Navigation> = ({ route }) => {
   const productData = route.params;
+  const { navigate } = useNavigation();
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   return (
     <View style={styles.PurchaseScreenContainer}>
@@ -64,11 +67,20 @@ const PurchaseScreen: React.FC<Navigation> = ({ route }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.boxes}>
-          <TouchableOpacity style={[styles.box, styles.borderBottom]}>
+          <TouchableOpacity
+            style={[styles.box, styles.borderBottom]}
+            onPress={() =>
+              navigate("PurchasePaymentMethod", { setPaymentMethod })
+            }
+          >
             <Text>支払い方法</Text>
             <View style={styles.rightBox}>
-              <Text style={styles.paymentNumber}>************1234</Text>
-              <Icon name="angle-right" size={22} color="#888" />
+              {paymentMethod ? (
+                <Text style={styles.paymentMethod}>{paymentMethod}</Text>
+              ) : (
+                <Text style={styles.paymentMethod}>(必須)</Text>
+              )}
+              <Icon name="angle-right" size={22} color="#ccc" />
             </View>
           </TouchableOpacity>
           <View style={styles.box}>
@@ -96,7 +108,7 @@ const PurchaseScreen: React.FC<Navigation> = ({ route }) => {
         </View>
       </ScrollView>
 
-      <PurchaseScreenFooter />
+      <PurchaseScreenFooter id={productData.id} paymentMethod={paymentMethod} />
       <SafeAreaView style={styles.safeAreaView} />
     </View>
   );
@@ -190,7 +202,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginRight: 5,
   },
-  paymentNumber: {
+  paymentMethod: {
     marginRight: 5,
   },
   paymentMoney: {

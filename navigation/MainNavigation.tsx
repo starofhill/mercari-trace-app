@@ -14,6 +14,7 @@ import {
 import {
   CommentContainer,
   Product,
+  PurchasePaymentMethod,
   PurchaseScreen,
 } from "../components/atoms/Home";
 import { BottomTabNavigation, SignUpNavigation } from ".";
@@ -123,6 +124,14 @@ const MainNavigation: React.FC = () => {
           component={CommentContainer}
           options={{
             title: "コメント",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="PurchasePaymentMethod"
+          component={PurchasePaymentMethod}
+          options={{
+            title: "支払い方法",
             headerBackTitleVisible: false,
           }}
         />

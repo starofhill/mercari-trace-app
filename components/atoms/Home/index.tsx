@@ -12,6 +12,8 @@ export { default as ProductInformation } from "./ProductInformation";
 export { default as Products } from "./Products";
 export { default as ProductSeller } from "./ProductSeller";
 export { default as ProductTop } from "./ProductTop";
+export { default as PurchasePaymentMethod } from "./PurchasePaymentMethod";
+export { default as PurchasePaymentMethodBox } from "./PurchasePaymentMethodBox";
 export { default as PurchaseScreen } from "./PurchaseScreen";
 export { default as PurchaseScreenFooter } from "./PurchaseScreenFooter";
 export { default as SearchCategory } from "./SearchCategory";
