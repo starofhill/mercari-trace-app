@@ -99,7 +99,9 @@ const HomeTabNavigation: React.FC<HomeTabNavigation> = ({
             />
           )}
         </Tab.Screen>
-        <Tab.Screen name="カテゴリー" component={Category} />
+        <Tab.Screen name="カテゴリー">
+          {() => <Category loading={loading} />}
+        </Tab.Screen>
         <Tab.Screen name="保存した検索条件">
           {() => (
             <Products

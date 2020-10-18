@@ -8,7 +8,11 @@ const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation: React.FC = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        labelPosition: "below-icon",
+      }}
+    >
       <Tab.Screen
         name="ホーム"
         component={Home}

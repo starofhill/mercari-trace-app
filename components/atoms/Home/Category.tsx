@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { CategoryBox, CategoryItems } from ".";
 
@@ -18,16 +18,21 @@ const categories = [
   "自動車・オートバイ",
 ];
 
-const Category: React.FC = () => {
+const Category: React.FC<{ loading: boolean }> = ({ loading }) => {
   return (
-    <ScrollView contentContainerStyle={styles.scrollView}>
-      <CategoryItems />
-      <View style={styles.boxes}>
-        {categories.map((category, categoryNumber) => (
-          <CategoryBox title={category} key={categoryNumber.toString()} />
-        ))}
-      </View>
-    </ScrollView>
+    <View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <CategoryItems />
+        <View style={styles.boxes}>
+          {categories.map((category, categoryNumber) => (
+            <CategoryBox title={category} key={categoryNumber.toString()} />
+          ))}
+        </View>
+      </ScrollView>
+      {loading && (
+        <ActivityIndicator size="large" style={styles.loading} color="black" />
+      )}
+    </View>
   );
 };
 
@@ -39,5 +44,12 @@ const styles = StyleSheet.create({
   },
   boxes: {
     marginTop: 30,
+  },
+  loading: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });
