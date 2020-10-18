@@ -10,8 +10,6 @@ const ProductFooterButton: React.FC<{
   const { navigate } = useNavigation();
   const users = useSelector((state) => state.users);
 
-  console.log(productData.status);
-
   return (
     <View style={styles.footer}>
       {productData.status !== "sold" && users.uid !== productData.user_id && (
