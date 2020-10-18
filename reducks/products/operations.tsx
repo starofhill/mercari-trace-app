@@ -322,7 +322,6 @@ export const PurchaseProducts = (
                 ]);
               })
               .catch(() => {
-                console.log(2222222222222);
                 Alert.alert("商品を購入することが\nできませんでした。", "", [
                   {
                     text: "OK",
