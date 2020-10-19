@@ -62,6 +62,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
 
       <Stack.Screen
         name="SearchHome"
+        component={SearchHome}
         options={{
           headerTitle: () => (
             <TouchableOpacity
@@ -97,9 +98,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
           ),
           headerLeftContainerStyle: styles.headerLeft,
         }}
-      >
-        {() => <SearchHome />}
-      </Stack.Screen>
+      />
 
       <Stack.Screen
         name="SearchCategory"
