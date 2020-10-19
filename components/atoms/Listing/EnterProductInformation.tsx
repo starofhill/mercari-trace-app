@@ -27,10 +27,10 @@ const EnterProductInformation: React.FC = () => {
   const [status] = useState("sale");
   const [condition, setCondition] = useState("");
   const [category, setCategory] = useState("");
-  const [shippingArea, setShippingArea] = useState("");
   const [shippingCharges, setShippingCharges] = useState("");
-  const [shippingDays, setShippingDays] = useState("");
   const [shippingMethod, setShippingMethod] = useState("");
+  const [shippingArea, setShippingArea] = useState("");
+  const [shippingDays, setShippingDays] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -94,6 +94,10 @@ const EnterProductInformation: React.FC = () => {
           sendImage={sendImage}
           status={status}
           setLoading={setLoading}
+          shippingCharges={shippingCharges}
+          shippingMethod={shippingMethod}
+          shippingArea={shippingArea}
+          shippingDays={shippingDays}
         />
         <SafeAreaView />
       </ScrollView>

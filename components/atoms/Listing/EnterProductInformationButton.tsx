@@ -16,6 +16,10 @@ interface EnterProductInformationButton {
   sendImage: string[];
   status: string;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  shippingCharges: string;
+  shippingMethod: string;
+  shippingArea: string;
+  shippingDays: string;
 }
 
 const EnterProductInformationButton: React.FC<EnterProductInformationButton> = ({
@@ -28,6 +32,10 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
   sendImage,
   status,
   setLoading,
+  shippingCharges,
+  shippingMethod,
+  shippingArea,
+  shippingDays,
 }) => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
@@ -55,7 +63,11 @@ const EnterProductInformationButton: React.FC<EnterProductInformationButton> = (
               sendImage,
               status,
               users,
-              navigate
+              navigate,
+              shippingCharges,
+              shippingMethod,
+              shippingArea,
+              shippingDays
             )
           ).then(() => {
             setLoading(false);

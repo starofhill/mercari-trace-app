@@ -6,7 +6,11 @@ const Validation = (
   description: string,
   category: string,
   condition: string,
-  price: number
+  price: number,
+  shippingCharges: string,
+  shippingMethod: string,
+  shippingArea: string,
+  shippingDays: string
 ) => {
   if (!image.length) {
     Alert.alert(
@@ -92,6 +96,63 @@ const Validation = (
     return false;
   }
 
+  if (!shippingCharges) {
+    Alert.alert(
+      "エラー",
+      "配送料の負担を選択してください",
+      [
+        {
+          text: "OK",
+        },
+      ],
+      { cancelable: false }
+    );
+    return false;
+  }
+
+  if (!shippingMethod) {
+    Alert.alert(
+      "エラー",
+      "配送の方法を選択してください",
+      [
+        {
+          text: "OK",
+        },
+      ],
+      { cancelable: false }
+    );
+    return false;
+  }
+
+  if (!shippingArea) {
+    Alert.alert(
+      "エラー",
+      "配送元の地域を選択してください",
+      [
+        {
+          text: "OK",
+        },
+      ],
+      { cancelable: false }
+    );
+    return false;
+  }
+
+  if (!shippingDays) {
+    Alert.alert(
+      "エラー",
+      "配送までの日数を選択してください",
+      [
+        {
+          text: "OK",
+        },
+      ],
+      { cancelable: false }
+    );
+    return false;
+  }
+
   return true;
 };
+
 export default Validation;

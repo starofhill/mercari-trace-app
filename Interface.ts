@@ -1,18 +1,7 @@
 /* eslint-disable camelcase */
 export interface Item {
-  user: { name: string | undefined };
-  created_at: string;
-  description: string;
-  id: number;
-  image_url: string;
-  price: number;
-  name: string;
-  updated_at: string;
-  user_id: number;
-
-  status?: string;
-  likes?: number;
-  comments?: {
+  category: string;
+  comments: {
     id: number;
     content: string;
     user_id: number;
@@ -20,13 +9,20 @@ export interface Item {
     created_at: string;
     update_at: string;
   }[];
-  category?: string;
-  condition?: string;
-  shippingCharges?: string;
-  deliveryArea?: string;
-  deliveryDate?: string;
-  method?: string;
-  brand?: string;
+  condition: string;
+  created_at: string;
+  description: string;
+  id: number;
+  image_url: string;
+  name: string;
+  prefecture: string;
+  price: number;
+  shipping_fee: string;
+  shipping_day: number;
+  shipping_method: string;
+  status: string;
+  user: { name: string | undefined };
+  user_id: number;
 }
 
 export interface Products {

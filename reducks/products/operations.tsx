@@ -4,6 +4,13 @@ import { Alert } from "react-native";
 import { Validation } from "../../components/atoms/Listing";
 import { fetchProductsAction } from "./actions";
 import { Item, Users } from "../../Interface";
+import {
+  conditionSelect,
+  prefectureSelect,
+  shippingDaySelect,
+  shippingFeeSelect,
+  shippingMethodSelect,
+} from "./Components";
 
 export const fetchProducts = () => {
   return async (dispatch) => {
@@ -27,13 +34,36 @@ export const addProduct = (
   sendImage: string[],
   status: string,
   users: Users,
-  navigate: (nav: string) => void
+  navigate: (nav: string) => void,
+  shippingCharges: string,
+  shippingMethod: string,
+  shippingArea: string,
+  shippingDays: string
 ) => {
   return async (dispatch) => {
-    // バリデーション
-    if (!Validation(image, name, description, category, condition, price)) {
-      return;
+    // // バリデーション
+    if (
+      !Validation(
+        image,
+        name,
+        description,
+        category,
+        condition,
+        price,
+        shippingCharges,
+        shippingMethod,
+        shippingArea,
+        shippingDays
+      )
+    ) {
+      return false;
     }
+
+    const Condition = conditionSelect(condition);
+    const shipping_fee = shippingFeeSelect(shippingCharges);
+    const shipping_method = shippingMethodSelect(shippingMethod);
+    const prefecture = prefectureSelect(shippingArea);
+    const shipping_day = shippingDaySelect(shippingDays);
 
     const product = {
       product: {
@@ -43,7 +73,11 @@ export const addProduct = (
         image: `data:image/jpg;base64,${sendImage[0]}`,
         status,
         category,
-        condition,
+        condition: Condition,
+        shipping_fee,
+        shipping_method,
+        prefecture,
+        shipping_day,
       },
     };
 

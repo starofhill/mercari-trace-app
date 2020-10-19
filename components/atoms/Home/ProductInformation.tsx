@@ -1,10 +1,23 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Item } from "../../../Interface";
+import {
+  conditionConversion,
+  prefectureConversion,
+  shippingDayConversion,
+  shippingFeeConversion,
+  shippingMethodConversion,
+} from "./ProductInformationConversion";
 
 const ProductInformation: React.FC<{ productData: Item }> = ({
   productData,
 }) => {
+  const condition = conditionConversion(productData.condition);
+  const shippingFee = shippingFeeConversion(productData.shipping_fee);
+  const shippingMethod = shippingMethodConversion(productData.shipping_method);
+  const prefecture = prefectureConversion(productData.prefecture);
+  const shippingDay = shippingDayConversion(productData.shipping_day);
+
   return (
     <View style={styles.box}>
       <Text style={styles.boxTitle}>商品の情報</Text>
@@ -15,29 +28,23 @@ const ProductInformation: React.FC<{ productData: Item }> = ({
         </View>
         <View style={styles.informationBox}>
           <Text style={styles.informationTitle}>商品の状態</Text>
-          <Text style={styles.informationContent}>{productData.condition}</Text>
+          <Text style={styles.informationContent}>{condition}</Text>
         </View>
         <View style={styles.informationBox}>
           <Text style={styles.informationTitle}>配送料の負担</Text>
-          <Text style={styles.informationContent}>
-            {productData.shippingCharges}
-          </Text>
+          <Text style={styles.informationContent}>{shippingFee}</Text>
         </View>
         <View style={styles.informationBox}>
           <Text style={styles.informationTitle}>配送の方法</Text>
-          <Text style={styles.informationContent}>{productData.method}</Text>
+          <Text style={styles.informationContent}>{shippingMethod}</Text>
         </View>
         <View style={styles.informationBox}>
           <Text style={styles.informationTitle}>発送元の地域</Text>
-          <Text style={styles.informationContent}>
-            {productData.deliveryArea}
-          </Text>
+          <Text style={styles.informationContent}>{prefecture}</Text>
         </View>
         <View style={[styles.informationBox, styles.noBorder]}>
           <Text style={styles.informationTitle}>発送までの日数</Text>
-          <Text style={styles.informationContent}>
-            {productData.deliveryDate}
-          </Text>
+          <Text style={styles.informationContent}>{shippingDay}</Text>
         </View>
       </View>
     </View>

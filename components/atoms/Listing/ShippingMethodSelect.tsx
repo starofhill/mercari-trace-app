@@ -15,6 +15,18 @@ const ShippingMethodSelect: React.FC<{
         <View>
           <SelectProductBoxButton name="未定" setName={setShippingMethod} />
           <SelectProductBoxButton
+            name="らくらくメルカリ便"
+            setName={setShippingMethod}
+          />
+          <SelectProductBoxButton
+            name="ゆうゆうメルカリ便"
+            setName={setShippingMethod}
+          />
+          <SelectProductBoxButton
+            name="梱包・配送たのメル便"
+            setName={setShippingMethod}
+          />
+          <SelectProductBoxButton
             name="ゆうメール"
             setName={setShippingMethod}
           />
