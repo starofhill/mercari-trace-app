@@ -1,7 +1,14 @@
-import React from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  RefreshControl,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
 import { CategoryBox, CategoryItems } from ".";
+import { fetchProducts } from "../../../reducks/products/operations";
 
 const categories = [
   "レディース",
@@ -19,9 +26,24 @@ const categories = [
 ];
 
 const Category: React.FC<{ loading: boolean }> = ({ loading }) => {
+  const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch();
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(fetchProducts()).then(() => {
+      setRefreshing(false);
+    });
+  };
+
   return (
     <View>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <CategoryItems />
         <View style={styles.boxes}>
           {categories.map((category, categoryNumber) => (

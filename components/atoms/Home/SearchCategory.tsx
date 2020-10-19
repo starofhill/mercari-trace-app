@@ -57,6 +57,12 @@ const SearchCategory: React.FC<SearchCategory> = ({ category }) => {
               style={styles.image}
               resizeMode="cover"
             />
+            {item.status === "sold" && (
+              <>
+                <View style={styles.soldBox} />
+                <Text style={styles.soldText}>SOLD</Text>
+              </>
+            )}
             <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
           </TouchableOpacity>
         </View>
