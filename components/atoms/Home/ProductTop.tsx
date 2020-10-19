@@ -3,23 +3,21 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Swiper from "react-native-swiper";
 import { Item } from "../../../Interface";
+import { LargeSoldTag } from "./SoldTag";
 
-const ProductTop: React.FC<{
+interface ProductTop {
   productData: Item;
   setProductData: React.Dispatch<React.SetStateAction<Item>>;
-}> = ({ productData, setProductData }) => {
+}
+
+const ProductTop: React.FC<ProductTop> = ({ productData, setProductData }) => {
   const { navigate } = useNavigation();
 
   return (
     <>
       <Swiper style={styles.wrapper} showsButtons>
         <>
-          {productData.status === "sold" && (
-            <>
-              <View style={styles.soldBox} />
-              <Text style={styles.soldText}>SOLD</Text>
-            </>
-          )}
+          {productData.status === "sold" && <LargeSoldTag />}
           <Image
             source={{
               uri: encodeURI(productData.image_url?.replace(/&/g, "%26")),
@@ -86,25 +84,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  soldBox: {
-    position: "absolute",
-    borderBottomColor: "transparent",
-    borderBottomWidth: 120,
-    borderLeftColor: "#FE0412",
-    borderLeftWidth: 120,
-    zIndex: 10,
-  },
-  soldText: {
-    position: "absolute",
-    margin: 5,
-    top: 20,
-    left: 0,
-    transform: [{ rotate: "-45deg" }],
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 30,
-    zIndex: 10,
   },
   main: {
     backgroundColor: "white",

@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { CheckBox } from "react-native-elements";
 import { Item } from "../../../Interface";
+import { MediumSoldTag } from "./SoldTag";
 
 interface SearchScreen {
   list: Item[];
@@ -62,12 +63,7 @@ const SearchScreen: React.FC<SearchScreen> = ({
                   style={styles.image}
                   resizeMode="cover"
                 />
-                {item.status === "sold" && (
-                  <>
-                    <View style={styles.soldBox} />
-                    <Text style={styles.soldText}>SOLD</Text>
-                  </>
-                )}
+                {item.status === "sold" && <MediumSoldTag />}
                 <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
               </TouchableOpacity>
             </View>
@@ -119,23 +115,5 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(30,30,30,0.8)",
     color: "white",
     padding: 3,
-  },
-  soldBox: {
-    position: "absolute",
-    margin: 5,
-    borderBottomColor: "transparent",
-    borderBottomWidth: 40,
-    borderLeftColor: "#FE0412",
-    borderLeftWidth: 40,
-  },
-  soldText: {
-    position: "absolute",
-    margin: 5,
-    top: 6,
-    left: 0,
-    transform: [{ rotate: "-45deg" }],
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 10,
   },
 });

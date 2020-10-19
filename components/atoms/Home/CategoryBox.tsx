@@ -6,6 +6,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useDispatch, useSelector } from "react-redux";
 import { Item, Store } from "../../../Interface";
 import { addCategoryAction } from "../../../reducks/search/actions";
+import { SmallSoldTag } from "./SoldTag";
 
 const CategoryBox: React.FC<{
   title: string;
@@ -53,12 +54,7 @@ const CategoryBox: React.FC<{
                 style={styles.image}
                 resizeMode="cover"
               />
-              {item.status === "sold" && (
-                <>
-                  <View style={styles.soldBox} />
-                  <Text style={styles.soldText}>SOLD</Text>
-                </>
-              )}
+              {item.status === "sold" && <SmallSoldTag />}
               <Text style={styles.price}>¥{item.price.toLocaleString()}</Text>
             </TouchableOpacity>
           </View>
@@ -120,23 +116,5 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(30,30,30,0.8)",
     color: "white",
     padding: 3,
-  },
-  soldBox: {
-    position: "absolute",
-    margin: 3,
-    borderBottomColor: "transparent",
-    borderBottomWidth: 40,
-    borderLeftColor: "#FE0412",
-    borderLeftWidth: 40,
-  },
-  soldText: {
-    position: "absolute",
-    margin: 5,
-    top: 4,
-    left: -2,
-    transform: [{ rotate: "-45deg" }],
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 10,
   },
 });
