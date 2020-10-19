@@ -33,7 +33,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
   });
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ gestureEnabled: false }}>
       <Stack.Screen
         name="Home"
         options={{
