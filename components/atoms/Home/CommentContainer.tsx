@@ -52,6 +52,8 @@ const CommentContainer: React.FC<CommentContainer> = ({ route }) => {
     );
   }, [StatusBarManager]);
 
+  console.log(users.isSignedIn);
+
   return (
     <View style={styles.commentContainer}>
       <ScrollView>
@@ -65,15 +67,24 @@ const CommentContainer: React.FC<CommentContainer> = ({ route }) => {
       >
         <View style={styles.BottomContainer}>
           <View style={styles.commentTextInputContainer}>
-            <TextInput
-              value={comment}
-              style={styles.commentTextInput}
-              onChangeText={(newValue) => {
-                setComment(newValue);
-              }}
-              placeholder="コメントする"
-              maxLength={40}
-            />
+            {users.isSignedIn ? (
+              <TextInput
+                value={comment}
+                style={styles.commentTextInput}
+                onChangeText={(newValue) => {
+                  setComment(newValue);
+                }}
+                placeholder="コメントする"
+                maxLength={40}
+              />
+            ) : (
+              <TouchableOpacity
+                style={styles.commentTextInput}
+                onPress={() => navigate("SignUp")}
+              >
+                <Text>コメントする</Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           {comment.length > 0 ? (
