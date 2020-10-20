@@ -5,12 +5,12 @@ import { Validation } from "../../components/atoms/Listing";
 import { fetchProductsAction } from "./actions";
 import { Item, Users } from "../../Interface";
 import {
-  conditionSelect,
-  prefectureSelect,
-  shippingDaySelect,
-  shippingFeeSelect,
-  shippingMethodSelect,
-} from "./Components";
+  conditionObject,
+  prefectureObject,
+  shippingDayObject,
+  shippingFeeObject,
+  shippingMethodObject,
+} from "./Objects";
 
 export const fetchProducts = () => {
   return async (dispatch) => {
@@ -59,11 +59,24 @@ export const addProduct = (
       return false;
     }
 
-    const Condition = conditionSelect(condition);
-    const shipping_fee = shippingFeeSelect(shippingCharges);
-    const shipping_method = shippingMethodSelect(shippingMethod);
-    const prefecture = prefectureSelect(shippingArea);
-    const shipping_day = shippingDaySelect(shippingDays);
+    const Condition = conditionObject.find((item) => item.value === condition)
+      ?.key;
+
+    const prefecture = prefectureObject.find(
+      (item) => item.value === shippingArea
+    )?.key;
+
+    const shipping_method = shippingMethodObject.find(
+      (item) => item.value === shippingMethod
+    )?.key;
+
+    const shipping_fee = shippingFeeObject.find(
+      (item) => item.value === shippingCharges
+    )?.key;
+
+    const shipping_day = shippingDayObject.find(
+      (item) => item.value === shippingDays
+    )?.key;
 
     const product = {
       product: {
@@ -80,7 +93,6 @@ export const addProduct = (
         shipping_day,
       },
     };
-
     await axios
       .post(
         "https://mercari-trace-server.herokuapp.com/api/v1/products/",
