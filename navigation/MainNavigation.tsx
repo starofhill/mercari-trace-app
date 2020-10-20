@@ -27,8 +27,11 @@ const MainNavigation: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // if()
     getUser().then((response) => {
-      dispatch(signInWithEmailAction(response));
+      if (response) {
+        dispatch(signInWithEmailAction(response));
+      }
     });
   }, [dispatch]);
 

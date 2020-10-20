@@ -24,3 +24,12 @@ export const getUser = async () => {
     console.log(err);
   }
 };
+
+export const removeUser = async () => {
+  try {
+    await AsyncStorage.removeItem("user");
+    return true;
+  } catch (exception) {
+    return false;
+  }
+};

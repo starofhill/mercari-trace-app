@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 import axios from "axios";
 import { signInWithEmailAction, signOutAction } from "./actions";
-import { storeUser } from "./asyncStorage";
+import { removeUser, storeUser } from "./asyncStorage";
 
 export const signUpWithEmail = (
   email: string,
@@ -131,7 +131,7 @@ export const signOut = (
           dispatch(signOutAction());
 
           // // 永続化
-          storeUser(null);
+          removeUser();
 
           setLoading(false);
 
