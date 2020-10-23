@@ -11,7 +11,7 @@ const Validation = (
   shippingMethod: string,
   shippingArea: string,
   shippingDays: string
-) => {
+): boolean => {
   if (!image.length) {
     Alert.alert(
       "エラー",
