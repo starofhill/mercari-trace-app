@@ -1,13 +1,65 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
+
+const SignUp: React.FC = () => {
+  const { navigate } = useNavigation();
+
+  return (
+    <SafeAreaView style={styles.component}>
+      <View style={styles.title}>
+        <Image
+          source={require("../../assets/IMG_6606.jpg")}
+          style={styles.mercariImage}
+        />
+        <Text style={styles.titleText}>mercari</Text>
+      </View>
+      <View style={styles.boxes}>
+        <Text style={styles.boxTitle}>初めてご利用の方は</Text>
+        <View>
+          <TouchableOpacity style={[styles.box, styles.blackBackgroundColor]}>
+            <Icon name="apple" size={24} color="white" />
+            <Text style={styles.whiteColor}>Appleでサインアップ</Text>
+            <Text />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.box, styles.blueBackgroundColor]}>
+            <Icon name="facebook-official" size={24} color="white" />
+            <Text style={styles.whiteColor}>Facebookで登録</Text>
+            <Text />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.box, styles.whiteBackgroundColor]}>
+            <Icon name="google" size={24} />
+            <Text style={styles.blackColor}>Googleで登録</Text>
+            <Text />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.box, styles.redBackgroundColor]}
+            onPress={() => navigate("SignUpEmailInput")}
+          >
+            <Icon name="envelope-o" size={24} color="white" />
+            <Text style={styles.whiteColor}>メールアドレスで登録</Text>
+            <Text />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.login}>
+        <TouchableOpacity onPress={() => navigate("SignIn")}>
+          <Text style={styles.loginText}>こちらからログイン</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default SignUp;
 
 const styles = StyleSheet.create({
   component: {
     backgroundColor: "white",
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
   },
   title: {
@@ -16,13 +68,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 30,
   },
+  mercariImage: {
+    width: 100,
+    height: 100,
+  },
   titleText: {
     fontWeight: "bold",
     fontSize: 48,
   },
   boxes: {
     alignItems: "center",
-    // justifyContent: "center",
     borderColor: "black",
     borderTopWidth: 1,
     marginTop: 30,
@@ -34,7 +89,6 @@ const styles = StyleSheet.create({
     top: -16,
     padding: 10,
   },
-  border: {},
   box: {
     width: 300,
     flexDirection: "row",
@@ -55,7 +109,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   redBackgroundColor: {
-    backgroundColor: "#FE0412",
+    backgroundColor: "#FF4F02",
   },
   whiteColor: {
     color: "white",
@@ -65,46 +119,12 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
   },
+  login: {
+    marginTop: 20,
+    borderBottomColor: "#136FFF",
+    borderBottomWidth: 1,
+  },
+  loginText: {
+    color: "#136FFF",
+  },
 });
-
-export default function SignUp() {
-  return (
-    <SafeAreaView style={styles.component}>
-      <View style={styles.title}>
-        <Image
-          source={require("../../assets/IMG_6606.jpg")}
-          style={{ width: 100, height: 100 }}
-        />
-        <Text style={styles.titleText}>mercari</Text>
-      </View>
-      <View style={styles.boxes}>
-        <Text style={styles.boxTitle}>初めてご利用の方は</Text>
-        {/* <View style={styles.border}>
-            <Text></Text>
-        </View> */}
-        <View>
-          <View style={[styles.box, styles.blackBackgroundColor]}>
-            <Icon name="apple" size="24" color="white" />
-            <Text style={styles.whiteColor}>Appleでサインアップ</Text>
-            <Text></Text>
-          </View>
-          <View style={[styles.box, styles.blueBackgroundColor]}>
-            <Icon name="facebook-official" size="24" color="white" />
-            <Text style={styles.whiteColor}>Facebookで登録</Text>
-            <Text></Text>
-          </View>
-          <View style={[styles.box, styles.whiteBackgroundColor]}>
-            <Icon name="google" size="24" />
-            <Text style={styles.blackColor}>Googleで登録</Text>
-            <Text></Text>
-          </View>
-          <View style={[styles.box, styles.redBackgroundColor]}>
-            <Icon name="envelope-o" size="24" color="white" />
-            <Text style={styles.whiteColor}>メールアドレスで登録</Text>
-            <Text></Text>
-          </View>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-}

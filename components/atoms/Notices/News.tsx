@@ -1,38 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-  },
-  box: {
-    width: "100%",
-    borderBottomColor: "#eee",
-    borderBottomWidth: 1,
-    padding: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    maxWidth: 500,
-    marginRight: "auto",
-    marginLeft: "auto",
-  },
-  texts: {
-    width: 320,
-  },
-  text: {
-    lineHeight: 20,
-  },
-  date: {
-    color: "#666",
-    fontSize: 11,
-    lineHeight: 20,
-  },
-  angle: {
-    paddingLeft: 10,
-  },
-});
+import { useNavigation } from "@react-navigation/native";
 
 const data = [
   {
@@ -96,13 +71,22 @@ const data = [
     date: "2020年9月16日 18:00",
   },
 ];
-export default function News() {
+
+const News: React.FC = () => {
+  const { navigate } = useNavigation();
+
   return (
     <FlatList
       data={data}
       contentContainerStyle={styles.container}
+      keyExtractor={(item) => `news-${item.id}`}
       renderItem={({ item }) => (
-        <View style={styles.box} key={item.id}>
+        <TouchableOpacity
+          style={styles.box}
+          onPress={() => {
+            navigate("NewsDetail");
+          }}
+        >
           <View style={styles.texts}>
             <Text style={styles.text}>{item.text}</Text>
             <Text style={styles.date}>{item.date}</Text>
@@ -110,8 +94,42 @@ export default function News() {
           <View style={styles.angle}>
             <Icon name="angle-right" size={24} />
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
   );
-}
+};
+
+export default News;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+  },
+  box: {
+    width: "100%",
+    borderBottomColor: "#eee",
+    borderBottomWidth: 1,
+    padding: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    maxWidth: 500,
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+  texts: {
+    width: 320,
+  },
+  text: {
+    lineHeight: 20,
+  },
+  date: {
+    color: "#666",
+    fontSize: 11,
+    lineHeight: 20,
+  },
+  angle: {
+    paddingLeft: 10,
+  },
+});
